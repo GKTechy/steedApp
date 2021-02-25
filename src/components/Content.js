@@ -10,6 +10,14 @@ import ProductionMaster from './production/ProductionMaster';
 import productionTransaction from './production/productionTransaction';
 import ProductionReport from './production/ProductionReport';
 import CommercialAdmin from './commercial/CommercialAdmin';
+import CommercialTransaction from './commercial/CommercialTransaction';
+import CommercialReport from './commercial/CommercialReport';
+import QualityMaster from './quality/QualityMaster';
+import QualityTransaction from './quality/QualityTransaction';
+import QualityReport from './quality/QualityReport';
+import MaterialMaster from './materials/MaterialMaster';
+import MaterialTransaction from './materials/MaterialTransaction';
+import MaterialReport from './materials/MaterialReport';
 export class Content extends Component {
     render() {
         return (
@@ -23,6 +31,18 @@ export class Content extends Component {
 
 
                 <Route exact path="/commercialMaster" component={CommercialAdmin} />
+                <Route exact path="/commercialTransaction" component={CommercialTransaction} />
+                <Route exact path="/commercialReports" component={CommercialReport} />
+
+                <Route exact path="/qualityMaster" component={QualityMaster} />
+                <Route exact path="/qualityTransaction" component={QualityTransaction} />
+                <Route exact path="/qualityReport" component={QualityReport} />
+                
+                
+                <Route exact path="/materialMaster" component={MaterialMaster} />
+                <Route exact path="/materialTransaction" component={MaterialTransaction} />
+                <Route exact path="/materialReport" component={MaterialReport} />
+
                 <Route exact path="/addDealer" component={AdminMaster} />
 
                 <Route exact path="/PEDMaster" component={PEDMaster} />

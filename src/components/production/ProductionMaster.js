@@ -24,12 +24,13 @@ export class ProductionMaster extends Component {
                             <div className="tab-content" id="custom-tabs-two-tabContent">
                                 <div className="tab-pane fade show active" id="custom-tabs-two-home" role="tabpanel" aria-labelledby="custom-tabs-two-home-tab">
                                     {/* <ManageUsers/> */}
+                                    1
                                 </div>
                                 <div className="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
-                                    {/* <Roles/> */}
+                                    {/* <Roles/> */}2
                                 </div>
                                 <div className="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
-                                    {/* <NoteForApproval/> */}
+                                    {/* <NoteForApproval/> */}3
                                 </div>
                    
                             </div>
