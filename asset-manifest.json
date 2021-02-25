@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/steedApp/static/css/main.2ae47eeb.chunk.css",
+    "main.js": "/steedApp/static/js/main.fc67a16d.chunk.js",
+    "main.js.map": "/steedApp/static/js/main.fc67a16d.chunk.js.map",
+    "runtime-main.js": "/steedApp/static/js/runtime-main.3773dfe7.js",
+    "runtime-main.js.map": "/steedApp/static/js/runtime-main.3773dfe7.js.map",
+    "static/js/2.b85b3947.chunk.js": "/steedApp/static/js/2.b85b3947.chunk.js",
+    "static/js/2.b85b3947.chunk.js.map": "/steedApp/static/js/2.b85b3947.chunk.js.map",
+    "static/js/3.0d078bca.chunk.js": "/steedApp/static/js/3.0d078bca.chunk.js",
+    "static/js/3.0d078bca.chunk.js.map": "/steedApp/static/js/3.0d078bca.chunk.js.map",
+    "index.html": "/steedApp/index.html",
+    "static/css/main.2ae47eeb.chunk.css.map": "/steedApp/static/css/main.2ae47eeb.chunk.css.map",
+    "static/js/2.b85b3947.chunk.js.LICENSE.txt": "/steedApp/static/js/2.b85b3947.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3773dfe7.js",
+    "static/js/2.b85b3947.chunk.js",
+    "static/css/main.2ae47eeb.chunk.css",
+    "static/js/main.fc67a16d.chunk.js"
+  ]
+}
