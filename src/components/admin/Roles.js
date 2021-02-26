@@ -1,56 +1,133 @@
 import React, { Component } from 'react'
+import BootstrapTable from 'react-bootstrap-table-next';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+
+
 
 export class Roles extends Component {
+
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            columns : [{
+                dataField: 'id',
+                text: 'ID',
+                filter: textFilter(),
+                sort: true
+              }, {
+                dataField: 'role',
+                text: 'Role',
+                filter: textFilter(),
+                sort: true
+              }, {
+                dataField: 'status',
+                text: 'Status',
+                filter: textFilter(),
+                sort: true
+              }],
+              data:[
+                  {
+                        id:1,
+                        role:"admin",
+                        status:'Active'
+                  },
+                  {
+                    id:2,
+                    role:"User",
+                    status:'Active'
+                 },
+                 {
+                    id:3,
+                    role:"root",
+                    status:'InActive'
+                },
+                    {
+                    id:3,
+                    role:"root",
+                    status:'InActive'
+                },
+                {
+                    id:3,
+                    role:"root",
+                    status:'InActive'
+                },
+                {
+                    id:3,
+                    role:"root",
+                    status:'InActive'
+                },
+                    {
+                        id:3,
+                        role:"root",
+                        status:'InActive'
+                    },
+                    {
+                    id:3,
+                    role:"root",
+                    status:'InActive'
+                },
+                {
+                    id:3,
+                    role:"root",
+                    status:'InActive'
+                },
+                {
+                    id:3,
+                    role:"root",
+                    status:'InActive'
+                },
+                    {
+                        id:3,
+                        role:"root",
+                        status:'InActive'
+                    },
+                    {
+                    id:3,
+                    role:"root",
+                    status:'InActive'
+                }
+              ],
+              defaultSorted :[{
+                dataField: 'role',
+                order: 'asc'
+              }]
+        }
+    }
+    
+   
+
+
+    componentDidMount() {
+      
+     }
+
+
     render() {
         return (
             <div>
-                {/* <section className="content-header">
-                    <div className="container-fluid">
-                        <div className="row mb-2">
-                        <div className="col-sm-6">
-                            <h1>Manage Roles</h1>
-                        </div>
-                        <div className="col-sm-6">
-                            <ol className="breadcrumb float-sm-right">
-                            <li className="breadcrumb-item"><a href="#">Home</a></li>
-                            <li className="breadcrumb-item active">Manage Roles</li>
-                            </ol>
-                        </div>
-                        </div>
-                    </div>
-                </section> */}
+               
                 <section className="content">
                     <div className="container-fluid">
-                   {/* /.row */}
                         <div className="row">
                         <div className="col-12">
-                            <div className="card">
-                            <div className="card-header">
-                                <div className="card-title">
-                                        {/* <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-default"><i class="fas fa-plus"></i></a> */}
-                                        <div className="input-group input-group-sm">
-                                            <input type="text" className="form-control" placeholder="Enter Role..." />
-                                            <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat">Add</button>
-                                            </span>
-                                        </div>
+                              
+                        <div className="input-group input-group-sm col-4">
+                            <input type="text" className="form-control" placeholder="Enter Role..." />
+                            <span className="input-group-append">
+                                <button type="button" className="btn btn-primary btn-flat">Add</button>
+                            </span>
+                        </div><br></br>
 
-                                </div>
-                                <div className="card-tools">
-                                    <div className="input-group input-group-sm" style={{width: 350}}>
-                                    
-                                        <input type="text" name="table_search" className="form-control float-right" placeholder="Search" />
-                                        <div className="input-group-append">
-                                        <button type="submit" className="btn btn-default">
-                                            <i className="fas fa-search" />
-                                        </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                
+                          
                          
-                            <div className="card-body" style={{height: 500}}>
-                                <table className="table table-bordered">
+                             <BootstrapTable bootstrap4 keyField='id' data={ this.state.data } columns={ this.state.columns }  selectRow={ { mode: 'checkbox' } } 
+                                                filter={ filterFactory() }   defaultSorted={ this.state.defaultSorted }  hover noDataIndication="No Data Available" 
+                                                pagination={ paginationFactory() }  filterPosition="top" />
+
+                                {/* <table className="table table-bordered table-borderless display" id="myTable">
                                 <thead>
                                     <tr>
                                     <th>#ID</th>
@@ -98,18 +175,9 @@ export class Roles extends Component {
                                     </tr>
                                    
                                 </tbody>
-                                </table>
-                            </div>
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                </ul>
-                            </div>
-                            </div>
+                                </table> */}
+
+
                             
                         </div>
                         </div>
