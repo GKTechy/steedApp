@@ -12,7 +12,9 @@ constructor(props) {
       loginParams: {
         user_id: "",
         user_password: ""
-      }
+    },
+    iserror:false,
+    iserrormsg:'',
   }
 }
 
@@ -32,7 +34,18 @@ login = event => {
   if (user_id === "admin" && user_password === "123") {
     localStorage.setItem("token", "T");
     this.setState({
-      islogged: true
+      islogged: true,
+      iserror: false
+    });
+  }else if (user_id === "" || user_password === "") {
+    this.setState({
+      iserror: true,
+      iserrormsg:"Enter All Values"
+    });
+  }else{
+    this.setState({
+      iserror: true,
+      iserrormsg:"Invalid Login"
     });
   }
   event.preventDefault();
@@ -79,7 +92,7 @@ login = event => {
                         <input
                            type="password"
                            name="user_password"
-                           className="form-control"
+                           className="form-control "
                            onChange={this.handleFormChange}
                            placeholder="Enter Password"
                         />
@@ -90,8 +103,12 @@ login = event => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-4">
-                          <button type="submit" className="btn btn-primary btn-block">
+                          
+                        <div className="col-6">
+                        {
+                          this.state.iserror ? <span className="text-danger">{this.state.iserrormsg}</span> :''
+                        }
+                          <button type="submit" className="btn btn-primary btn-block" >
                             Sign In
                           </button>
                         </div>

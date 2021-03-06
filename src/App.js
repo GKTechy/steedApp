@@ -1,16 +1,7 @@
 import React, { Component } from 'react'
-import Content from './components/Content'
-import Footer from './components/Footer'
-
-import Menu from './components/Menu'
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
+import {   BrowserRouter as Router,  Switch,  Route,  Redirect} from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 export class App extends Component {
