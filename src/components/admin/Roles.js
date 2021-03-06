@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import "datatables.net-dt/js/dataTables.dataTables"
-import "datatables.net-dt/css/jquery.dataTables.min.css"
+import "datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+import "datatables.net-bs4/js/dataTables.bootstrap4.min.js"
 
 import $ from 'jquery';
 
@@ -11,7 +12,59 @@ export class Roles extends Component {
         super(props)
     
         this.state = {
-            
+            rolesList:[
+
+                {
+                    id:1,
+                    role:"admin",
+                    status:'Active'
+                }, {
+                    id:2,
+                    role:"root",
+                    status:'Active'
+                }, {
+                    id:3,
+                    role:"qc",
+                    status:'Active'
+                }, {
+                    id:4,
+                    role:"sales",
+                    status:'Active'
+                }, {
+                    id:5,
+                    role:"test",
+                    status:'Active'
+                }, {
+                    id:6,
+                    role:"purchase",
+                    status:'Active'
+                }, {
+                    id:7,
+                    role:"Manufacturing",
+                    status:'Active'
+                }, {
+                    id:8,
+                    role:"Accounting",
+                    status:'Active'
+                }, {
+                    id:9,
+                    role:"develop",
+                    status:'Active'
+                }, {
+                    id:10,
+                    role:"admin1",
+                    status:'Active'
+                }, {
+                    id:11,
+                    role:"admin2",
+                    status:'Active'
+                }, {
+                    id:12,
+                    role:"admin3",
+                    status:'Active'
+                },
+                
+            ]
         }
     }
     
@@ -52,150 +105,22 @@ export class Roles extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>181</td>
-                                        <td>John Doe</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>182</td>
-                                        <td>abc</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" ><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>184</td>
-                                        <td>Doe</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" ><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>181</td>
-                                        <td>John Doe</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>182</td>
-                                        <td>abc</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" ><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>184</td>
-                                        <td>Doe</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" ><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>181</td>
-                                        <td>John Doe</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>182</td>
-                                        <td>abc</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" ><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>184</td>
-                                        <td>Doe</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" ><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>181</td>
-                                        <td>John Doe</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>182</td>
-                                        <td>abc</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" ><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>184</td>
-                                        <td>Doe</td>
-                                        <td><span className="tag tag-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" ><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
+
+                                    {
+                                        this.state.rolesList.map((item) =>
+                                        
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
+                                            <td>{item.role}</td>
+                                            <td><span className="tag tag-success">{item.status}</span></td>
+                                            <td className="project-actions ">
+                                                <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
+                                                <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
+                                            </td>
+                                        </tr>
+                                     )}
+                                    
+                                    
                                 </tbody>
                                 </table> 
 
