@@ -1,21 +1,38 @@
 import React, { Component } from 'react'
 import Content from './components/Content'
 import Footer from './components/Footer'
-import Header from './components/Header'
-import Menu from './components/Menu'
 
-import {BrowserRouter as Router,  Switch,  Route,  Link} from "react-router-dom";
+import Menu from './components/Menu'
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
 export class App extends Component {
   render() {
     return (
       <div>
-          <Router>
-            <Header/>
-            <Menu/>
-            <Content/>
-            {/* <Footer/> */}
-          </Router>
+         <Router>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <ProtectedRoute path="/dashboard">
+              <Dashboard path="/dashboard"/>
+            </ProtectedRoute>
+            <Route exact path="/">
+              <Redirect exact from="/" to="dashboard" />
+            </Route>
+            <Route path="*">
+              <Redirect from="/" to="dashboard" />
+            </Route>
+          </Switch>
+        </Router>
       </div>
     )
   }

@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 export class Menu extends Component {
+    
     render() {
+
+        const { match } = this.props;
+
         return (
            <aside className="main-sidebar sidebar-dark-primary elevation-4">
-                {/* Brand Logo */}
                 <a href="index3.html" className="brand-link">
-                    {/* <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{opacity: '.8'}} /> */}
                     <span className="brand-text font-weight-light">Steed App</span>
+                    
                 </a>
                 {/* Sidebar */}
                 <div className="sidebar">
@@ -27,7 +30,7 @@ export class Menu extends Component {
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-users-cog"/><p>Admin </p></a>
                                     <ul className="nav nav-treeview">
                                         <li className="nav-item">
-                                            <Link to="/adminMaster"> <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/adminMaster`}> <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
                                             {/* <ul className="nav nav-treeview">
                                                 <li className="nav-item"><Link to="/manageusers"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Manage Users</p></a></Link></li>
                                                 <li className="nav-item"><Link to="/roles"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Roles</p></a></Link></li>
@@ -35,7 +38,7 @@ export class Menu extends Component {
                                             </ul> */}
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="/adminTransaction"> <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/adminTransaction`} > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
                                             {/* <ul className="nav nav-treeview">
                                                  <li className="nav-item"><Link to="/userrolemapping"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Employee User Mapping</p></a></Link></li>
                                                 <li className="nav-item"><Link to="/roles"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Roles Menu Mapping</p></a></Link></li> 

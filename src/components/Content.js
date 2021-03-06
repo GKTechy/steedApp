@@ -18,36 +18,52 @@ import QualityReport from './quality/QualityReport';
 import MaterialMaster from './materials/MaterialMaster';
 import MaterialTransaction from './materials/MaterialTransaction';
 import MaterialReport from './materials/MaterialReport';
+import IndexDashboard from './IndexDashboard';
+
+import { withRouter } from "react-router";
+
 export class Content extends Component {
+
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             
+        }
+    }
+    
     render() {
+
+        const { match } = this.props;
         return (
             <div className="content-wrapper">
-                <Route exact path="/adminMaster" component={AdminMaster} />
-                <Route exact path="/adminTransaction" component={AdminTransaction} />
+                <Route exact path={`${match.path}`}><IndexDashboard/></Route>
+                <Route exact path={`${match.path}/adminMaster`}  component={AdminMaster} />
+                <Route exact path={`${match.path}/adminTransaction`} component={AdminTransaction} />
 
-                <Route exact path="/productionMaster" component={ProductionMaster} />
-                <Route exact path="/productionTransaction" component={productionTransaction} />
-                <Route exact path="/productionReport" component={ProductionReport} />
+                <Route exact path={`${match.path}/productionMaster`}  component={ProductionMaster} />
+                <Route exact path={`${match.path}/productionTransaction`}  component={productionTransaction} />
+                <Route exact path={`${match.path}/productionReport`}  component={ProductionReport} />
 
 
-                <Route exact path="/commercialMaster" component={CommercialAdmin} />
-                <Route exact path="/commercialTransaction" component={CommercialTransaction} />
-                <Route exact path="/commercialReports" component={CommercialReport} />
+                <Route exact path={`${match.path}/commercialMaster`}  component={CommercialAdmin} />
+                <Route exact path={`${match.path}/commercialTransaction`}  component={CommercialTransaction} />
+                <Route exact path={`${match.path}/commercialReports`}  component={CommercialReport} />
 
-                <Route exact path="/qualityMaster" component={QualityMaster} />
-                <Route exact path="/qualityTransaction" component={QualityTransaction} />
-                <Route exact path="/qualityReport" component={QualityReport} />
+                <Route exact path={`${match.path}/qualityMaster`}  component={QualityMaster} />
+                <Route exact path={`${match.path}/qualityTransaction`}  component={QualityTransaction} />
+                <Route exact path={`${match.path}/qualityReport`}  component={QualityReport} />
                 
                 
-                <Route exact path="/materialMaster" component={MaterialMaster} />
-                <Route exact path="/materialTransaction" component={MaterialTransaction} />
-                <Route exact path="/materialReport" component={MaterialReport} />
+                <Route exact path={`${match.path}/materialMaster`}  component={MaterialMaster} />
+                <Route exact path={`${match.path}/materialTransaction`}  component={MaterialTransaction} />
+                <Route exact path={`${match.path}/materialReport`}  component={MaterialReport} />
 
-                <Route exact path="/addDealer" component={AdminMaster} />
+                <Route exact path={`${match.path}/addDealer`}  component={AdminMaster} />
 
-                <Route exact path="/PEDMaster" component={PEDMaster} />
+                <Route exact path={`${match.path}/PEDMaster`}  component={PEDMaster} />
                 
-                <Route path="/login" component={Login} />
+                
                 
 
                 
@@ -56,4 +72,5 @@ export class Content extends Component {
     }
 }
 
-export default Content
+
+export default withRouter(Content);

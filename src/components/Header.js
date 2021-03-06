@@ -1,7 +1,34 @@
 import React, { Component } from 'react'
+import { Redirect, Switch, Route, Link } from "react-router-dom";
 
 export class Header extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          islogout: false
+        };
+      }
+
+
+    signOut = () => {
+        localStorage.removeItem("token");
+        this.setState({
+          islogout: true
+        });
+      };
+
+
+
     render() {
+
+        if (this.state.islogout) {
+            return <Redirect to="/login" />;
+          }
+        const { match } = this.props;
+
+
+
         return (
            
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
@@ -12,6 +39,7 @@ export class Header extends Component {
             </li>
             <li className="nav-item d-none d-sm-inline-block">
             <a href="#" className="nav-link">Home</a>
+            
             </li>
             <li className="nav-item d-none d-sm-inline-block">
             <a href="#" className="nav-link">Contact</a>
@@ -121,7 +149,7 @@ export class Header extends Component {
             </a>
             </li>
             <li className="nav-item">
-            <a className="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+            <a className="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button" onClick={this.signOut}>
                 <i className="fas fa-th-large" />
             </a>
             </li>
