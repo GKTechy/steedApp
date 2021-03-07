@@ -47,20 +47,23 @@ export class Dashboard extends Component {
                     <nav className="mt-2">
                         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-users-cog"/><p>Admin </p></a>
+                                  
                                     <ul className="nav nav-treeview">
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/adminMaster`}> <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/adminMaster`} > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                         <li className="nav-item">
                                             <Link to={`${match.path}/adminTransaction`} > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
-                                    </ul>
+                                        
+                                </ul>
+
                             </li>
 
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-industry" /><p>Production</p></a>
                                 <ul className="nav nav-treeview">
                                         <li className="nav-item">
-                                        <Link to={`${match.path}/productionMaster`} > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/productionMaster`} > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                         <li className="nav-item">
                                             <Link to={`${match.path}/productionTransaction`} > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
@@ -131,13 +134,9 @@ export class Dashboard extends Component {
             <main role="main">
               <div className="main">
                
-              <Switch>
-                    <Route path={`${match.path}/adminTransaction`}>
-                      <AdminMaster/>
-                    </Route>
-                  
-                    <Content/>
-                    </Switch>
+                <Switch>
+                   <Content/>
+                </Switch>
               </div>
             </main>
           </div>

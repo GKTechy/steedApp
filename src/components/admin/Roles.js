@@ -111,7 +111,7 @@ export class Roles extends Component {
         return (
             <div>
                
-                <section className="content">
+                <div className="content">
                     <div className="container-fluid">
                         <div className="row">
                         <div className="col-12">
@@ -161,7 +161,7 @@ export class Roles extends Component {
                    
                        
                     </div>
-                    </section>
+                    </div>
 
                    <div className="modal fade" id="modal-default">
                     <div className="modal-dialog">

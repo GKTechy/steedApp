@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UOM from './UOM'
 
 export class MaterialMaster extends Component {
     render() {
@@ -32,7 +33,7 @@ export class MaterialMaster extends Component {
                             <div className="card-body" >
                             <div className="tab-content" id="custom-tabs-two-tabContent">
                                 <div className="tab-pane fade show active" id="tabs-1" role="tabpanel" aria-labelledby="custom-tabs-1">
-                                    1
+                                        <UOM/>
                                 </div>
                                 <div className="tab-pane fade" id="tabs-2" role="tabpanel" aria-labelledby="custom-tabs-2">
                                     2
