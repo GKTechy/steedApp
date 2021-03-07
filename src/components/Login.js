@@ -32,7 +32,7 @@ login = event => {
   let user_id = this.state.loginParams.user_id;
   let user_password = this.state.loginParams.user_password;
   if (user_id === "admin" && user_password === "123") {
-    localStorage.setItem("token", "T");
+    localStorage.setItem("steedApptoken", "SAt");
     this.setState({
       islogged: true,
       iserror: false
@@ -55,7 +55,7 @@ login = event => {
 
   render() {
 
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("steedApptoken")) {
       return <Redirect to="/" />;
     }
 

@@ -12,7 +12,7 @@ export class Header extends Component {
 
 
     signOut = () => {
-        localStorage.removeItem("token");
+        localStorage.removeItem("steedApptoken");
         this.setState({
           islogout: true
         });
