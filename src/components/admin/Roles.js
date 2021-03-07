@@ -87,10 +87,11 @@ export class Roles extends Component {
                 errormsg: "Enter Role"
             });
         }else{
-            const obj = {'role':this.state.rolename, status:'Active','id':1*1};
+            const obj = {'role':this.state.rolename, status:'Active','id':1*15};
             this.setState({
                 errormsg: "",
-                rolesList: [...this.state.rolesList, obj]
+                rolesList: [...this.state.rolesList, obj],
+                rolename:""
             },()=>{
                 $('#myTable').DataTable();
                 console.log(this.state.rolesList); 
@@ -118,7 +119,7 @@ export class Roles extends Component {
                         <div className="input-group input-group-sm col-4">
                             <input type="text" 
                             className='form-control'
-                             placeholder="Enter Role..." name={this.state.rolename} onChange={this.handleFormChange}/>
+                             placeholder="Enter Role..." name="rolename" id="rolename" value= {this.state.rolename} onChange={this.handleFormChange}/>
                             <span className="input-group-append">
                                 <button type="button" className="btn btn-primary btn-flat" onClick={this.addRole}>Add</button>
                             </span>
