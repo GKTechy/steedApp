@@ -30,23 +30,14 @@ export class MaterialTransaction extends Component {
                                         <li className="nav-item">
                                             <a className="nav-link" id="custom-tabs-6" data-toggle="pill" href="#tabs-6" role="tab" aria-controls="custom-tabs-66" aria-selected="false">MIV General</a>
                                         </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" id="custom-tabs-7" data-toggle="pill" href="#tabs-7" role="tab" aria-controls="custom-tabs-77" aria-selected="false">MIV EO </a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" id="custom-tabs-8" data-toggle="pill" href="#tabs-8" role="tab" aria-controls="custom-tabs-88" aria-selected="false">MRV</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" id="custom-tabs-9" data-toggle="pill" href="#tabs-9" role="tab" aria-controls="custom-tabs-99" aria-selected="false">Delivery Challan</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" id="custom-tabs-10" data-toggle="pill" href="#tabs-10" role="tab" aria-controls="custom-tabs-100" aria-selected="false">Bar Stock Received</a>
-                                        </li>
-
+                                      
                                         <li className="nav-item">
                                             <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">More</a>
                                             <div className="dropdown-menu bg-primary">
-                                                
+                                            <a className="dropdown-item " id="custom-tabs-6" data-toggle="pill" href="#tabs-6"  aria-controls="custom-tabs-66" >MIV EO</a>
+                                            <a className="dropdown-item " id="custom-tabs-6" data-toggle="pill" href="#tabs-6"  aria-controls="custom-tabs-66" >MRV</a>
+                                            <a className="dropdown-item " id="custom-tabs-6" data-toggle="pill" href="#tabs-6"  aria-controls="custom-tabs-66" >Delivery Challan</a>
+                                            <a className="dropdown-item " id="custom-tabs-6" data-toggle="pill" href="#tabs-6"  aria-controls="custom-tabs-66" >Bar Stock Received</a>
                                                 <a className="dropdown-item " id="custom-tabs-6" data-toggle="pill" href="#tabs-6"  aria-controls="custom-tabs-66" >Forging/Casting Received Detail</a>
                                                 <a className="dropdown-item " id="custom-tabs-6" data-toggle="pill" href="#tabs-6"  aria-controls="custom-tabs-66" >Dispatch Slip (DS)</a>
                                                 <a className="dropdown-item " id="custom-tabs-6" data-toggle="pill" href="#tabs-6"  aria-controls="custom-tabs-66" >RawMaterial Length / Weight Details</a>

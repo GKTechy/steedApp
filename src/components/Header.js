@@ -150,7 +150,7 @@ export class Header extends Component {
             </li>
             <li className="nav-item">
             <a className="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button" onClick={this.signOut}>
-                <i className="fas fa-th-large" />
+                <i className="fas fa-sign-out-alt" />
             </a>
             </li>
         </ul>

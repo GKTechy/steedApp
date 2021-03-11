@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 export class Menu extends Component {
     
     render() {
@@ -8,7 +8,7 @@ export class Menu extends Component {
 
         return (
            <aside className="main-sidebar sidebar-dark-primary elevation-4">
-                <a href="index3.html" className="brand-link">
+                <a href="#" className="brand-link">
                     <span className="brand-text font-weight-light">Steed App</span>
                     
                 </a>
@@ -26,7 +26,7 @@ export class Menu extends Component {
                
                     {/* Sidebar Menu */}
                     <nav className="mt-2">
-                        <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-users-cog"/><p>Admin </p></a>
                                     <ul className="nav nav-treeview">
                                         <li className="nav-item">
@@ -89,32 +89,13 @@ export class Menu extends Component {
                                 <ul className="nav nav-treeview">
                                         <li className="nav-item">
                                             <Link to="/commercialMaster"> <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
-                                            {/* <ul className="nav nav-treeview">
-                                                <li className="nav-item"><Link to="/manageusers"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Dealer</p></a></Link></li>
-                                                <li className="nav-item"><Link to="/roles"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Dealer Order</p></a></Link></li>
-                                                <li className="nav-item"><Link to="/roles"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Colour Code</p></a></Link></li>
-                                                
-                                            </ul> */}
                                         </li>
                                         <li className="nav-item">
                                              <Link to="/commercialTransaction"> <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
-                                             {/* <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a>
-                                            <ul className="nav nav-treeview">
-                                                <li className="nav-item"><Link to="/manageusers"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Production Indent</p></a></Link></li>
-                                                <li className="nav-item"><Link to="/manageusers"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Execution Order Register</p></a></Link></li>
-                                                
-                                            </ul> */}
                                         </li> 
                                         <li className="nav-item">
                                             <Link to="/commercialReports"> <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i class="right fas fa-angle-left"></i></p></a></Link>
-
-                                            {/* <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i class="right fas fa-angle-left"></i></p></a>
-                                            <ul className="nav nav-treeview">
-                                                <li className="nav-item"><Link to="/manageusers"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Dealer</p></a></Link></li>
-                                                <li className="nav-item"><Link to="/manageusers"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>Dealer Order</p></a></Link></li>
-                                                <li className="nav-item"><Link to="/manageusers"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>EO Register</p></a></Link></li>
-                                            </ul> */}
-                                        </li>
+                                       </li>
                                     </ul>
                             </li>
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-balance-scale" /><p>Accounts</p></a>

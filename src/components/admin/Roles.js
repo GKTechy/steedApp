@@ -125,7 +125,7 @@ export class Roles extends Component {
                             </span>
                         </div>
                         <span className="text-danger">{this.state.errormsg}</span>
-                        <br/><br/>
+                        <br/>
                             <div className="table-responsive-sm" >
                                 <table className="table table-striped table-sm table-bordered" id="myTable" >
                                     <thead>

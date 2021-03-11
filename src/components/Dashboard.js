@@ -45,15 +45,15 @@ export class Dashboard extends Component {
                
                     {/* Sidebar Menu */}
                     <nav className="mt-2">
-                        <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-users-cog"/><p>Admin </p></a>
                                   
                                     <ul className="nav nav-treeview">
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/adminMaster`} > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/adminMaster`} > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master </p></a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/adminTransaction`} > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/adminTransaction`} > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction </p></a></Link>
                                         </li>
                                         
                                 </ul>
@@ -72,6 +72,19 @@ export class Dashboard extends Component {
                                             <Link to={`${match.path}/productionReport`} > <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i class="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                 </ul>
+                            </li>
+                            <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-chart-pie" /><p>Commercial</p></a>
+                                <ul className="nav nav-treeview">
+                                        <li className="nav-item">
+                                            <Link to={`${match.path}/commercialMaster`}> <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
+                                        </li>
+                                        <li className="nav-item">
+                                             <Link to={`${match.path}/commercialTransaction`}> <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
+                                        </li> 
+                                        <li className="nav-item">
+                                            <Link to={`${match.path}/commercialReports`}> <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i class="right fas fa-angle-left"></i></p></a></Link>
+                                       </li>
+                                    </ul>
                             </li>
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-balance-scale" /><p>Accounts</p></a>
                                     <ul className="nav nav-treeview">
