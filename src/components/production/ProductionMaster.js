@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Machine from './Machine'
 
 export class ProductionMaster extends Component {
     render() {
@@ -27,11 +28,10 @@ export class ProductionMaster extends Component {
                                     1
                                 </div>
                                 <div className="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
-                                    {/* <Roles/> */}2
+                                    <Machine/>
                                 </div>
-                                <div className="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
-                                    {/* <NoteForApproval/> */}3
-                                </div>
+                                
+                                
                    
                             </div>
                             </div>
