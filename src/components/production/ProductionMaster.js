@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Machine from './Machine'
+import MachineProcessMap from './MachineProcessMap'
 
 export class ProductionMaster extends Component {
     render() {
@@ -24,8 +25,7 @@ export class ProductionMaster extends Component {
                             <div className="card-body" style={{height: 700}}>
                             <div className="tab-content" id="custom-tabs-two-tabContent">
                                 <div className="tab-pane fade show active" id="custom-tabs-two-home" role="tabpanel" aria-labelledby="custom-tabs-two-home-tab">
-                                    {/* <ManageUsers/> */}
-                                    1
+                                    <MachineProcessMap/>
                                 </div>
                                 <div className="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
                                     <Machine/>

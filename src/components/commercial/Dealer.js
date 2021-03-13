@@ -14,7 +14,7 @@ export class Dealer extends Component {
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
                                             {/* <Link to="/addDealer"><button type="button" className="btn btn-primary btn-flat" >Create New Dealer &nbsp;&nbsp;<i class="fas fa-plus"></i></button></Link> */}
-                                            <button type="button" className="btn btn-primary btn-flat" >Create New Dealer &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                            <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#new_dealer">Create New Dealer &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
                                             </span>
                                         </div>
 
@@ -115,7 +115,7 @@ export class Dealer extends Component {
                 </section>  
 
                 
-                <div className="modal fade" id="user-model">
+                <div className="modal fade" id="new_dealer">
                     <div className="modal-dialog modal-xl">
                         <div className="modal-content">
                         <div className="modal-header">
@@ -234,10 +234,79 @@ export class Dealer extends Component {
                                             </div>
                                         </div>
                                         <div className="card-body" style={{display: 'none'}}>
-                                            <div className="direct-chat-messages">
-                                        
-                                        
-                                            </div>
+                                            <form>
+
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputEmail4">Address Name</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address Name" />
+                                                        </div>
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputPassword4">Is Default Address</label>
+                                                        <input type="checkbox" className="form-control form-control-sm" id="inputPassword4" placeholder="" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputEmail4">Address 1</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address 1" />
+                                                        </div>
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputPassword4">Phone</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Phone" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputEmail4">Address 2</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address 2" />
+                                                        </div>
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputPassword4">Mobile</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Mobile" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputEmail4">Address 3</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address 3" />
+                                                        </div>
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputPassword4">Fax</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Fax" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputEmail4">City</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="City" />
+                                                        </div>
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputPassword4">Email</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Email" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputEmail4">State</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="State" />
+                                                        </div>
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputPassword4">Contact Person</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Contact Person" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputEmail4">Pin Code</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Pin Code" />
+                                                        </div>
+                                                        <div className="form-group col-md-6">
+                                                        <label htmlFor="inputPassword4">Contact Person Phone No</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Phone No" />
+                                                        </div>
+                                                    </div>
+                                            </form>
                                         </div>
                                     </div>
 

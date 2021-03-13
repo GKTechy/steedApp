@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import CSGeneration from './CSGeneration'
+import CSRegeneration from './CSRegeneration'
 
 export class QualityMaster extends Component {
     render() {
@@ -29,16 +31,16 @@ export class QualityMaster extends Component {
                                 <div className="card-body" >
                                 <div className="tab-content" id="custom-tabs-two-tabContent">
                                     <div className="tab-pane fade show active" id="tabs-1" role="tabpanel" aria-labelledby="custom-tabs-1">
-                                        1
+                                        <CSGeneration/>
                                     </div>
                                     <div className="tab-pane fade" id="tabs-2" role="tabpanel" aria-labelledby="custom-tabs-2">
-                                        2
+                                       2
                                     </div>
                                     <div className="tab-pane fade" id="tabs-3" role="tabpanel" aria-labelledby="custom-tabs-3">
                                         3
                                     </div>
                                     <div className="tab-pane fade" id="tabs-4" role="tabpanel" aria-labelledby="custom-tabs-4">
-                                        4
+                                       <CSRegeneration/>
                                     </div>
                                 </div>
                                 </div>

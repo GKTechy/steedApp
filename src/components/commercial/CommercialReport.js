@@ -13,13 +13,13 @@ export class CommercialReport extends Component {
                                 <ul className="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
                                     <li className="pt-2 px-3"><h3 className="card-title">Commercial Report</h3></li>
                                     <li className="nav-item">
-                                     <a className="nav-link active" id="custom-tabs-two-home-tab" data-toggle="pill" href="#custom-tabs-1" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">Dealer</a>
+                                     <a className="nav-link active" id="custom-tabs-two-home-tab" data-toggle="pill" href="#custom-tabs-1" role="tab" aria-controls="custom-tabs-two-home" aria-selected="true">Dealer List</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" id="custom-tabs-two-profile-tab" data-toggle="pill" href="#custom-tabs-2" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">Dealer Order</a>
+                                        <a className="nav-link" id="custom-tabs-two-profile-tab" data-toggle="pill" href="#custom-tabs-2" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">PO List</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" id="custom-tabs-two-profile-tab" data-toggle="pill" href="#custom-tabs-3" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">EO Register</a>
+                                        <a className="nav-link" id="custom-tabs-two-profile-tab" data-toggle="pill" href="#custom-tabs-3" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">WO Register</a>
                                     </li>
                                 </ul>
                                 </div>

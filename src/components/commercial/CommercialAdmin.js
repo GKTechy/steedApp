@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ColorCode from './ColorCode'
 import Dealer from './Dealer'
+import DealerOrder from './DealerOrder'
 
 export class CommercialAdmin extends Component {
     render() {
@@ -30,7 +31,7 @@ export class CommercialAdmin extends Component {
                                <Dealer/>
                             </div>
                             <div className="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
-                                
+                                <DealerOrder/>
                             </div>
                             <div className="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
                                 <ColorCode/>
