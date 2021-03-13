@@ -21,7 +21,7 @@ export class DealerOrder extends Component {
                             <div className="card">
                             <div className="card-header">
                                  <div className="row">
-                                    <div className="col-5">
+                                    <div className="col-8">
                                          <form className="form-inline">
                                             <label htmlFor="exampleSelectRounded0" className="my-1 mr-2" >Dealer</label>
                                             <select className="form-control form-control-sm" id="exampleSelectRounded0">

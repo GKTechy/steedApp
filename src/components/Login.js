@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+
+
+
 export class Login extends Component {
 
 
@@ -67,7 +70,8 @@ login = event => {
             <div className="card card-outline card-primary">
                 <div className="card-header text-center">
                   <a href="#" className="h1">
-                    <b>SteedApp</b>
+                    {/* <b>SteedApp</b> */}
+                    <img src="logo.png" className="img-fluid "/>
                   </a>
                 </div>
                 <div className="card-body">
