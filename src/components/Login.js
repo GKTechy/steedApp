@@ -76,7 +76,7 @@ login = event => {
                 </div>
                 <div className="card-body">
                 
-                  <p className="login-box-msg">Sign in </p>
+                  {/* <p className="login-box-msg">Sign in </p> */}
                   <form onSubmit={this.login} className="form-signin">
                       <div className="input-group mb-3">
                         <input
