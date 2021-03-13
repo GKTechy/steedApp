@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import MaterialType from './MaterialType'
 import UOM from './UOM'
 
 export class MaterialMaster extends Component {
@@ -36,7 +37,7 @@ export class MaterialMaster extends Component {
                                         <UOM/>
                                 </div>
                                 <div className="tab-pane fade" id="tabs-2" role="tabpanel" aria-labelledby="custom-tabs-2">
-                                    2
+                                    <MaterialType/>
                                 </div>
                                 <div className="tab-pane fade" id="tabs-3" role="tabpanel" aria-labelledby="custom-tabs-3">
                                     3
