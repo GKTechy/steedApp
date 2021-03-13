@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import Material from './Material'
 import MaterialType from './MaterialType'
+import PaymentTerm from './PaymentTerm'
+import Supplier from './Supplier'
 import UOM from './UOM'
 
 export class MaterialMaster extends Component {
@@ -40,13 +43,13 @@ export class MaterialMaster extends Component {
                                     <MaterialType/>
                                 </div>
                                 <div className="tab-pane fade" id="tabs-3" role="tabpanel" aria-labelledby="custom-tabs-3">
-                                    3
+                                   <Material/>
                                 </div>
                                 <div className="tab-pane fade" id="tabs-4" role="tabpanel" aria-labelledby="custom-tabs-4">
-                                    4
+                                    <Supplier/>
                                 </div>
                                 <div className="tab-pane fade" id="tabs-5" role="tabpanel" aria-labelledby="custom-tabs-5">
-                                    5
+                                    <PaymentTerm/>
                                 </div>
                             </div>
                             </div>
