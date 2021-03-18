@@ -201,63 +201,116 @@ export class UOM extends Component {
         return (
             <div>
 
-  <section className="content">
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-12">
-          <div className="card">
-            <div className="card-header">
-                <div className="row">
-                    <div className="col-2">
-                        <input type="text" className="form-control form-control-sm" placeholder="UOM" title="UOM" />
-                    </div>
-                    <div className="col-2">
-                        <input type="text" className="form-control form-control-sm" placeholder="Description" title="Description" />
-                    </div>
-                    <div className="col-5">
-                        <button className="btn btn-primary btn-sm">Add</button>
-                    </div>
-                </div>
+                <section className="content">
+                    <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-12">
+                        <div className="card">
+                            <div className="card-header">
+                            <div className="card-title">
+                                        <div className="input-group input-group-sm">
+                                            <span className="input-group-append">
+                                                <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#uom-new-model">Create New  UOM&nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                            </span>
+                                        </div>
 
+                                </div>
+
+                            </div>
+                            <div className="card-body">
+                            <table id="uom_master_table" className="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>MeasureMent Name</th>
+                                    <th>Short Name</th>
+                                    <th>MeasureMent Type</th>
+                                    <th>Is Base</th>
+                                    <th>Is Valid</th>
+                                    <th>Equalant Value</th>
+                                    <th>Active</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {/* {
+                                    this.state.uomList.map((item) =>
+                                    
+                                    <tr key={item.id}>
+                                        
+                                        <td>{item.code}</td>
+                                        <td><span className="tag tag-success">{item.desc}</span></td>
+                                        <td className="project-actions ">
+                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
+                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
+                                        </td>
+                                    </tr>
+                                )} */}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>MeasureMent Name</th>
+                                    <th>Short Name</th>
+                                    <th>MeasureMent Type</th>
+                                    <th>Is Base</th>
+                                    <th>Is Valid</th>
+                                    <th>Equalant Value</th>
+                                    <th>Active</th>
+                                    <th>Action</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </section>
+
+
+                <div className="modal fade" id="uom-new-model">
+                    <div className="modal-dialog modal-xl">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h4 className="modal-title">New UOM</h4>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                                <div className="container-fluid">
+                                    <div className="form-inline">
+                                        <label htmlFor="code" className="m-2 col-sm-2" >MeasureMent Type<span class="text-danger">*</span></label>
+                                        <select className="form-control m-2 col-sm-3" id="exampleSelectRounded0">
+                                            <option>M 1</option>
+                                            <option>M 2</option>
+                                            <option>M 3</option>
+                                        </select>
+                                        <label htmlFor="name" className="m-2 col-sm-2">Base MeasureMent<span class="text-danger">*</span></label>
+                                        <input type="checkbox" className="form-check-input m-1" id="isactive" />
+                                        <label htmlFor="name" className="m-2 col-sm-2">Valid MeasureMent <span class="text-danger">*</span> </label>
+                                        <input type="checkbox" className="form-check-input m-1" id="isqc" />
+                                        <label htmlFor="name" className="m-2 col-sm-2" >MeasureMent Name<span class="text-danger">*</span></label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="MeasureMent Name" />
+                                        <label htmlFor="code" className="m-2 col-sm-2" >Short Name</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="MeasureMent Short" />
+                                        <label htmlFor="name" className="m-2 col-sm-2" >Equalant Value</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="Equalant Value with Base" />
+                                        <label htmlFor="name" className="m-2 col-sm-2" >Description</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="Description" />
+                                        <label htmlFor="name" className="m-2 col-sm-2">Active<span class="text-danger">*</span></label>
+                                        <input type="checkbox" className="form-check-input m-1" id="isactive" />
+                                    </div>
+                            </div>
+                         </div>
+                        <div className="modal-footer justify-content-between">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary">Save</button>
+                        </div>
+                        </div>
+                    </div>
             </div>
-            <div className="card-body">
-              <table id="uom_master_table" className="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Code</th>
-                    <th>Description</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {
-                    this.state.uomList.map((item) =>
-                    
-                    <tr key={item.id}>
-                        
-                        <td>{item.code}</td>
-                        <td><span className="tag tag-success">{item.desc}</span></td>
-                        <td className="project-actions ">
-                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                        </td>
-                    </tr>
-                )}
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th> Code</th>
-                    <th>Description</th>
-                    <th>Action</th>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
+
 </div>
         )
     }
