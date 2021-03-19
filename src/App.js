@@ -8,22 +8,24 @@ export class App extends Component {
   render() {
     return (
       <div>
-         <Router>
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <ProtectedRoute path="/dashboard">
-              <Dashboard path="/dashboard"/>
-            </ProtectedRoute>
-            <Route exact path="/">
-              <Redirect exact from="/" to="dashboard" />
-            </Route>
-            <Route path="*">
-              <Redirect from="/" to="dashboard" />
-            </Route>
-          </Switch>
-        </Router>
+          
+            <Router>
+              <Switch>
+                <Route path="/login">
+                  <Login />
+                </Route>
+                <ProtectedRoute path="/dashboard">
+                  <Dashboard path="/dashboard"/>
+                </ProtectedRoute>
+                <Route exact path="/">
+                  <Redirect exact from="/" to="dashboard" />
+                </Route>
+                <Route path="*">
+                  <Redirect from="/" to="dashboard" />
+                </Route>
+              </Switch>
+            </Router>
+        
       </div>
     )
   }

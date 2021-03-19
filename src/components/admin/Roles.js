@@ -5,6 +5,7 @@ import "datatables.net-bs4/js/dataTables.bootstrap4.min.js"
 
 import $ from 'jquery';
 
+import { connect } from "react-redux";
 
 export class Roles extends Component {
 
@@ -17,8 +18,9 @@ export class Roles extends Component {
             active:true,
             showModal:false,
             errormsg:"",
-            rolesList:[
-            ]
+            rolesList:[],
+            isLoaded:false,
+           
         }
        
     }
@@ -27,13 +29,38 @@ export class Roles extends Component {
 
 
     componentDidMount() {
+
+        this.getTableValues();
         $(document).ready(function () {
             $('#myTable').DataTable();
         });
         
+        console.log('props profile-->:'+this.props.apiurl)
      }  
 
-     addRole= event =>{
+
+    getTableValues(){
+
+        fetch("https://api.example.com/items")
+        .then(res => res.json())
+        .then( (result) => {
+                this.setState({
+                    isLoaded: true,
+                    rolesList: result.items
+                });
+            },(error) => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                });
+            }
+        )
+    }
+
+
+    
+
+     saveClick= event =>{
         if(this.state.rolename === ""){
             this.setState({
                 errormsg: "Enter Role"
@@ -58,7 +85,14 @@ export class Roles extends Component {
         }
      }
 
-        
+     resetClick= () => {
+        this.setState({ 
+            errormsg: "",
+            rolename:"",
+            roleid:0,
+            active:true
+        });
+    }
     handleFormChange = event => {
         this.setState({
             rolename: event.target.value
@@ -100,7 +134,7 @@ export class Roles extends Component {
         return (
             <div>
                
-                <div className="content">
+            <div className="content">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-3">
@@ -113,7 +147,8 @@ export class Roles extends Component {
                                 </div>
                             </div>
                             <div className="col-1">
-                                <button type="button" className="btn btn-primary btn-flat" onClick={this.addRole}>Add</button>
+                                <button type="button" className="btn btn-primary btn-flat" onClick={this.saveClick}>Add</button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick}>Reset</button>
                             </div>
                             <div className="col-2">
                             <span className="text-danger">{this.state.errormsg}</span>
@@ -188,4 +223,13 @@ export class Roles extends Component {
     }
 }
 
-export default Roles
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl
+    }
+  }
+
+ export default connect(mapStateToProps)(Roles);
+
+//export default Roles
