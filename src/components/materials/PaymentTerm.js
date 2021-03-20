@@ -1,9 +1,4 @@
 import React, { Component } from 'react'
-import "datatables.net-dt/js/dataTables.dataTables"
-import "datatables.net-bs4/css/dataTables.bootstrap4.min.css"
-import "datatables.net-bs4/js/dataTables.bootstrap4.min.js"
-
-import $ from 'jquery';
 
 export class PaymentTerm extends Component {
     constructor(props) {
@@ -15,10 +10,7 @@ export class PaymentTerm extends Component {
     }
 
     componentDidMount(){
-        $(document).ready(function () {
-            $('#paymentterm_master_table').DataTable();
-            
-        });
+       
 
     }
     

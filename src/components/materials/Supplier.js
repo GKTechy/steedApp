@@ -176,51 +176,37 @@ export class Supplier extends Component {
                                                         <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Mobile" />
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">Contact Person Phone</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Contact Person  Phone No" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-row m-2">
-                                                        <div className="form-group col-md-4">
                                                         <label htmlFor="inputEmail4">Email</label>
                                                         <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Email" />
                                                         </div>
+                                                    </div>
+                                                    <div className="form-row m-2">
+                                                       
                                                         <div className="form-group col-md-4">
                                                         <label htmlFor="inputPassword4">Fax</label>
                                                         <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Fax" />
+                                                        </div>
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="inputPassword4">GST</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="GST" />
                                                         </div>
                                                         <div className="form-group col-md-4">
                                                         <label htmlFor="inputPassword4">PAN</label>
                                                         <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="PAN" />
                                                         </div>
                                                     </div>
-                                                    <div className="form-row m-2">
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputEmail4">Service Tax No</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Service Tax No" />
-                                                        </div>
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">CST</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="CST" />
-                                                        </div>
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">Sales Tax No</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Sales Tax No" />
-                                                        </div>
-                                                    </div>
+                                                   
                                                    
                                                     <div className="form-row m-2">
+                                                        
                                                         <div className="form-group col-md-4">
                                                         <label htmlFor="inputEmail4">Remarks</label>
                                                         <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Remarks" />
                                                         </div>
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">TIN</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="TIN" />
-                                                        </div>
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">Is Active</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Sales Tax No" />
+                                                       
+                                                        <div className="col-md-4 form-inline">
+                                                        <label htmlFor="inputPassword4">Is Active</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input type="checkbox" className="form-control form-control-sm" id="inputPassword4" placeholder="" />
                                                         </div>
                                                     </div>
                                                  </form>
@@ -248,8 +234,8 @@ export class Supplier extends Component {
                                                         <label htmlFor="inputEmail4">Address Name</label>
                                                         <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address Name" />
                                                         </div>
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputPassword4">Is Default Address</label>
+                                                        <div className="col-md-6 form-inline">
+                                                        <label htmlFor="inputPassword4">Is Default Address</label>&nbsp;&nbsp;&nbsp;
                                                         <input type="checkbox" className="form-control form-control-sm" id="inputPassword4" placeholder="" />
                                                         </div>
                                                     </div>
@@ -269,7 +255,7 @@ export class Supplier extends Component {
                                                         <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address 2" />
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                        <label htmlFor="inputPassword4">Mobile</label>
+                                                        <label htmlFor="inputPassword4">Phone 2</label>
                                                         <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Mobile" />
                                                         </div>
                                                     </div>
@@ -279,7 +265,7 @@ export class Supplier extends Component {
                                                         <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address 3" />
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                        <label htmlFor="inputPassword4">Fax</label>
+                                                        <label htmlFor="inputPassword4">Phone 3</label>
                                                         <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Fax" />
                                                         </div>
                                                     </div>
@@ -289,8 +275,8 @@ export class Supplier extends Component {
                                                         <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="City" />
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                        <label htmlFor="inputPassword4">Email</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Email" />
+                                                        <label htmlFor="inputEmail4">Pin Code</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Pin Code" />
                                                         </div>
                                                     </div>
                                                     <div className="form-row m-2">
@@ -299,61 +285,16 @@ export class Supplier extends Component {
                                                         <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="State" />
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                        <label htmlFor="inputPassword4">Contact Person</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Contact Person" />
+                                                        <label htmlFor="inputPassword4">Country</label>
+                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Country" />
                                                         </div>
                                                     </div>
-                                                    <div className="form-row m-2">
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputEmail4">Pin Code</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Pin Code" />
-                                                        </div>
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputPassword4">Contact Person Phone No</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Phone No" />
-                                                        </div>
-                                                    </div>
+                                                   
                                             </form>
                                         </div>
                                     </div>
 
-                                    <div className="card card-warning card-outline direct-chat direct-chat-primary collapsed-card">
-                                        <div className="card-header">
-                                            <h3 className="card-title">Contact Person</h3>
-                                            <div className="card-tools">
-                                            
-                                            <button type="button" className="btn btn-tool bg-primary" data-card-widget="collapse">
-                                                <i className="fas fa-plus" />
-                                            </button>
-                                        
-                                            </div>
-                                        </div>
-                                        <div className="card-body" style={{display: 'none'}}>
-                                            <div className="direct-chat-messages">
-                                        
-                                        
-                                            </div>
-                                        </div>
-                                    </div>
                                     
-                                    <div className="card card-danger card-outline direct-chat direct-chat-primary collapsed-card">
-                                        <div className="card-header">
-                                            <h3 className="card-title">Bank Details</h3>
-                                            <div className="card-tools">
-                                            
-                                            <button type="button" className="btn btn-tool bg-primary" data-card-widget="collapse">
-                                                <i className="fas fa-plus" />
-                                            </button>
-                                        
-                                            </div>
-                                        </div>
-                                        <div className="card-body" style={{display: 'none'}}>
-                                            <div className="direct-chat-messages">
-                                        
-                                        
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div>
                             </div>

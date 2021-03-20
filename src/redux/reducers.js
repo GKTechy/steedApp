@@ -2,6 +2,7 @@ import { Types } from './Types';
 
 const initialState = {
     profile: {
+      userId:"100",
       firstName: '',
       lastName: '',
       telephone: '',
@@ -16,8 +17,7 @@ const initialState = {
       profileImage: '',
       subscribenewsletter: false
     },
-    formSubmitted: false,
-    apiurl:"http://localhost:8080/steedapp",
+    apiurl:"http://localhost:8080/steedapp/",
     
   
 }

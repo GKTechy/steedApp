@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import "datatables.net-dt/js/dataTables.dataTables"
-import "datatables.net-bs4/css/dataTables.bootstrap4.min.css"
-import "datatables.net-bs4/js/dataTables.bootstrap4.min.js"
 
-import $ from 'jquery';
 export class UOM extends Component {
 
 
@@ -190,10 +186,7 @@ export class UOM extends Component {
         }
         
     componentDidMount(){
-        $(document).ready(function () {
-            $('#uom_master_table').DataTable();
-            
-        });
+       
 
     }
 
@@ -225,7 +218,7 @@ export class UOM extends Component {
                                     <th>Short Name</th>
                                     <th>MeasureMent Type</th>
                                     <th>Is Base</th>
-                                    <th>Is Valid</th>
+                                    <th>Is Varied</th>
                                     <th>Equalant Value</th>
                                     <th>Active</th>
                                     <th>Action</th>
@@ -252,7 +245,7 @@ export class UOM extends Component {
                                     <th>Short Name</th>
                                     <th>MeasureMent Type</th>
                                     <th>Is Base</th>
-                                    <th>Is Valid</th>
+                                    <th>Is Varied</th>
                                     <th>Equalant Value</th>
                                     <th>Active</th>
                                     <th>Action</th>
@@ -279,17 +272,18 @@ export class UOM extends Component {
                         <div className="modal-body">
                                 <div className="container-fluid">
                                     <div className="form-inline">
-                                        <label htmlFor="code" className="m-2 col-sm-2" >MeasureMent Type<span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 col-sm-2" >Measurement Type<span class="text-danger">*</span></label>
                                         <select className="form-control m-2 col-sm-3" id="exampleSelectRounded0">
-                                            <option>M 1</option>
-                                            <option>M 2</option>
-                                            <option>M 3</option>
+                                            <option>Mass</option>
+                                            <option>Volume</option>
+                                            <option>Unit</option>
+                                            <option>Distance</option>
                                         </select>
-                                        <label htmlFor="name" className="m-2 col-sm-2">Base MeasureMent<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2">Base Measurement<span class="text-danger">*</span></label>
                                         <input type="checkbox" className="form-check-input m-1" id="isactive" />
-                                        <label htmlFor="name" className="m-2 col-sm-2">Valid MeasureMent <span class="text-danger">*</span> </label>
-                                        <input type="checkbox" className="form-check-input m-1" id="isqc" />
-                                        <label htmlFor="name" className="m-2 col-sm-2" >MeasureMent Name<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2">is Varied<span class="text-danger">*</span> </label>
+                                        <input type="checkbox" className="form-check-input" id="isqc" />
+                                        <label htmlFor="name" className="m-2 col-sm-2" >Measurement Name<span class="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="MeasureMent Name" />
                                         <label htmlFor="code" className="m-2 col-sm-2" >Short Name</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="MeasureMent Short" />

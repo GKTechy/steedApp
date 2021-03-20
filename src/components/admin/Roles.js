@@ -1,66 +1,86 @@
 import React, { Component } from 'react'
-import "datatables.net-dt/js/dataTables.dataTables"
-import "datatables.net-bs4/css/dataTables.bootstrap4.min.css"
-import "datatables.net-bs4/js/dataTables.bootstrap4.min.js"
-
-import $ from 'jquery';
-
 import { connect } from "react-redux";
+
+import ReactDatatable from '@ashvin27/react-datatable';
 
 export class Roles extends Component {
 
     constructor(props) {
         super(props)
-    
+        
+        this.columns = [
+            {
+                key: "roleName",
+                text: "Name",
+                sortable: true
+            },
+            {
+                key: "status",
+                text: "Active",
+                sortable: true
+            },
+            {
+                key: "action",
+                text: "Action",
+                cell: (record, index) => {
+                    return (
+                            <button
+                                className="btn btn-info btn-sm"
+                                onClick={this.editRecord.bind(this, record, index)}
+                                style={{marginRight: '5px'}}>
+                                    <i className="fas fa-pencil-alt"></i>Edit
+                            </button>
+                       
+                    );
+                }
+            }
+        ];
+
+        this.config = {
+            key_column: 'roleId',
+            page_size: 10,
+            length_menu: [10, 20, 50],
+            show_filter: true,
+            show_pagination: true,
+            pagination: 'advance',
+            filename: "Roles",
+            button: {
+                excel: true,
+                print: true,
+                csv: true
+            }
+        }
         this.state = {
             rolename:"",
             roleid:0,
             active:true,
             showModal:false,
             errormsg:"",
-            rolesList:[],
+            records:[],
             isLoaded:false,
-           
+           loginUser:this.props.profile
         }
        
     }
-    
-   
-
-
     componentDidMount() {
-
         this.getTableValues();
-        $(document).ready(function () {
-            $('#myTable').DataTable();
-        });
-        
-        console.log('props profile-->:'+this.props.apiurl)
+//        console.log('props profile-->:'+this.props.apiurl)
      }  
-
-
     getTableValues(){
-
-        fetch("https://api.example.com/items")
+        fetch(this.props.apiurl+"role/allRoles")
         .then(res => res.json())
         .then( (result) => {
-                this.setState({
-                    isLoaded: true,
-                    rolesList: result.items
-                });
+               // console.log("result-->"+JSON.stringify(result))
+                if(result.valid){
+                    this.setState({
+                        records: result.roleList
+                    });
+                }else{}
             },(error) => {
-                this.setState({
-                    isLoaded: true,
-                    error
-                });
             }
         )
     }
-
-
-    
-
-     saveClick= event =>{
+    saveClick= event =>{
         if(this.state.rolename === ""){
             this.setState({
                 errormsg: "Enter Role"
@@ -70,18 +90,58 @@ export class Roles extends Component {
                 errormsg: "Select Active"
             });
         }else{
-            const obj = {'rolename':this.state.rolename, active:this.state.active,'roleid':this.state.roleid};
-          //  console.log("c role->"+obj)
-            this.setState({
-                errormsg: "",
-                rolesList: [...this.state.rolesList, obj],
-                rolename:"",
-                roleid:0,
-                active:true
-            },()=>{
-                $('#myTable').DataTable();
-              //  console.log(this.state.rolesList); 
-            });
+
+            if(this.state.active){
+                var tempstatus="Active"
+            }else{
+                var tempstatus="InActive"
+            }
+            
+            const obj = {'roleName':this.state.rolename, status:tempstatus,'roleId':this.state.roleid,"updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
+
+             // POST request using fetch with error handling
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "roleObj": obj })
+                };
+                fetch(this.props.apiurl+"role/saveRole", requestOptions)
+                    .then(async response => {
+                        const data = await response.json();
+                        console.log("--data--"+JSON.stringify(data))
+                        // check for error response
+                        if (!response.ok) {
+                            // get error message from body or default to response status
+                            const error = (data && data.message) || response.status;
+                            return Promise.reject(error);
+                        }
+
+                        if(data.valid){
+                             //  console.log("c role->"+obj)
+                             this.setState({
+                                errormsg: "",
+                                records: data.roleList,
+                                rolename:"",
+                                roleid:0,
+                                active:true
+                            },()=>{});
+                        }else{
+                            this.setState({ errormsg: data.responseMsg});
+                            this.setState({
+                                errormsg: "",
+                                rolename:"",
+                                roleid:0,
+                                active:true
+                            },()=>{});
+                        }
+                           
+                    })
+                    .catch(error => {
+                        this.setState({ errormsg: error.toString() });
+                        console.error('There was an error!', error);
+                    });
+                    
+          
         }
      }
 
@@ -103,33 +163,26 @@ export class Roles extends Component {
         this.setState({ active: !this.state.active });
     }
 
-    editEvent = (obj) => {
-        console.log("-->"+JSON.stringify(obj))
+    editRecord = (record, index) => {
+       // console.log("Edit record", index, record);
+       // console.log("-->"+JSON.stringify(record))
+       var tempstatus=true;
+       if(record.status === "Active"){
+            tempstatus=true;
+        }else{
+            tempstatus=false;
+        }
         this.setState({
-            rolename:obj.rolename,
-            roleid:obj.rolename,
-            active:obj.active
+            rolename:record.roleName,
+            roleid:record.roleId,
+            active:tempstatus
         });
 
-    }
-    
-    deleteAlertEvent = (obj) => {
-      //  alert("id-->"+id)
-        this.setState({
-            rolename:obj.rolename,
-            roleid:obj.rolename,
-            active:obj.active,
-            showModal:true,
-        });
+
     }
 
-    deleteEvent= () => {
-       alert("Deleted!!");
-       this.setState({
-        showModal:false,
-    });
-    }
     
+  
     render() {
         return (
             <div>
@@ -147,8 +200,8 @@ export class Roles extends Component {
                                 </div>
                             </div>
                             <div className="col-1">
-                                <button type="button" className="btn btn-primary btn-flat" onClick={this.saveClick}>Add</button>&nbsp;&nbsp;&nbsp;
-                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick}>Reset</button>
+                                <button type="button" className="btn btn-primary btn-flat" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
+                                {/* <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick}>Reset</button> */}
                             </div>
                             <div className="col-2">
                             <span className="text-danger">{this.state.errormsg}</span>
@@ -159,7 +212,7 @@ export class Roles extends Component {
                         <div className="row">
                         <div className="col-12">
                             <div className="table-responsive-sm" >
-                                <table className="table table-striped table-sm table-bordered" id="myTable" >
+                                {/*<table className="table table-sm table-bordered" id="myTable" >
                                     <thead>
                                         <tr>
                                         
@@ -173,23 +226,30 @@ export class Roles extends Component {
                                         {
                                             this.state.rolesList.map((obj) =>
                                             
-                                            <tr key={obj.roleid}>
+                                            <tr key={obj.roleId}>
                                                 
-                                                <td>{obj.rolename}</td>
+                                                <td>{obj.roleName}</td>
                                                 <td>{
-                                                        obj.active ? <span className="tag tag-success">Active</span> : <span className="tag tag-failure">In Active</span>
+                                                        obj.status ? <span className="tag tag-success">Active</span> : <span className="tag tag-failure">In Active</span>
                                                     }
                                                 </td>
                                                 <td className="project-actions ">
                                                     <a className="btn btn-info btn-sm" href="#" onClick={ ()=> this.editEvent(obj)}><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                                    <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default" onClick={ ()=> this.deleteAlertEvent(obj)}><i className="fas fa-trash"></i>Delete</a>
+                                                  
                                                 </td>
                                             </tr>
                                         )}
                                         
                                         
                                     </tbody>
-                                </table> 
+                                </table>  */}
+
+                                <ReactDatatable
+                                    config={this.config}
+                                    records={this.state.records}
+                                    columns={this.columns}/>
+
+
                             </div>
                         </div>
                         </div>
