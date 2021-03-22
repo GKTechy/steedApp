@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+
+import ReactDatatable from '@ashvin27/react-datatable';
 
 
 export class MaterialType extends Component {
@@ -7,189 +10,199 @@ export class MaterialType extends Component {
 
     constructor(props) {
         super(props)
-    
-        this.state = {
-             uomList:[
-                {
-                    "code": "B15","desc": "BAG 15"
-                },{
-                    "code": "B25",            "desc": "BAG 25"
-                },{
-                    "code": "B50",            "desc": "BAG 50"
-                },{
-                    "code": "BBL",            "desc": "Barrel - Liquid Measure"
-                },{
-                    "code": "BOX",            "desc": "Box"
-                },{
-                    "code": "BRL",            "desc": "BARREL"
-                },{
-                    "code": "BSD",            "desc": "Bushel - Dry Measure"
-                },{
-                    "code": "CAN",            "desc": "CAN"
-                },{
-                    "code": "CCM",            "desc": "Cubic Centimeters"
-                },{
-                    "code": "CDM",            "desc": "Cubic Decimeters"
-                },{
-                    "code": "CG",            "desc": "Centigrams"
-                },{
-                    "code": "CHN",           "desc": "Chain"
-                },{
-                    "code": "CL",            "desc": "Centiliters"
-                },{
-                    "code": "CM",            "desc": "Centimeters"
-                },{
-                    "code": "CMM",            "desc": "Cubic Millimeters"
-                },{
-                    "code": "CRT",            "desc": "CRATE"
-                },{
-                    "code": "CS",            "desc": "Case"
-                },{
-                    "code": "CUF",            "desc": "Cubic Feet"
-                },{
-                    "code": "CUI",            "desc": "Cubic Inches"
-                },{
-                    "code": "CUM",            "desc": "Cubic Meters"
-                },{
-                    "code": "CUY",            "desc": "Cubic Yards"
-                },{
-                    "code": "DAY",            "desc": "Days"
-                },{
-                    "code": "DG",            "desc": "Decigrams"
-                },{
-                    "code": "DL",            "desc": "Deciliters"
-                },{
-                    "code": "DM",            "desc": "Decimeters"
-                },{
-                    "code": "DOZ",            "desc": "Dozen"
-                },{
-                    "code": "DRA",            "desc": "Dram"
-                },{
-                    "code": "DRM",            "desc": "DRUM"
-                },{
-                    "code": "EA",            "desc": "Each"
-                },{
-                    "code": "FOZ",            "desc": "Fluid Ounce "
-                },{
-                    "code": "FT",            "desc": "Feet"
-                },{
-                    "code": "G",            "desc": "Grams"
-                },{
-                    "code": "GAL",            "desc": "Gallon - US Liquid Measure"
-                },{
-                    "code": "GRP",            "desc": "Grains "
-                },{
-                    "code": "GRS",            "desc": "Gross"
-                },{
-                    "code": "GRT",            "desc": "Grains - Troy"
-                },{
-                    "code": "HUN",            "desc": "Hundreds"
-                },{
-                    "code": "IN",            "desc": "Inches"
-                },{
-                    "code": "KG",            "desc": "Kilograms"
-                },{
-                    "code": "KGF",            "desc": "Kilograms of Force per CM"
-                },{
-                    "code": "KL",            "desc": "Kiloliters"
-                },{
-                    "code": "KM",            "desc": "Kilometers"
-                },{
-                    "code": "KWH",            "desc": "Kilowatt Hours"
-                },{
-                    "code": "L",            "desc": "Liters"
-                },{
-                    "code": "LBS",            "desc": "Pounds"
-                },{
-                    "code": "LBT",            "desc": "Pounds - Troy"
-                },{
-                    "code": "LNK",            "desc": "Link"
-                },{
-                    "code": "LOT",            "desc": "Batch Lot"
-                },{
-                    "code": "LT",            "desc": "Long Tons"
-                },{
-                    "code": "M",            "desc": "Meters"
-                },{
-                    "code": "MDY",            "desc": "Person Day"
-                },{
-                    "code": "MG",            "desc": "Milligrams"
-                },{
-                    "code": "MHR",            "desc": "Work Hour"
-                },{
-                    "code": "MIL",            "desc": "Miles"
-                },{
-                    "code": "ML",            "desc": "Milliliters"
-                },{
-                    "code": "MM",            "desc": "Millimeters"
-                },{
-                    "code": "MMO",            "desc": "Work Month"
-                },{
-                    "code": "MT",            "desc": "Metric Tons"
-                },{
-                    "code": "MWK",            "desc": "Work Week"
-                },{
-                    "code": "OZT",            "desc": "Ounces - Troy"
-                },{
-                    "code": "PK",            "desc": "Cello Pack"
-                },{
-                    "code": "PKD",            "desc": "Peck - Dry Measure"
-                },{
-                    "code": "PL",            "desc": "Pallet"
-                },{
-                    "code": "PTD",            "desc": "Pint - Dry Measure"
-                },{
-                    "code": "PTL",            "desc": "Pint - Liquid Measure"
-                },{
-                    "code": "PWT",            "desc": "Pennyweight - Troy"
-                },{
-                    "code": "QTD",            "desc": "Quart - Dry Measure"
-                },{
-                    "code": "QTL",            "desc": "Quart - Liquid Measure"
-                },{
-                    "code": "SCM",            "desc": "Square Centimeters"
-                },{
-                    "code": "SDM",            "desc": "Square Decimeters"
-                },{
-                    "code": "SF",            "desc": "Square Feet"
-                },{
-                    "code": "SHT",            "desc": "Short Ton"
-                },{
-                    "code": "SHW",            "desc": "Short Hundred Weight"
-                },{
-                    "code": "SLV",            "desc": "SLEEVE"
-                },{
-                    "code": "SM",            "desc": "Square Meters"
-                },{
-                    "code": "SMM",            "desc": "Square Millimeters"
-                },{
-                    "code": "SQF",            "desc": "Square Feet"
-                },{
-                    "code": "SQI",            "desc": "Square Inches"
-                },{
-                    "code": "SQM",            "desc": "Square Miles"
-                },{
-                    "code": "SQY",            "desc": "Square Yards"
-                },{
-                    "code": "ST",            "desc": "Short Tons"
-                },{
-                    "code": "TON",            "desc": "Tons"
-                },{
-                    "code": "TRK",            "desc": "TRUCK LOAD"
-                },{
-                    "code": "TUB",            "desc": "TUB"
-                },{
-                    "code": "UNT",            "desc": "Units (generic)"
-                },{
-                    "code": "YD",            "desc": "Yard"
+     
+          
+        this.columns = [
+            {
+                key: "materialTypeName",
+                text: "Code",
+                sortable: true
+            },
+            {
+                key: "materialTypeDescription",
+                text: "Description",
+                sortable: true
+            },
+            {
+                key: "isActive",
+                text: "Active",
+                sortable: true
+            },
+            {
+                key: "action",
+                text: "Action",
+                cell: (record, index) => {
+                    return (
+                            <button
+                                className="btn btn-info btn-sm"
+                                onClick={this.editRecord.bind(this, record, index)}
+                                style={{marginRight: '5px'}}>
+                                    <i className="fas fa-pencil-alt"></i>Edit
+                            </button>
+                       
+                    );
                 }
-             ]
+            }
+        ];
+
+        this.config = {
+            key_column: 'materialTypeId',
+            page_size: 10,
+            length_menu: [10, 20, 50],
+            show_filter: true,
+            show_pagination: true,
+            pagination: 'advance',
+            filename: "Material Type",
+            button: {
+                excel: true,
+                print: true,
+                csv: true
+            }
+        }
+
+        this.state = {
+            typeId:0,
+            typeName:"",
+            typeDesc:"",
+            isActive:true,
+            errormsg:"",
+            records:[],
+            loginUser:this.props.profile,
+
         }
     }
     
-        componentDidMount(){
+    componentDidMount() {
+        this.getTableValues();
+//        console.log('props profile-->:'+this.props.apiurl)
+     }  
+    getTableValues(){
+        fetch(this.props.apiurl+"mateialtype/allMaterialTypes")
+        .then(res => res.json())
+        .then( (result) => {
+              //  console.log("result-->"+JSON.stringify(result))
+                if(result.valid){
+                    this.setState({
+                        records: result.materialTypeList
+                    });
+                }else{}
+            },(error) => {
+            }
+        )
+    }
+
+
+    handleFormChange = event => {
+        this.setState({[event.target.name]: event.target.value});
+    };
+
+    handleCheckClick = () => {
+        this.setState({ isActive: !this.state.isActive });
+    }
+
+    editRecord = (record, index) => {
+       // console.log("Edit record", index, record);
+       // console.log("-->"+JSON.stringify(record))
+       var tempstatus=true;
+       if(record.isActive === "Active"){
+            tempstatus=true;
+        }else{
+            tempstatus=false;
+        }
+        this.setState({
+            typeDesc:record.materialTypeDescription,
+            typeName:record.materialTypeName,
+            typeId:record.materialTypeId,
+            isActive:tempstatus
+        });
+
+
+    }
+
+    resetClick= () => {
+        this.setState({ 
+            typeDesc: "",
+            typeName:"",
+            typeId:0,
+            isActive:true
+        });
+    }
+
+
+
+    saveClick= event =>{
+        if(this.state.typeName === ""){
+            this.setState({
+                errormsg: "Enter Code"
+            });
+        }else if(this.state.typeDesc === ""){
+            this.setState({
+                errormsg: "Enter Description"
+            });
+        }else if(!this.state.isActive && this.state.typeId===0){
+            this.setState({
+                errormsg: "Select Active"
+            });
+        }else{
+            var tempstatus="";
+            if(this.state.isActive){
+                tempstatus="Active"
+            }else{
+                tempstatus="InActive"
+            }
+            
+            const obj = {'materialTypeName':this.state.typeName,'materialTypeDescription':this.state.typeDesc, isActive:tempstatus,'materialTypeId':this.state.typeId,"updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
+
+             // POST request using fetch with error handling
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "materialTypeObj": obj })
+                };
+                fetch(this.props.apiurl+"mateialtype/saveMaterialType", requestOptions)
+                    .then(async response => {
+                        const data = await response.json();
+                   //     console.log("--data--"+JSON.stringify(data))
+                        // check for error response
+                        if (!response.ok) {
+                            // get error message from body or default to response status
+                            const error = (data && data.message) || response.status;
+                            return Promise.reject(error);
+                        }
+
+                        if(data.valid){
+                             //  console.log("c role->"+obj)
+                             this.setState({
+                                errormsg: "",
+                                records: data.materialTypeList,
+                                typeName:"",
+                                typeDesc:"",
+                                typeId:"",
+                                typeId:0,
+                                isActive:true
+                            },()=>{});
+                        }else{
+                            this.setState({ errormsg: data.responseMsg});
+                            this.setState({
+                                errormsg: "",
+                                typeName:"",
+                                typeDesc:"",
+                                typeId:"",
+                                typeId:0,
+                                isActive:true
+                            },()=>{});
+                        }
+                           
+                    })
+                    .catch(error => {
+                        this.setState({ errormsg: error.toString() });
+                      //  console.error('There was an error!', error);
+                    });
+                    
           
         }
+     }
+
     render() {
         return (
             <div>
@@ -203,49 +216,59 @@ export class MaterialType extends Component {
                                 <div className="container-fluid">
                                     <div className="form-inline" >
                                         <label htmlFor="code" className="m-2 " >Code <span class="text-danger">*</span></label>
-                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="Code" />
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="typeName" name="typeName" id="typeName" value= {this.state.typeName} onChange={this.handleFormChange}/>
                                         <label htmlFor="name" className="m-2 " >Description<span class="text-danger">*</span></label>
-                                        <input type="text" className="form-control m-2 col-sm-3 form-control-sm" id="Description" />
+                                        <input type="text" className="form-control m-2 col-sm-3 form-control-sm" id="typeDesc" name="typeDesc" id="typeDesc" value= {this.state.typeDesc} onChange={this.handleFormChange}/>
                                         <label htmlFor="code" className="" >isActive</label>
-                                        <input type="checkbox" className="form-check-input m-1" id="isactive" /> &nbsp;&nbsp;&nbsp;
-                                        <button className="btn btn-primary btn-sm">Add</button>
+                                        <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick}/> &nbsp;&nbsp;&nbsp;
+                                        <button className="btn btn-primary btn-sm" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
+                                        <button type="button" className="btn btn-primary btn-sm" onClick={this.resetClick}>Reset</button>&nbsp;&nbsp;&nbsp;
+
+                                        <label htmlFor="code" className="m-2 " ><span class="text-danger">{this.state.errormsg}</span></label>
                                     </div>
                                     
                                 </div>
 
                             </div>
                             <div className="card-body">
-                            <table id="materialtype_master_table" className="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {
-                                    this.state.uomList.map((item) =>
-                                    
-                                    <tr key={item.id}>
-                                        
-                                        <td>{item.code}</td>
-                                        <td><span className="tag tag-success">{item.desc}</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                )}
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th> Code</th>
-                                    <th>Description</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
-                            </table>
+
+                            <ReactDatatable
+                                    config={this.config}
+                                    records={this.state.records}
+                                    columns={this.columns}/>
+
+
+                            {/*       <table id="materialtype_master_table" className="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Description</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {
+                                            this.state.uomList.map((item) =>
+                                            
+                                            <tr key={item.id}>
+                                                
+                                                <td>{item.code}</td>
+                                                <td><span className="tag tag-success">{item.desc}</span></td>
+                                                <td className="project-actions ">
+                                                    <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
+                                                    <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
+                                                </td>
+                                            </tr>
+                                        )}
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th> Code</th>
+                                            <th>Description</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </tfoot>
+                                        </table>  */}
                             </div>
                         </div>
                         </div>
@@ -257,4 +280,16 @@ export class MaterialType extends Component {
     }
 }
 
-export default MaterialType
+
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl
+    }
+  }
+
+ export default connect(mapStateToProps)(MaterialType);
+
+
+
+//export default MaterialType

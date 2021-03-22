@@ -1,5 +1,6 @@
 import { Types } from './Types';
 
+
 const initialState = {
     profile: {
       userId:"100",

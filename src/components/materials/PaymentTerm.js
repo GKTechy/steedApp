@@ -1,19 +1,192 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+import ReactDatatable from '@ashvin27/react-datatable';
+
+
+
 
 export class PaymentTerm extends Component {
     constructor(props) {
         super(props)
     
+              this.columns = [
+            {
+                key: "content",
+                text: "Content",
+                sortable: true
+            },
+            {
+                key: "description",
+                text: "Description",
+                sortable: true
+            },
+            {
+                key: "isActive",
+                text: "Active",
+                sortable: true
+            },
+            {
+                key: "action",
+                text: "Action",
+                cell: (record, index) => {
+                    return (
+                            <button
+                                className="btn btn-info btn-sm"
+                                onClick={this.editRecord.bind(this, record, index)}
+                                style={{marginRight: '5px'}}>
+                                    <i className="fas fa-pencil-alt"></i>Edit
+                            </button>
+                       
+                    );
+                }
+            }
+        ];
+
+        this.config = {
+            key_column: 'paymentTermsId',
+            page_size: 10,
+            length_menu: [10, 20, 50],
+            show_filter: true,
+            show_pagination: true,
+            pagination: 'advance',
+            filename: "Payment Terms",
+            button: {
+                excel: true,
+                print: true,
+                csv: true
+            }
+        }
+
         this.state = {
-             
+            paymentTermsId:0,
+            content:"",
+            description:"",
+            isActive:true,
+            errormsg:"",
+            records:[],
+            loginUser:this.props.profile,
+
         }
     }
+ 
+    componentDidMount() {
+        this.getTableValues();
+//        console.log('props profile-->:'+this.props.apiurl)
+     }  
+    getTableValues(){
+        fetch(this.props.apiurl+"paymentTerm/allPaymentTerms")
+        .then(res => res.json())
+        .then( (result) => {
+                console.log("result-->"+JSON.stringify(result))
+                if(result.valid){
+                    this.setState({
+                        records: result.paymentTermList
+                    });
+                }else{}
+            },(error) => {
+            }
+        )
+    }
 
-    componentDidMount(){
-       
 
+    handleFormChange = event => {
+        this.setState({[event.target.name]: event.target.value});
+    };
+
+    handleCheckClick = () => {
+        this.setState({ isActive: !this.state.isActive });
+    }
+
+    editRecord = (record, index) => {
+       // console.log("Edit record", index, record);
+       // console.log("-->"+JSON.stringify(record))
+       var tempstatus=true;
+       if(record.isActive === "Active"){
+            tempstatus=true;
+        }else{
+            tempstatus=false;
+        }
+        this.setState({
+            description:record.description,
+            content:record.content,
+            paymentTermsId:record.paymentTermsId,
+            isActive:tempstatus
+        });
     }
     
+    
+    saveClick= event =>{
+        if(this.state.content === ""){
+            this.setState({
+                errormsg: "Enter Content"
+            });
+        }else if(this.state.description === ""){
+            this.setState({
+                errormsg: "Enter Description"
+            });
+        }else if(!this.state.isActive && this.state.paymentTermsId===0){
+            this.setState({
+                errormsg: "Select Active"
+            });
+        }else{
+            var tempstatus="";
+            if(this.state.isActive){
+                tempstatus="Active"
+            }else{
+                tempstatus="InActive"
+            }
+            
+            const obj = {'content':this.state.content,'description':this.state.description, isActive:tempstatus,'paymentTermsId':this.state.paymentTermsId,"updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
+
+             // POST request using fetch with error handling
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "paymentTermObj": obj })
+                };
+                fetch(this.props.apiurl+"paymentTerm/savePaymentTerm", requestOptions)
+                    .then(async response => {
+                        const data = await response.json();
+                   //     console.log("--data--"+JSON.stringify(data))
+                        // check for error response
+                        if (!response.ok) {
+                            // get error message from body or default to response status
+                            const error = (data && data.message) || response.status;
+                            return Promise.reject(error);
+                        }
+
+                        if(data.valid){
+                             //  console.log("c role->"+obj)
+                             this.setState({
+                                errormsg: "",
+                                records: data.paymentTermList,
+                                content:"",
+                                description:"",
+                                paymentTermsId:0,
+                                isActive:true
+                            },()=>{});
+                        }else{
+                            this.setState({ errormsg: data.responseMsg});
+                            this.setState({
+                                errormsg: "",
+                                content:"",
+                                description:"",
+                                paymentTermsId:0,
+                                isActive:true
+                            },()=>{});
+                        }
+                           
+                    })
+                    .catch(error => {
+                        this.setState({ errormsg: error.toString() });
+                      //  console.error('There was an error!', error);
+                    });
+                    
+          
+        }
+     }
+
+
     render() {
         return (
             <div>
@@ -35,7 +208,16 @@ export class PaymentTerm extends Component {
 
                             </div>
                             <div className="card-body">
-                            <table id="paymentterm_master_table" className="table table-bordered table-striped">
+
+
+                            <ReactDatatable
+                                    config={this.config}
+                                    records={this.state.records}
+                                    columns={this.columns}/>
+
+
+
+                           {/*   <table id="paymentterm_master_table" className="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Description</th>
@@ -45,7 +227,7 @@ export class PaymentTerm extends Component {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {/* {
+                               {
                                     this.state.uomList.map((item) =>
                                     
                                     <tr key={item.id}>
@@ -57,7 +239,7 @@ export class PaymentTerm extends Component {
                                             <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
                                         </td>
                                     </tr>
-                                )} */}
+                                )} 
                                 </tbody>
                                 <tfoot>
                                 <tr>
@@ -67,7 +249,7 @@ export class PaymentTerm extends Component {
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>
-                            </table>
+                            </table>*/}
                             </div>
                         </div>
                         </div>
@@ -89,19 +271,21 @@ export class PaymentTerm extends Component {
                                     <div className="form-inline">
                                       
                                         <label htmlFor="name" className="m-2 col-sm-2" >Description<span class="text-danger">*</span></label>
-                                        <input type="text" className="form-control form-control-sm m-2 col-sm-8" id="Description" />
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-8" name="description" id="description" value= {this.state.description} onChange={this.handleFormChange}/>
                                         <label htmlFor="code" className="m-2 col-sm-2" >Content<span class="text-danger">*</span></label>
                                         &nbsp;&nbsp;
-                                        <textarea class="col-sm-8 form-control" placeholder="Content" ng-model="myTextarea" required data-error="Please enter Content"></textarea>
+                                        <textarea class="col-sm-8 form-control" placeholder="Content" required data-error="Please enter Content" id="content" name="content" id="content" value= {this.state.content} onChange={this.handleFormChange}></textarea>
 
                                         <label htmlFor="name" className="m-2 col-sm-2">Active<span class="text-danger">*</span></label>
-                                        <input type="checkbox" className="form-check-input m-1" id="isactive" />
+                                        <input type="checkbox" className="form-check-input m-1" id="isactive" checked={this.state.isActive}  onChange={this.handleCheckClick}/><br/><br/>
+
+                                        <label htmlFor="name" className="m-6 col-sm-6"><span class="text-danger">{this.state.errormsg}</span></label>
                                     </div>
                             </div>
                          </div>
                         <div className="modal-footer justify-content-between">
                             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save</button>
+                            <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>
                         </div>
                         </div>
                     </div>
@@ -112,4 +296,19 @@ export class PaymentTerm extends Component {
     }
 }
 
-export default PaymentTerm
+
+
+
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl
+    }
+  }
+
+ export default connect(mapStateToProps)(PaymentTerm);
+
+
+
+
+//export default PaymentTerm

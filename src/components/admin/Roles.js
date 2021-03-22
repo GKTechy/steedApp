@@ -58,7 +58,7 @@ export class Roles extends Component {
             errormsg:"",
             records:[],
             isLoaded:false,
-           loginUser:this.props.profile
+            loginUser:this.props.profile
         }
        
     }
@@ -90,11 +90,11 @@ export class Roles extends Component {
                 errormsg: "Select Active"
             });
         }else{
-
+            var tempstatus=""
             if(this.state.active){
-                var tempstatus="Active"
+                tempstatus="Active"
             }else{
-                var tempstatus="InActive"
+                tempstatus="InActive"
             }
             
             const obj = {'roleName':this.state.rolename, status:tempstatus,'roleId':this.state.roleid,"updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
@@ -108,7 +108,7 @@ export class Roles extends Component {
                 fetch(this.props.apiurl+"role/saveRole", requestOptions)
                     .then(async response => {
                         const data = await response.json();
-                        console.log("--data--"+JSON.stringify(data))
+                       // console.log("--data--"+JSON.stringify(data))
                         // check for error response
                         if (!response.ok) {
                             // get error message from body or default to response status
