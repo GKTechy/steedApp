@@ -200,7 +200,7 @@ export class Roles extends Component {
                                 </div>
                             </div>
                             <div className="col-1">
-                                <button type="button" className="btn btn-primary btn-flat" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
                                 {/* <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick}>Reset</button> */}
                             </div>
                             <div className="col-2">
