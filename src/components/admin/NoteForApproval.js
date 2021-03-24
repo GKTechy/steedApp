@@ -2,25 +2,231 @@ import React, { Component } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+import { connect } from "react-redux";
+
+import ReactDatatable from '@ashvin27/react-datatable';
+
+
 export class NoteForApproval extends Component {
+
+    constructor(props) {
+        super(props);
+        this.columns = [
+            {
+                key: "nfaDocumentNo",
+                text: "Document No",
+                sortable: true
+            },
+            {
+                key: "nfaDocumentDate",
+                text: "Document Date",
+                sortable: true
+            },
+            {
+                key: "nfaTitle",
+                text: "Title",
+                sortable: true
+            },
+            // {
+            //     key: "nfaDescription",
+            //     text: "Description",
+            //     sortable: true
+            // },
+            {
+                key: "isActive",
+                text: "Active",
+                sortable: true
+            },
+            {
+                key: "action",
+                text: "Action",
+                cell: (record, index) => {
+                    return (
+                            <button
+                                className="btn btn-info btn-sm"
+                                onClick={this.editRecord.bind(this, record, index)}
+                                style={{marginRight: '5px'}}>
+                                    <i className="fas fa-pencil-alt"></i>Edit
+                            </button>
+                       
+                    );
+                }
+            }
+        ];
+
+        this.config = {
+            key_column: 'nfaId',
+            page_size: 10,
+            length_menu: [10, 20, 50],
+            show_filter: true,
+            show_pagination: true,
+            pagination: 'advance',
+            filename: "Note For Approval",
+            button: {
+                excel: true,
+                print: true,
+                csv: true
+            }
+        }
+
+        this.state = {
+            nfaDescription: 'Welcome to Steed Application',
+            nfaDocumentNo:"",
+            nfaDocumentDate:"",
+            nfaTitle:"",
+            nfaId:0,
+            active:true,
+            showModal:false,
+            errormsg:"",
+            records:[],
+            isLoaded:false,
+            loginUser:this.props.profile
+        }
+    }
+
+    componentDidMount() {
+        this.getTableValues();
+//        console.log('props profile-->:'+this.props.apiurl)
+     }  
+    getTableValues(){
+        fetch(this.props.apiurl+"noteforapproval/allNoteForApprovals")
+        .then(res => res.json())
+        .then( (result) => {
+               // console.log("result-->"+JSON.stringify(result))
+                if(result.valid){
+                    this.setState({
+                        records: result.noteForApprovalList
+                    });
+                }else{}
+            },(error) => {
+            }
+        )
+    }
+
+    handleFormChange = event => {
+        this.setState({[event.target.name]: event.target.value});
+    };
+
+    handleCheckClick = () => {
+        this.setState({ isActive: !this.state.isActive });
+    }
+    editRecord = (record, index) => {
+        // console.log("Edit record", index, record);
+        // console.log("-->"+JSON.stringify(record))
+        var tempstatus=true;
+        if(record.status === "Active"){
+             tempstatus=true;
+         }else{
+             tempstatus=false;
+         }
+         this.setState({
+            nfaDescription:record.nfaDescription,
+            nfaDocumentNo:record.nfaDocumentNo,
+            nfaDocumentDate:record.nfaDocumentDate,
+            nfaTitle:record.nfaTitle,
+            nfaId:record.nfaId,
+             active:tempstatus
+         });
+ 
+     }
+
+     saveClick= event =>{
+        if(this.state.nfaDocumentNo === ""){
+            this.setState({
+                errormsg: "Enter Document"
+            });
+        }else if(this.state.nfaDocumentDate === ""){
+            this.setState({
+                errormsg: "Select Document Date"
+            });
+        }else if(this.state.nfaTitle === ""){
+            this.setState({
+                errormsg: "Enter Title"
+            });
+        }else if(this.state.nfaDescription === ""){
+            this.setState({
+                errormsg: "Enter Description"
+            });
+        }
+        // else if(!this.state.active && this.state.nfaId===0){
+        //     this.setState({
+        //         errormsg: "Select Active"
+        //     });
+        // }
+        else{
+            var tempstatus=""
+            if(this.state.active){
+                tempstatus="Active"
+            }else{
+                tempstatus="InActive"
+            }
+            
+            const obj = {
+                'nfaDocumentNo':this.state.nfaDocumentNo,'nfaDocumentDate':this.state.nfaDocumentDate, 
+                'nfaTitle':this.state.nfaTitle, 'nfaDescription':this.state.nfaDescription,  
+                 "isActive":tempstatus,'nfaId':this.state.nfaId,
+                 "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
+
+                 ///console.log("--obj--"+JSON.stringify(obj))
+
+             // POST request using fetch with error handling
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "noteForApprovalObj": obj })
+                };
+                fetch(this.props.apiurl+"noteforapproval/saveNoteForApproval", requestOptions)
+                    .then(async response => {
+                        const data = await response.json();
+                       // console.log("--data--"+JSON.stringify(data))
+                        // check for error response
+                        if (!response.ok) {
+                            // get error message from body or default to response status
+                            const error = (data && data.message) || response.status;
+                            return Promise.reject(error);
+                        }
+
+                        if(data.valid){
+                             //  console.log("c role->"+obj)
+                             this.setState({
+                                errormsg: "",
+                                records: data.noteForApprovalList,
+                                nfaDescription:"",
+                                nfaDocumentNo:"",
+                                nfaDocumentDate:"",
+                                nfaTitle:"",
+                                nfaId:0,
+                                active:true
+                                
+                            },()=>{});
+                        }else{
+                            this.setState({ errormsg: data.responseMsg});
+                            this.setState({
+                                nfaDescription:"",
+                                nfaDocumentNo:"",
+                                nfaDocumentDate:"",
+                                nfaTitle:"",
+                                nfaId:0,
+                                active:true
+                            },()=>{});
+                        }
+                           
+                    })
+                    .catch(error => {
+                        this.setState({ errormsg: error.toString() });
+                        console.error('There was an error!', error);
+                    });
+                    
+          
+        }
+     }
+
+
+
     render() {
         return (
             <div>
-                {/* <section className="content-header">
-                    <div className="container-fluid">
-                        <div className="row mb-2">
-                        <div className="col-sm-6">
-                            <h1>Note For Approval</h1>
-                        </div>
-                        <div className="col-sm-6">
-                            <ol className="breadcrumb float-sm-right">
-                            <li className="breadcrumb-item"><a href="#">Home</a></li>
-                            <li className="breadcrumb-item active">Note For Approval</li>
-                            </ol>
-                        </div>
-                        </div>
-                    </div>
-                </section> */}
+             
                 <section className="content">
                     <div className="container-fluid">
                
@@ -51,79 +257,14 @@ export class NoteForApproval extends Component {
                                 </div>
                             
                             <div className="card-body" >
-                                <table className="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>#ID</th>
-                                        <th style={{"width":"6%"}}>Doc No</th>
-                                        <th style={{"width":"10%"}}>Note Date</th>
-                                        <th>Subject</th>
-                                        <th style={{"width":"15%"}}>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>123456</td>
-                                        <td>10-10-2021</td>
-                                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>123456</td>
-                                        <td>10-10-2021</td>
-                                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>123456</td>
-                                        <td>10-10-2021</td>
-                                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>123456</td>
-                                        <td>10-10-2021</td>
-                                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. .</td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>123456</td>
-                                        <td>10-10-2021</td>
-                                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. unknown printer took a galley of type and scrambled it to make a type specimen book.</td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                   
-                                </tbody>
-                                </table>
+                                <ReactDatatable
+                                    config={this.config}
+                                    records={this.state.records}
+                                    columns={this.columns}/>
+
                             </div>
                             <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                </ul>
+                               
                             </div>
                             </div>
                             
@@ -145,15 +286,16 @@ export class NoteForApproval extends Component {
                         </div>
                         <div className="modal-body">
 
-
+            
                        <div className="container-fluid">
                             <form className="form-inline">
-                                <label htmlFor="inlineFormEmail" className="m-2">Document No <span class="text-danger">*</span></label>
-                                <input type="email" className="form-control m-2" id="inlineFormEmail" />
-                                <label htmlFor="inlineFormPassword" className="m-2">Document Date <span class="text-danger">*</span></label>
-                                <input type="password" className="form-control m-2" id="inlineFormPassword" />
-                                <label htmlFor="confirmFormPassword" className="m-2">Title <span class="text-danger">*</span></label>
-                                <input type="password" className="form-control m-2" id="confirmFormPassword" />
+                                <label htmlFor="nfaDocumentNo" className="m-2">Document No <span class="text-danger">*</span></label>
+                                <input type="text" className="form-control m-2 form-control-sm" name="nfaDocumentNo" id="nfaDocumentNo" value= {this.state.nfaDocumentNo} onChange={this.handleFormChange} />
+                                <label htmlFor="nfaDocumentDate" className="m-2">Document Date <span class="text-danger">*</span></label>
+                                <input type="date" className="form-control m-2 form-control-sm" name="nfaDocumentDate" id="nfaDocumentDate" value= {this.state.nfaDocumentDate} onChange={this.handleFormChange}/>
+                                <label htmlFor="nfaTitle" className="m-2">Title <span class="text-danger">*</span></label>
+                                <input type="text" className="form-control m-2 form-control-sm" name="nfaTitle" id="nfaTitle" value= {this.state.nfaTitle} onChange={this.handleFormChange}/>
+                                <label htmlFor="nfaTitle" className="m-2"> <span className="text-danger">{this.state.errormsg}</span></label>
                             </form>
                                 <div className="row">
                                 <div className="col-12">
@@ -164,10 +306,14 @@ export class NoteForApproval extends Component {
 
                                         </div>
                                     </div>
-                                    <div className="card-body table-responsive p-0" >
+                                    <div className="card-body table-responsive p-0" style={{height:300}}>
                                         <CKEditor
                                                 editor={ ClassicEditor }
-                                                data="<p>Hello from CKEditor 5!</p>"
+                                                style={{
+                                                    'height': '300px'                                                    
+                                                }}
+                                                activeClass="p10"
+                                                data={this.state.nfaDescription}
                                                 onReady={ editor => {
                                                     // You can store the "editor" and use when it is needed.
                                                     console.log( 'Editor is ready to use!', editor );
@@ -175,6 +321,9 @@ export class NoteForApproval extends Component {
                                                 onChange={ ( event, editor ) => {
                                                     const data = editor.getData();
                                                     console.log( { event, editor, data } );
+                                                    this.setState({
+                                                        nfaDescription: data
+                                                    });
                                                 } }
                                                 onBlur={ ( event, editor ) => {
                                                     console.log( 'Blur.', editor );
@@ -197,7 +346,7 @@ export class NoteForApproval extends Component {
                             </div>
                             <div className="modal-footer justify-content-between">
                                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-primary">Save</button>
+                                <button type="button" className="btn btn-primary"  onClick={this.saveClick}>Save</button>
                             </div>
                             </div>
                         </div>
@@ -207,4 +356,14 @@ export class NoteForApproval extends Component {
     }
 }
 
-export default NoteForApproval
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl
+    }
+  }
+
+export default connect(mapStateToProps)(NoteForApproval);
+
+
+//export default NoteForApproval

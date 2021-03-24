@@ -204,7 +204,7 @@ export class Roles extends Component {
                                 {/* <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick}>Reset</button> */}
                             </div>
                             <div className="col-2">
-                            <span className="text-danger">{this.state.errormsg}</span>
+                                 <span className="text-danger">{this.state.errormsg}</span>
                             </div>
                         </div>
 
@@ -212,39 +212,7 @@ export class Roles extends Component {
                         <div className="row">
                         <div className="col-12">
                             <div className="table-responsive-sm" >
-                                {/*<table className="table table-sm table-bordered" id="myTable" >
-                                    <thead>
-                                        <tr>
-                                        
-                                        <th>Role</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        {
-                                            this.state.rolesList.map((obj) =>
-                                            
-                                            <tr key={obj.roleId}>
-                                                
-                                                <td>{obj.roleName}</td>
-                                                <td>{
-                                                        obj.status ? <span className="tag tag-success">Active</span> : <span className="tag tag-failure">In Active</span>
-                                                    }
-                                                </td>
-                                                <td className="project-actions ">
-                                                    <a className="btn btn-info btn-sm" href="#" onClick={ ()=> this.editEvent(obj)}><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                                  
-                                                </td>
-                                            </tr>
-                                        )}
-                                        
-                                        
-                                    </tbody>
-                                </table>  */}
-
-                                <ReactDatatable
+                              <ReactDatatable
                                     config={this.config}
                                     records={this.state.records}
                                     columns={this.columns}/>
