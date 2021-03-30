@@ -33,7 +33,7 @@ export class PaymentTerm extends Component {
                             <button
                                 className="btn btn-info btn-sm"
                                 onClick={this.editRecord.bind(this, record, index)}
-                                style={{marginRight: '5px'}}>
+                                style={{marginRight: '5px'}} data-toggle="modal" data-target="#new-paymentterm-model">
                                     <i className="fas fa-pencil-alt"></i>Edit
                             </button>
                        

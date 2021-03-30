@@ -10,20 +10,30 @@ export class Machine extends Component {
         super(props);
         this.columns = [
             {
-                key: "nfaDocumentNo",
+                key: "machineCode",
                 text: "Machine Code",
                 sortable: true
             },
             {
-                key: "nfaDocumentDate",
+                key: "machineName",
                 text: "Machine Name",
                 sortable: true
             },
             {
-                key: "nfaTitle",
-                text: "Capacity",
+                key: "make",
+                text: "Make",
                 sortable: true
             },
+            {
+                key: "type",
+                text: "Type",
+                sortable: true
+            },
+            {
+                key: "capacity",
+                text: "Capacity",
+                sortable: true
+            }, 
             // {
             //     key: "nfaDescription",
             //     text: "Description",
@@ -42,8 +52,8 @@ export class Machine extends Component {
                             <button
                                 className="btn btn-info btn-sm"
                                 onClick={this.editRecord.bind(this, record, index)}
-                                style={{marginRight: '5px'}}>
-                                    <i className="fas fa-pencil-alt"></i>Edit
+                                style={{marginRight: '5px'}} data-toggle="modal" data-target="#new-machine">
+                                    <i className="fas fa-pencil-alt" ></i>Edit
                             </button>
                        
                     );
@@ -52,13 +62,13 @@ export class Machine extends Component {
         ];
 
         this.config = {
-            key_column: 'nfaId',
+            key_column: 'machineId',
             page_size: 10,
             length_menu: [10, 20, 50],
             show_filter: true,
             show_pagination: true,
             pagination: 'advance',
-            filename: "Note For Approval",
+            filename: "Machine",
             button: {
                 excel: true,
                 print: true,
@@ -81,10 +91,10 @@ export class Machine extends Component {
             machineLocation:"",
             machineStatus:"",
             machineCapacity:"",
-            isQCMachine:false,
+            isQCMachine:true,
             active:true,
             showModal:false,
-            errormsg:"eeeeeeeeee",
+            errormsg:"",
             records:[],
             isLoaded:false,
             loginUser:this.props.profile
@@ -93,7 +103,7 @@ export class Machine extends Component {
 
     componentDidMount() {
         this.getTableValues();
-//        console.log('props profile-->:'+this.props.apiurl)
+        console.log('machine props profile-->:'+this.props.apiurl)
      }  
     getTableValues(){
         fetch(this.props.apiurl+"machine/allMachines")
@@ -113,9 +123,21 @@ export class Machine extends Component {
     resetClick= () => {
         this.setState({ 
             errormsg: "",
-            rolename:"",
-            roleid:0,
-            active:true
+            machineId:0,
+            machineCode:"",
+            machineName:"",
+            machineMake:"",
+            machineType:"",
+            machineCommissioningDate: Date.now(),
+            machineDispoteDate: Date.now(),
+            machineInvNo:"",
+            machineInvDate: Date.now(),
+            machineInvValue:"",
+            machineLocation:"",
+            machineStatus:"",
+            machineCapacity:"",
+            isQCMachine:false,
+            active:true,
         });
     }
     handleFormChange = event => {
@@ -130,20 +152,124 @@ export class Machine extends Component {
         this.setState({ isQCMachine: !this.state.isQCMachine });
     }
 
-    
+    saveClick= event =>{
+        if(this.state.machineName === ""){
+            this.setState({
+                errormsg: "Enter Machine Name"
+            });
+        }else if(!this.state.active && this.state.machineId===0){
+            this.setState({
+                errormsg: "Select Active"
+            });
+        }else if(!this.state.isQCMachine && this.state.machineId===0){
+            this.setState({
+                errormsg: "Select QC Machine"
+            });
+        }else{
+            var tempstatus=""
+            if(this.state.active){
+                tempstatus="Active"
+            }else{
+                tempstatus="InActive"
+            }
+            
+            var tempstatus1=""
+            if(this.state.isQCMachine){
+                tempstatus1="Active"
+            }else{
+                tempstatus1="InActive"
+            }
+
+            const obj = {
+                'machineCode':this.state.machineCode,'machineName':this.state.machineName,
+                'make':this.state.machineMake,'type':this.state.machineType,
+                'commissioningDate':this.state.machineCommissioningDate,'dispoteDate':this.state.machineDispoteDate,
+                'invNo':this.state.machineInvNo,'invDate':this.state.machineInvDate,
+                'invValue':this.state.machineInvValue,'location':this.state.machineLocation,
+                'status':this.state.machineStatus,'capacity':this.state.machineCapacity,
+                'isQcMachine':tempstatus1,'isActive':tempstatus,
+                'machineId':this.state.machineId,
+                "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
+
+             // POST request using fetch with error handling
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "machineObj": obj })
+                };
+                fetch(this.props.apiurl+"machine/saveMachine", requestOptions)
+                    .then(async response => {
+                        const data = await response.json();
+                       // console.log("--data--"+JSON.stringify(data))
+                        // check for error response
+                        if (!response.ok) {
+                            // get error message from body or default to response status
+                            const error = (data && data.message) || response.status;
+                            return Promise.reject(error);
+                        }
+
+                        if(data.valid){
+                             //  console.log("c role->"+obj)
+                             this.setState({
+                                errormsg: "",
+                                records: data.machineList,
+                                rolename:"",
+                                roleid:0,
+                                active:true
+                            },()=>{});
+                        }else{
+                            this.setState({ errormsg: data.responseMsg});
+                            this.setState({
+                                errormsg: "",
+                                rolename:"",
+                                roleid:0,
+                                active:true
+                            },()=>{});
+                        }
+                           
+                    })
+                    .catch(error => {
+                        this.setState({ errormsg: error.toString() });
+                        console.error('There was an error!', error);
+                    });
+                    
+          
+        }
+     }
+
 
     editRecord = (record, index) => {
        // console.log("Edit record", index, record);
        // console.log("-->"+JSON.stringify(record))
        var tempstatus=true;
-       if(record.status === "Active"){
+       if(record.isActive === "Active"){
             tempstatus=true;
         }else{
             tempstatus=false;
         }
+
+        var tempstatus1=true;
+       if(record.isQcMachine === "Active"){
+            tempstatus1=true;
+        }else{
+            tempstatus1=false;
+        }
+
         this.setState({
-            rolename:record.roleName,
-            roleid:record.roleId,
+            machineId:record.machineId,
+            machineCode:record.machineCode,
+            machineName:record.machineName,
+            machineMake:record.make,
+            machineType:record.type,
+            machineCommissioningDate: record.commissioningDate,
+            machineDispoteDate: record.dispoteDate,
+            machineInvNo:record.invNo,
+            machineInvDate: record.invDate,
+            machineInvValue:record.invValue,
+            machineLocation:record.location,
+            machineStatus:record.status,
+            machineCapacity:record.capacity,
+            isQCMachine:tempstatus1,
             active:tempstatus
         });
 
@@ -170,7 +296,7 @@ export class Machine extends Component {
                                 <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#new-machine">Create New Machine &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#new-machine">Create New Machine &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
                                             </span>
                                         </div>
                                 </div>
@@ -210,7 +336,7 @@ export class Machine extends Component {
                                 <label htmlFor="code" className="m-2 col-sm-2" style={leftAlign}>Machine Code <span class="text-danger">*</span></label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineCode" id="machineCode" value= {this.state.machineCode} onChange={this.handleFormChange}/>
                                 <label htmlFor="name" className="m-2 col-sm-2" style={leftAlign}>Machine Name<span class="text-danger">*</span></label>
-                                <input type="text" className="form-control m-2 col-sm-3 v" name="machineName" id="machineName" value= {this.state.machineName} onChange={this.handleFormChange} />
+                                <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineName" id="machineName" value= {this.state.machineName} onChange={this.handleFormChange} />
                                 <label htmlFor="code" className="m-2 col-sm-2" style={{textAlign: "left !important"}}>Make</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineMake" id="machineMake" value= {this.state.machineMake} onChange={this.handleFormChange} />
                                 <label htmlFor="name" className="m-2 col-sm-2" style={leftAlign}>Type</label>
@@ -244,7 +370,7 @@ export class Machine extends Component {
                         </div>
                         <div className="modal-footer justify-content-between">
                             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save</button>
+                            <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>
                         </div>
                         </div>
                     </div>
