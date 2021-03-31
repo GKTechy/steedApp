@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-
 import ReactDatatable from '@ashvin27/react-datatable';
 
 
@@ -255,7 +254,4 @@ const mapStateToProps = (state) => {
   }
 
  export default connect(mapStateToProps)(ColorCode);
-
-
-
 //export default ColorCode
