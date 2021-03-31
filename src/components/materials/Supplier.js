@@ -1,14 +1,258 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+import ReactDatatable from '@ashvin27/react-datatable';
 
 export class Supplier extends Component {
-
     constructor(props) {
+        
         super(props)
-    
-        this.state = {
-             
+        
+     
+
+        this.columns = [
+            {
+                key: "supplierCode",
+                text: "Supplier Code",
+                sortable: true
+            },{
+                key: "supplierName",
+                text: "Supplier Name",
+                sortable: true
+            }  ,{
+                key: "supplierContactPerson",
+                text: "Contact Person",
+                sortable: true
+            } ,{
+                key: "mobile",
+                text: "Phone",
+                sortable: true
+            },
+            {
+                key: "email",
+                text: "Email",
+                sortable: true
+            },{
+                key: "address",
+                text: "Address",
+                sortable: true
+            },
+            {
+                key: "action",
+                text: "Action",
+                cell: (record, index) => {
+                    return (
+                            <button
+                                className="btn btn-info btn-sm"
+                                data-toggle="modal" data-target="#new_supplier"
+                                onClick={this.editRecord.bind(this, record, index)}
+                                style={{marginRight: '5px'}}>
+                                    <i className="fas fa-pencil-alt" ></i>Edit
+                            </button>
+                       
+                    );
+                }
+            }
+        ];
+
+        this.config = {
+            key_column: 'supplierId',
+            page_size: 10,
+            length_menu: [10, 20, 50],
+            show_filter: true,
+            show_pagination: true,
+            pagination: 'advance',
+            filename: "Supplier",
+            button: {
+                excel: true,
+                print: true,
+                csv: true
+            }
         }
+        this.state = {
+            supplierId:0,
+            supplierName:"",
+            supplierCode:"",
+            supplierContactPerson:"",
+            mobile:"",
+            email:"",
+            fax:"",
+            gst:"",
+            pan:"",
+
+            address:"",
+            city:"",
+            state:"",
+            pinCode:"",
+
+
+            remarks:"",
+            isActive:true,
+
+
+
+            showModal:false,
+            errormsg:"",
+            records:[],
+            isLoaded:false,
+            loginUser:this.props.profile
+        }
+       
     }
+
+    
+    
+    componentDidMount() {
+        this.getTableValues();
+//        console.log('props profile-->:'+this.props.apiurl)
+     }  
+    getTableValues(){
+        fetch(this.props.apiurl+"supplier/allSuppliers")
+        .then(res => res.json())
+        .then( (result) => {
+              //  console.log("result-->"+JSON.stringify(result))
+                if(result.valid){
+                    this.setState({
+                        records: result.supplierList
+                    });
+                }else{}
+            },(error) => {
+            }
+        )
+    }
+
+    handleFormChange = event => {
+        this.setState({[event.target.name]: event.target.value});
+    };
+
+    handleCheckClick = () => {
+        this.setState({ isActive: !this.state.isActive });
+    }
+
+    editRecord = (record, index) => {
+        // console.log("Edit record", index, record);
+        // console.log("-->"+JSON.stringify(record))
+        var tempstatus=true;
+        if(record.isActive === "Active"){
+             tempstatus=true;
+         }else{
+             tempstatus=false;
+         }
+         this.setState({
+            supplierId:record.supplierId,
+            supplierName:record.supplierName,
+            supplierCode:record.supplierCode,
+            supplierContactPerson:record.supplierContactPerson,
+            mobile:record.mobile,
+            email:record.email,
+            fax:record.fax,
+            gst:record.gst,
+            pan:record.pan,
+            remarks:record.remarks,
+            errormsg:"",
+            address:record.address,
+            city:record.city,
+            state:record.state,
+            pinCode:record.pinCode,
+            isActive:tempstatus
+         });
+     }
+     resetClick= () => {
+         this.setState({ 
+            supplierId:0,
+            supplierName:"",
+            supplierCode:"",
+            supplierContactPerson:"",
+            mobile:"",
+            email:"",
+            fax:"",
+            gst:"",
+            pan:"",
+
+            address:"",
+            city:"",
+            state:"",
+            pinCode:"",
+
+
+            remarks:"",
+            
+            isActive:true,
+            errormsg:"",
+         });
+    }
+
+    saveClick= event =>{
+        
+        if(this.state.supplierName === ""){
+            this.setState({
+                errormsg: "Enter Supplier Name"
+            });
+        }else if(!this.state.isActive && this.state.supplierId===0){
+            this.setState({
+                errormsg: "Select Active"
+            });
+        }else{
+            var tempstatus="";
+            if(this.state.isActive){
+                tempstatus="Active"
+            }else{
+                tempstatus="InActive"
+            }
+            
+        
+
+            const obj = {
+                'supplierCode':this.state.supplierCode,'supplierName':this.state.supplierName, 
+                'supplierContactPerson':this.state.supplierContactPerson,'mobile':this.state.mobile, 
+                'email':this.state.email,'fax':this.state.fax, 
+                'gst':this.state.gst,'pan':this.state.pan, 
+                'address':this.state.address,'city':this.state.city, 
+                'state':this.state.state,'pinCode':this.state.pinCode, 
+                'remarks':this.state.remarks,
+                isActive:tempstatus,'supplierId':this.state.supplierId,
+               
+                "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
+
+             // POST request using fetch with error handling
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "supplierObj": obj })
+                };
+                fetch(this.props.apiurl+"supplier/saveSupplier", requestOptions)
+                    .then(async response => {
+                        const data = await response.json();
+                   //     console.log("--data--"+JSON.stringify(data))
+                        // check for error response
+                        if (!response.ok) {
+                            // get error message from body or default to response status
+                            const error = (data && data.message) || response.status;
+                            return Promise.reject(error);
+                        }
+
+                        if(data.valid){
+                             //  console.log("c role->"+obj)
+                             this.setState({
+                                errormsg: "Supplier Details Saved Successfully",
+                                records: data.supplierList,
+                            },()=>{
+                                this.resetClick();
+                            });
+                           
+                        }else{
+                           this.setState({ errormsg: data.responseMsg});
+                           this.resetClick();
+                        } 
+                    })
+                    .catch(error => {
+                        this.setState({ errormsg: error.toString() });
+                      //  console.error('There was an error!', error);
+                    });
+                    
+          
+        }
+     }
+     
     
     render() {
         return (
@@ -41,77 +285,13 @@ export class Supplier extends Component {
                             </div>
                             
                             <div className="card-body" style={{height: 500}}>
-                                <table className="table table-bordered table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                    <th>#ID</th>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Supplier 1</td>
-                                        <td>John Doe</td>
-                                        <td><span className="badge badge-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>&nbsp;&nbsp;View</a>&nbsp;&nbsp;
-                                            <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>&nbsp;&nbsp;
-                                         
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Supplier 12</td>
-                                        <td>John Doe</td>
-                                        <td><span className="badge badge-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>&nbsp;&nbsp;View</a>&nbsp;&nbsp;
-                                            <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>&nbsp;&nbsp;
-                                            
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Supplier 13</td>
-                                        <td>John Doe</td>
-                                        <td><span className="badge badge-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>&nbsp;&nbsp;View</a>&nbsp;&nbsp;
-                                            <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>&nbsp;&nbsp;
-                                          
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Supplier 14</td>
-                                        <td>John Doe</td>
-                                        <td><span className="badge badge-danger">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>&nbsp;&nbsp;View</a>&nbsp;&nbsp;
-                                            <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>&nbsp;&nbsp;
-                                         
-                                        </td>
-                                    </tr>
-                                   
-                                </tbody>
-                                </table>
+                                <ReactDatatable
+                                    config={this.config}
+                                    records={this.state.records}
+                                    columns={this.columns}/>
                             </div>
                             <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                </ul>
+                               
                             </div>
                             </div>
                             
@@ -138,75 +318,90 @@ export class Supplier extends Component {
                             <div className="row">
                                 <div className="col-12">
                                     
-                                <div className="card card-primary card-outline direct-chat direct-chat-primary collapsed-card">
+                                <div className="card card-primary card-outline ">
                                         <div className="card-header">
                                             <h3 className="card-title">Personal</h3>
                                             <div className="card-tools">
-                                            
-                                            <button type="button" className="btn btn-tool bg-primary" data-card-widget="collapse">
-                                                <i className="fas fa-plus" />
-                                            </button>
+                                          
                                         
                                             </div>
                                         </div>
-                                        <div className="card-body" style={{display: 'none'}}>
+                                        <div className="card-body" >
 
-                                            <form>
+                                        <form>
                                                     <div className="form-row m-2">
+                                                     
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="inputEmail4">Supplier Code <span class="text-danger">*</span></label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Supplier Code " />
+                                                            <label htmlFor="dealerCode">Supplier Code <span class="text-danger">*</span></label>
+                                                            <input type="text" className="form-control form-control-sm" id="supplierCode" name="supplierCode" value= {this.state.supplierCode} onChange={this.handleFormChange} placeholder="Supplier Code " readOnly/>
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">Name <span class="text-danger">*</span></label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Name" />
+                                                        <label htmlFor="dealerName">Name <span class="text-danger">*</span></label>
+                                                        <input type="text" className="form-control form-control-sm" id="supplierName" name="supplierName" value= {this.state.supplierName} onChange={this.handleFormChange} placeholder="Name" />
                                                         </div>
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">Phone</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Phone" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-row m-2">
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputEmail4">Contact Person</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Contact Person " />
-                                                        </div>
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">Mobile</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Mobile" />
-                                                        </div>
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputEmail4">Email</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Email" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-row m-2">
-                                                       
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">Fax</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Fax" />
-                                                        </div>
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">GST</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="GST" />
-                                                        </div>
-                                                        <div className="form-group col-md-4">
-                                                        <label htmlFor="inputPassword4">PAN</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="PAN" />
-                                                        </div>
-                                                    </div>
-                                                   
-                                                   
-                                                    <div className="form-row m-2">
                                                         
+                                                    </div>
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="dealerContactPerson">Contact Person</label>
+                                                        <input type="text" className="form-control form-control-sm" id="supplierContactPerson" name="supplierContactPerson" value= {this.state.supplierContactPerson} onChange={this.handleFormChange} placeholder="Contact Person " />
+                                                        </div>
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="mobile">Mobile</label>
+                                                        <input type="text" className="form-control form-control-sm" id="mobile" name="mobile" value= {this.state.mobile} onChange={this.handleFormChange} placeholder="Mobile" />
+                                                        </div>
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="email">Email</label>
+                                                        <input type="text" className="form-control form-control-sm" id="email" name="email" value= {this.state.email} onChange={this.handleFormChange} placeholder="Email" />
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                    
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="fax">Fax</label>
+                                                        <input type="text" className="form-control form-control-sm" id="fax" name="fax" value= {this.state.fax} onChange={this.handleFormChange} placeholder="Fax" />
+                                                        </div>
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="gst">GST</label>
+                                                        <input type="text" className="form-control form-control-sm" id="gst" name="gst" value= {this.state.gst} onChange={this.handleFormChange} placeholder="GST" />
+                                                        </div>
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="pan">PAN</label>
+                                                        <input type="text" className="form-control form-control-sm" id="pan" name="pan" value= {this.state.pan} onChange={this.handleFormChange} placeholder="PAN" />
+                                                        </div>
+                                                    </div>
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="address1">Address</label>
+                                                        <input type="text" className="form-control form-control-sm" id="address" name="address" value= {this.state.address} onChange={this.handleFormChange} placeholder="address" />
+                                                        </div>
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="city">City</label>
+                                                        <input type="text" className="form-control form-control-sm" id="city" name="city" value= {this.state.city} onChange={this.handleFormChange} placeholder="city" />
+                                                        </div>
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="state">State</label>
+                                                        <input type="text" className="form-control form-control-sm" id="state" name="state" value= {this.state.state} onChange={this.handleFormChange} placeholder="state" />
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    <div className="form-row m-2">
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="inputEmail4">Pin Code</label>
+                                                        <input type="text" className="form-control form-control-sm" id="pinCode" name="pinCode" value= {this.state.pinCode} onChange={this.handleFormChange} placeholder="Pin Code" />
+                                                        </div>
                                                         <div className="form-group col-md-4">
                                                         <label htmlFor="inputEmail4">Remarks</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Remarks" />
+                                                        <input type="text" className="form-control form-control-sm" id="remarks" name="remarks" value= {this.state.remarks} onChange={this.handleFormChange} placeholder="Remarks" />
                                                         </div>
                                                        
                                                         <div className="col-md-4 form-inline">
                                                         <label htmlFor="inputPassword4">Is Active</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <input type="checkbox" className="form-control form-control-sm" id="inputPassword4" placeholder="" />
+                                                        <input type="checkbox" className="form-control form-control-sm" checked={this.state.isActive}  onChange={this.handleCheckClick} />
                                                         </div>
                                                     </div>
                                                  </form>
@@ -215,84 +410,6 @@ export class Supplier extends Component {
                                     
                                     </div>
 
-                                    <div className="card card-success card-outline direct-chat direct-chat-primary collapsed-card">
-                                        <div className="card-header">
-                                            <h3 className="card-title">Address</h3>
-                                            <div className="card-tools">
-                                            
-                                            <button type="button" className="btn btn-tool bg-primary" data-card-widget="collapse">
-                                                <i className="fas fa-plus" />
-                                            </button>
-                                        
-                                            </div>
-                                        </div>
-                                        <div className="card-body" style={{display: 'none'}}>
-                                            <form>
-
-                                                    <div className="form-row m-2">
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputEmail4">Address Name</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address Name" />
-                                                        </div>
-                                                        <div className="col-md-6 form-inline">
-                                                        <label htmlFor="inputPassword4">Is Default Address</label>&nbsp;&nbsp;&nbsp;
-                                                        <input type="checkbox" className="form-control form-control-sm" id="inputPassword4" placeholder="" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-row m-2">
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputEmail4">Address 1</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address 1" />
-                                                        </div>
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputPassword4">Phone</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Phone" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-row m-2">
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputEmail4">Address 2</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address 2" />
-                                                        </div>
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputPassword4">Phone 2</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Mobile" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-row m-2">
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputEmail4">Address 3</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Address 3" />
-                                                        </div>
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputPassword4">Phone 3</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Fax" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-row m-2">
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputEmail4">City</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="City" />
-                                                        </div>
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputEmail4">Pin Code</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="Pin Code" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="form-row m-2">
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputEmail4">State</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputEmail4" placeholder="State" />
-                                                        </div>
-                                                        <div className="form-group col-md-6">
-                                                        <label htmlFor="inputPassword4">Country</label>
-                                                        <input type="text" className="form-control form-control-sm" id="inputPassword4" placeholder="Country" />
-                                                        </div>
-                                                    </div>
-                                                   
-                                            </form>
-                                        </div>
-                                    </div>
 
                                     
 
@@ -305,7 +422,8 @@ export class Supplier extends Component {
                         </div>
                         <div className="modal-footer justify-content-between">
                             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save</button>
+                            <span className="text-danger">{this.state.errormsg}</span>
+                            <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>
                         </div>
                         </div>
                     </div>
@@ -316,4 +434,13 @@ export class Supplier extends Component {
     }
 }
 
-export default Supplier
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl
+    }
+  }
+
+ export default connect(mapStateToProps)(Supplier);
+
+//export default Supplier
