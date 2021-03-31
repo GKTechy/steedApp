@@ -308,10 +308,7 @@ export class Dealer extends Component {
 
                                             <form>
                                                     <div className="form-row m-2">
-                                                        <div className="form-group col-md-4">
-                                                            <label htmlFor="dealerCode">Super stockist <span class="text-danger">*</span></label>
-                                                            <input type="text" className="form-control form-control-sm" id="Super stockist" name="Super stockist" value= {this.state.dealerCode} onChange={this.handleFormChange} placeholder="Dealer Code " />
-                                                        </div>
+                                                     
                                                         <div className="form-group col-md-4">
                                                             <label htmlFor="dealerCode">Dealer Code <span class="text-danger">*</span></label>
                                                             <input type="text" className="form-control form-control-sm" id="dealerCode" name="dealerCode" value= {this.state.dealerCode} onChange={this.handleFormChange} placeholder="Dealer Code " readOnly/>
@@ -336,6 +333,11 @@ export class Dealer extends Component {
                                                         <input type="text" className="form-control form-control-sm" id="email" name="email" value= {this.state.email} onChange={this.handleFormChange} placeholder="Email" />
                                                         </div>
                                                     </div>
+
+
+
+
+                                                    
                                                     <div className="form-row m-2">
                                                         <div className="form-group col-md-4">
                                                         <label htmlFor="fax">Fax</label>
@@ -366,7 +368,10 @@ export class Dealer extends Component {
                                                     </div>
                                                    
                                                     <div className="form-row m-2">
-                                                        
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="inputEmail4">Pin Code</label>
+                                                        <input type="text" className="form-control form-control-sm" id="remarks" name="remarks" value= {this.state.remarks} onChange={this.handleFormChange} placeholder="Remarks" />
+                                                        </div>
                                                         <div className="form-group col-md-4">
                                                         <label htmlFor="inputEmail4">Remarks</label>
                                                         <input type="text" className="form-control form-control-sm" id="remarks" name="remarks" value= {this.state.remarks} onChange={this.handleFormChange} placeholder="Remarks" />
