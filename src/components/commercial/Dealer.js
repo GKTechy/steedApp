@@ -23,11 +23,11 @@ export class Dealer extends Component {
                 text: "Dealer Name",
                 sortable: true
             }  ,{
-                key: "dealer_contact_person",
+                key: "dealerContactPerson",
                 text: "Contact Person",
                 sortable: true
-            }           ,{
-                key: "dealer_phone",
+            } ,{
+                key: "mobile",
                 text: "Phone",
                 sortable: true
             },
@@ -36,11 +36,10 @@ export class Dealer extends Component {
                 text: "Email",
                 sortable: true
             },{
-                key: "address_1",
+                key: "address",
                 text: "Address",
                 sortable: true
             },
-
             {
                 key: "action",
                 text: "Action",
@@ -48,9 +47,10 @@ export class Dealer extends Component {
                     return (
                             <button
                                 className="btn btn-info btn-sm"
+                                data-toggle="modal" data-target="#new_dealer"
                                 onClick={this.editRecord.bind(this, record, index)}
                                 style={{marginRight: '5px'}}>
-                                    <i className="fas fa-pencil-alt"></i>Edit
+                                    <i className="fas fa-pencil-alt" ></i>Edit
                             </button>
                        
                     );
@@ -86,10 +86,13 @@ export class Dealer extends Component {
             remarks:"",
             isActive:true,
 
-
+            address:"",
+            city:"",
+            state:"",
+            pinCode:"",
 
             showModal:false,
-            errormsg:"this is errrorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+            errormsg:"",
             records:[],
             isLoaded:false,
             loginUser:this.props.profile
@@ -135,9 +138,22 @@ export class Dealer extends Component {
              tempstatus=false;
          }
          this.setState({
-            orderCode:record.orderCode,
-            colorCode:record.colorCode,
-            orderCodeId:record.orderCodeId,
+            dealerId:record.dealerId,
+            dealerName:record.dealerName,
+            dealerCode:record.dealerCode,
+            dealerPhone:record.dealerPhone,
+            dealerContactPerson:record.dealerContactPerson,
+            mobile:record.mobile,
+            email:record.email,
+            fax:record.fax,
+            gst:record.gst,
+            pan:record.pan,
+            remarks:record.remarks,
+            errormsg:"",
+            address:record.address,
+            city:record.city,
+            state:record.state,
+            pinCode:record.pinCode,
             isActive:tempstatus
          });
      }
@@ -156,6 +172,11 @@ export class Dealer extends Component {
             remarks:"",
             isActive:true,
             errormsg:"",
+            address:"",
+            city:"",
+            state:"",
+            pinCode:"",
+
          });
     }
 
@@ -184,6 +205,8 @@ export class Dealer extends Component {
                 'dealerContactPerson':this.state.dealerContactPerson,'mobile':this.state.mobile, 
                 'email':this.state.email,'fax':this.state.fax, 
                 'gst':this.state.gst,'pan':this.state.pan, 
+                'address':this.state.address,'city':this.state.city, 
+                'state':this.state.state,'pinCode':this.state.pinCode, 
                 'remarks':this.state.remarks,
                 isActive:tempstatus,'dealerId':this.state.dealerId,
                
@@ -308,10 +331,7 @@ export class Dealer extends Component {
 
                                             <form>
                                                     <div className="form-row m-2">
-                                                        <div className="form-group col-md-4">
-                                                            <label htmlFor="dealerCode">Super stockist <span class="text-danger">*</span></label>
-                                                            <input type="text" className="form-control form-control-sm" id="Super stockist" name="Super stockist" value= {this.state.dealerCode} onChange={this.handleFormChange} placeholder="Dealer Code " />
-                                                        </div>
+                                                     
                                                         <div className="form-group col-md-4">
                                                             <label htmlFor="dealerCode">Dealer Code <span class="text-danger">*</span></label>
                                                             <input type="text" className="form-control form-control-sm" id="dealerCode" name="dealerCode" value= {this.state.dealerCode} onChange={this.handleFormChange} placeholder="Dealer Code " readOnly/>
@@ -336,6 +356,11 @@ export class Dealer extends Component {
                                                         <input type="text" className="form-control form-control-sm" id="email" name="email" value= {this.state.email} onChange={this.handleFormChange} placeholder="Email" />
                                                         </div>
                                                     </div>
+
+
+
+
+                                                    
                                                     <div className="form-row m-2">
                                                         <div className="form-group col-md-4">
                                                         <label htmlFor="fax">Fax</label>
@@ -353,7 +378,7 @@ export class Dealer extends Component {
                                                     <div className="form-row m-2">
                                                         <div className="form-group col-md-4">
                                                         <label htmlFor="address1">Address</label>
-                                                        <input type="text" className="form-control form-control-sm" id="address1" name="address1" value= {this.state.address1} onChange={this.handleFormChange} placeholder="address" />
+                                                        <input type="text" className="form-control form-control-sm" id="address" name="address" value= {this.state.address} onChange={this.handleFormChange} placeholder="address" />
                                                         </div>
                                                         <div className="form-group col-md-4">
                                                         <label htmlFor="city">City</label>
@@ -366,7 +391,10 @@ export class Dealer extends Component {
                                                     </div>
                                                    
                                                     <div className="form-row m-2">
-                                                        
+                                                        <div className="form-group col-md-4">
+                                                        <label htmlFor="inputEmail4">Pin Code</label>
+                                                        <input type="text" className="form-control form-control-sm" id="pinCode" name="pinCode" value= {this.state.pinCode} onChange={this.handleFormChange} placeholder="Pin Code" />
+                                                        </div>
                                                         <div className="form-group col-md-4">
                                                         <label htmlFor="inputEmail4">Remarks</label>
                                                         <input type="text" className="form-control form-control-sm" id="remarks" name="remarks" value= {this.state.remarks} onChange={this.handleFormChange} placeholder="Remarks" />
@@ -515,7 +543,4 @@ const mapStateToProps = (state) => {
   }
 
  export default connect(mapStateToProps)(Dealer);
-//export default ColorCode
-
-
 //export default Dealer

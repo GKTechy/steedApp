@@ -1,195 +1,240 @@
 import React, { Component } from 'react'
 
+import { connect } from "react-redux";
+import ReactDatatable from '@ashvin27/react-datatable';
+
+
 export class UOM extends Component {
 
 
-        constructor(props) {
-            super(props)
+    constructor(props) {
         
-            this.state = {
-                 uomList:[
-                    {
-                        "code": "B15","desc": "BAG 15"
-                    },{
-                        "code": "B25",            "desc": "BAG 25"
-                    },{
-                        "code": "B50",            "desc": "BAG 50"
-                    },{
-                        "code": "BBL",            "desc": "Barrel - Liquid Measure"
-                    },{
-                        "code": "BOX",            "desc": "Box"
-                    },{
-                        "code": "BRL",            "desc": "BARREL"
-                    },{
-                        "code": "BSD",            "desc": "Bushel - Dry Measure"
-                    },{
-                        "code": "CAN",            "desc": "CAN"
-                    },{
-                        "code": "CCM",            "desc": "Cubic Centimeters"
-                    },{
-                        "code": "CDM",            "desc": "Cubic Decimeters"
-                    },{
-                        "code": "CG",            "desc": "Centigrams"
-                    },{
-                        "code": "CHN",           "desc": "Chain"
-                    },{
-                        "code": "CL",            "desc": "Centiliters"
-                    },{
-                        "code": "CM",            "desc": "Centimeters"
-                    },{
-                        "code": "CMM",            "desc": "Cubic Millimeters"
-                    },{
-                        "code": "CRT",            "desc": "CRATE"
-                    },{
-                        "code": "CS",            "desc": "Case"
-                    },{
-                        "code": "CUF",            "desc": "Cubic Feet"
-                    },{
-                        "code": "CUI",            "desc": "Cubic Inches"
-                    },{
-                        "code": "CUM",            "desc": "Cubic Meters"
-                    },{
-                        "code": "CUY",            "desc": "Cubic Yards"
-                    },{
-                        "code": "DAY",            "desc": "Days"
-                    },{
-                        "code": "DG",            "desc": "Decigrams"
-                    },{
-                        "code": "DL",            "desc": "Deciliters"
-                    },{
-                        "code": "DM",            "desc": "Decimeters"
-                    },{
-                        "code": "DOZ",            "desc": "Dozen"
-                    },{
-                        "code": "DRA",            "desc": "Dram"
-                    },{
-                        "code": "DRM",            "desc": "DRUM"
-                    },{
-                        "code": "EA",            "desc": "Each"
-                    },{
-                        "code": "FOZ",            "desc": "Fluid Ounce "
-                    },{
-                        "code": "FT",            "desc": "Feet"
-                    },{
-                        "code": "G",            "desc": "Grams"
-                    },{
-                        "code": "GAL",            "desc": "Gallon - US Liquid Measure"
-                    },{
-                        "code": "GRP",            "desc": "Grains "
-                    },{
-                        "code": "GRS",            "desc": "Gross"
-                    },{
-                        "code": "GRT",            "desc": "Grains - Troy"
-                    },{
-                        "code": "HUN",            "desc": "Hundreds"
-                    },{
-                        "code": "IN",            "desc": "Inches"
-                    },{
-                        "code": "KG",            "desc": "Kilograms"
-                    },{
-                        "code": "KGF",            "desc": "Kilograms of Force per CM"
-                    },{
-                        "code": "KL",            "desc": "Kiloliters"
-                    },{
-                        "code": "KM",            "desc": "Kilometers"
-                    },{
-                        "code": "KWH",            "desc": "Kilowatt Hours"
-                    },{
-                        "code": "L",            "desc": "Liters"
-                    },{
-                        "code": "LBS",            "desc": "Pounds"
-                    },{
-                        "code": "LBT",            "desc": "Pounds - Troy"
-                    },{
-                        "code": "LNK",            "desc": "Link"
-                    },{
-                        "code": "LOT",            "desc": "Batch Lot"
-                    },{
-                        "code": "LT",            "desc": "Long Tons"
-                    },{
-                        "code": "M",            "desc": "Meters"
-                    },{
-                        "code": "MDY",            "desc": "Person Day"
-                    },{
-                        "code": "MG",            "desc": "Milligrams"
-                    },{
-                        "code": "MHR",            "desc": "Work Hour"
-                    },{
-                        "code": "MIL",            "desc": "Miles"
-                    },{
-                        "code": "ML",            "desc": "Milliliters"
-                    },{
-                        "code": "MM",            "desc": "Millimeters"
-                    },{
-                        "code": "MMO",            "desc": "Work Month"
-                    },{
-                        "code": "MT",            "desc": "Metric Tons"
-                    },{
-                        "code": "MWK",            "desc": "Work Week"
-                    },{
-                        "code": "OZT",            "desc": "Ounces - Troy"
-                    },{
-                        "code": "PK",            "desc": "Cello Pack"
-                    },{
-                        "code": "PKD",            "desc": "Peck - Dry Measure"
-                    },{
-                        "code": "PL",            "desc": "Pallet"
-                    },{
-                        "code": "PTD",            "desc": "Pint - Dry Measure"
-                    },{
-                        "code": "PTL",            "desc": "Pint - Liquid Measure"
-                    },{
-                        "code": "PWT",            "desc": "Pennyweight - Troy"
-                    },{
-                        "code": "QTD",            "desc": "Quart - Dry Measure"
-                    },{
-                        "code": "QTL",            "desc": "Quart - Liquid Measure"
-                    },{
-                        "code": "SCM",            "desc": "Square Centimeters"
-                    },{
-                        "code": "SDM",            "desc": "Square Decimeters"
-                    },{
-                        "code": "SF",            "desc": "Square Feet"
-                    },{
-                        "code": "SHT",            "desc": "Short Ton"
-                    },{
-                        "code": "SHW",            "desc": "Short Hundred Weight"
-                    },{
-                        "code": "SLV",            "desc": "SLEEVE"
-                    },{
-                        "code": "SM",            "desc": "Square Meters"
-                    },{
-                        "code": "SMM",            "desc": "Square Millimeters"
-                    },{
-                        "code": "SQF",            "desc": "Square Feet"
-                    },{
-                        "code": "SQI",            "desc": "Square Inches"
-                    },{
-                        "code": "SQM",            "desc": "Square Miles"
-                    },{
-                        "code": "SQY",            "desc": "Square Yards"
-                    },{
-                        "code": "ST",            "desc": "Short Tons"
-                    },{
-                        "code": "TON",            "desc": "Tons"
-                    },{
-                        "code": "TRK",            "desc": "TRUCK LOAD"
-                    },{
-                        "code": "TUB",            "desc": "TUB"
-                    },{
-                        "code": "UNT",            "desc": "Units (generic)"
-                    },{
-                        "code": "YD",            "desc": "Yard"
-                    }
-                 ]
+        super(props)
+          this.columns = [
+            {
+                key: "measurementName",
+                text: "MeasureMent Name",
+                sortable: true
+            },{
+                key: "measurementShortName",
+                text: "Short Name",
+                sortable: true
+            }  ,{
+                key: "measurementType",
+                text: "MeasureMent Type",
+                sortable: true
+            } ,{
+                key: "baseMeasurement",
+                text: "Is Base",
+                sortable: true
+            },
+            {
+                key: "equivalentValueWithBase",
+                text: "Is Varied",
+                sortable: true
+            },
+            {
+                key: "action",
+                text: "Action",
+                cell: (record, index) => {
+                    return (
+                            <button
+                                className="btn btn-info btn-sm"
+                                data-toggle="modal" data-target="#uom-new-model"
+                                onClick={this.editRecord.bind(this, record, index)}
+                                style={{marginRight: '5px'}}>
+                                    <i className="fas fa-pencil-alt" ></i>Edit
+                            </button>
+                       
+                    );
+                }
+            }
+        ];
+
+        this.config = {
+            key_column: 'unitOfMeasurementId',
+            page_size: 10,
+            length_menu: [10, 20, 50],
+            show_filter: true,
+            show_pagination: true,
+            pagination: 'advance',
+            filename: "UOM",
+            button: {
+                excel: true,
+                print: true,
+                csv: true
             }
         }
-        
-    componentDidMount(){
-       
+        this.state = {
+            unitOfMeasurementId:0,
+            measurementName:"",
+            measurementShortName:"",
+            measurementType:"",
+            baseMeasurement:false,
+            equivalentValueWithBase:"",
+            description:"",
+            variedMeasurement:false,
+            isActive:true,
 
+            showModal:false,
+            errormsg:"",
+            records:[],
+            isLoaded:false,
+            loginUser:this.props.profile
+        }
+       
     }
 
+     
+    componentDidMount() {
+        this.getTableValues();
+//        console.log('props profile-->:'+this.props.apiurl)
+     }  
+    getTableValues(){
+        fetch(this.props.apiurl+"uom/allUOMs")
+        .then(res => res.json())
+        .then( (result) => {
+              //  console.log("result-->"+JSON.stringify(result))
+                if(result.valid){
+                    this.setState({
+                        records: result.uomList
+                    });
+                }else{}
+            },(error) => {
+            }
+        )
+    }
+
+    handleFormChange = event => {
+        this.setState({[event.target.name]: event.target.value});
+    };
+
+    handleCheckClick = () => {
+        this.setState({ isActive: !this.state.isActive });
+    }
+    handlebaseClick= () => {
+        this.setState({ baseMeasurement: !this.state.baseMeasurement });
+    }
+    handlevariedClick= () => {
+        this.setState({ variedMeasurement: !this.state.variedMeasurement });
+    }
+    editRecord = (record, index) => {
+        // console.log("Edit record", index, record);
+        // console.log("-->"+JSON.stringify(record))
+        var tempstatus=true;
+        if(record.isActive === "Active"){
+             tempstatus=true;
+         }else{
+             tempstatus=false;
+         }
+         this.setState({
+            unitOfMeasurementId:record.unitOfMeasurementId,
+            measurementName:record.measurementName,
+            measurementShortName:record.measurementShortName,
+            supplierContactPerson:record.supplierContactPerson,
+            measurementType:record.measurementType,
+            baseMeasurement:record.baseMeasurement,
+            equivalentValueWithBase:record.equivalentValueWithBase,
+            description:record.description,
+            variedMeasurement:record.variedMeasurement,
+            isActive:tempstatus
+         });
+     }
+     resetClick= () => {
+         this.setState({ 
+            unitOfMeasurementId:0,
+            measurementName:"",
+            measurementShortName:"",
+            measurementType:"",
+            baseMeasurement:"",
+            equivalentValueWithBase:"",
+            description:"",
+            variedMeasurement:"",
+            isActive:true,
+            errormsg:"",
+         });
+    }
+    saveClick= event =>{
+      //  console.log("state-->"+JSON.stringify(this.state))
+        if(this.state.measurementName === ""){
+            this.setState({
+                errormsg: "Enter measurement Name"
+            });
+        }else if(!this.state.isActive && this.state.unitOfMeasurementId===0){
+            this.setState({
+                errormsg: "Select Active"
+            });
+        }else{
+            var tempstatus="";
+            if(this.state.isActive){
+                tempstatus="Active"
+            }else{
+                tempstatus="InActive"
+            }
+            
+            var tempstatus1="";
+            if(this.state.baseMeasurement){
+                tempstatus1="Active"
+            }else{
+                tempstatus1="InActive"
+            }
+            var tempstatus11="";
+            if(this.state.variedMeasurement){
+                tempstatus11="Active"
+            }else{
+                tempstatus11="InActive"
+            }
+        
+
+            const obj = {
+                'measurementName':this.state.measurementName,'measurementShortName':this.state.measurementShortName, 
+                'measurementType':this.state.measurementType,'baseMeasurement':tempstatus1, 
+                'equivalentValueWithBase':this.state.equivalentValueWithBase,'description':this.state.description   , 
+                'variedMeasurement':tempstatus11,
+                "isActive":tempstatus,'unitOfMeasurementId':this.state.unitOfMeasurementId,
+               
+                "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
+
+             // POST request using fetch with error handling
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "uomObj": obj })
+                };
+                fetch(this.props.apiurl+"uom/saveUOM", requestOptions)
+                    .then(async response => {
+                        const data = await response.json();
+                   //     console.log("--data--"+JSON.stringify(data))
+                        // check for error response
+                        if (!response.ok) {
+                            // get error message from body or default to response status
+                            const error = (data && data.message) || response.status;
+                            return Promise.reject(error);
+                        }
+
+                        if(data.valid){
+                             //  console.log("c role->"+obj)
+                             this.setState({
+                                errormsg: "Supplier Details Saved Successfully",
+                                records: data.uomList,
+                            },()=>{
+                                this.resetClick();
+                            });
+                           
+                        }else{
+                           this.setState({ errormsg: data.responseMsg});
+                           this.resetClick();
+                        } 
+                    })
+                    .catch(error => {
+                        this.setState({ errormsg: error.toString() });
+                      //  console.error('There was an error!', error);
+                    });
+                    
+          
+        }
+    }
+   
     render() {
         return (
             <div>
@@ -211,47 +256,10 @@ export class UOM extends Component {
 
                             </div>
                             <div className="card-body">
-                            <table id="uom_master_table" className="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>MeasureMent Name</th>
-                                    <th>Short Name</th>
-                                    <th>MeasureMent Type</th>
-                                    <th>Is Base</th>
-                                    <th>Is Varied</th>
-                                    <th>Equalant Value</th>
-                                    <th>Active</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {/* {
-                                    this.state.uomList.map((item) =>
-                                    
-                                    <tr key={item.id}>
-                                        
-                                        <td>{item.code}</td>
-                                        <td><span className="tag tag-success">{item.desc}</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                )} */}
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>MeasureMent Name</th>
-                                    <th>Short Name</th>
-                                    <th>MeasureMent Type</th>
-                                    <th>Is Base</th>
-                                    <th>Is Varied</th>
-                                    <th>Equalant Value</th>
-                                    <th>Active</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
-                            </table>
+                                <ReactDatatable
+                                    config={this.config}
+                                    records={this.state.records}
+                                    columns={this.columns}/>
                             </div>
                         </div>
                         </div>
@@ -273,32 +281,34 @@ export class UOM extends Component {
                                 <div className="container-fluid">
                                     <div className="form-inline">
                                         <label htmlFor="code" className="m-2 col-sm-2" >Measurement Type<span class="text-danger">*</span></label>
-                                        <select className="form-control m-2 col-sm-3" id="exampleSelectRounded0">
-                                            <option>Mass</option>
-                                            <option>Volume</option>
-                                            <option>Unit</option>
-                                            <option>Distance</option>
+                                        <select className="form-control m-2 col-sm-3" id="measurementType" name="measurementType" value={this.state.measurementType} onChange={this.handleFormChange} >
+                                            <option value="0"></option>
+                                            <option value="Mass">Mass</option>
+                                            <option value="Volume">Volume</option>
+                                            <option value="Unit">Unit</option>
+                                            <option value="Distance">Distance</option>
                                         </select>
-                                        <label htmlFor="name" className="m-2 col-sm-2">Base Measurement<span class="text-danger">*</span></label>
-                                        <input type="checkbox" className="form-check-input m-1" id="isactive" />
-                                        <label htmlFor="name" className="m-2 col-sm-2">is Varied<span class="text-danger">*</span> </label>
-                                        <input type="checkbox" className="form-check-input" id="isqc" />
+                                        <label htmlFor="name" className="m-2 col-sm-2">Base Measurement</label>
+                                        <input type="checkbox" className="form-check-input m-1" checked={this.state.baseMeasurement}  onChange={this.handlebaseClick} />
+                                        <label htmlFor="name" className="m-2 col-sm-2">is Varied</label>
+                                        <input type="checkbox" className="form-check-input" checked={this.state.variedMeasurement}  onChange={this.handlevariedClick} />
                                         <label htmlFor="name" className="m-2 col-sm-2" >Measurement Name<span class="text-danger">*</span></label>
-                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="MeasureMent Name" />
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="measurementName" name="measurementName" value= {this.state.measurementName} onChange={this.handleFormChange} placeholder="Measurement Name" />
                                         <label htmlFor="code" className="m-2 col-sm-2" >Short Name</label>
-                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="MeasureMent Short" />
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="measurementShortName" name="measurementShortName" value= {this.state.measurementShortName} onChange={this.handleFormChange} placeholder="Short Name" />
                                         <label htmlFor="name" className="m-2 col-sm-2" >Equalant Value</label>
-                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="Equalant Value with Base" />
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="equivalentValueWithBase" name="equivalentValueWithBase" value= {this.state.equivalentValueWithBase} onChange={this.handleFormChange} placeholder="Equalant Value" />
                                         <label htmlFor="name" className="m-2 col-sm-2" >Description</label>
-                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="Description" />
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="description" name="description" value= {this.state.description} onChange={this.handleFormChange} placeholder="Description"/>
                                         <label htmlFor="name" className="m-2 col-sm-2">Active<span class="text-danger">*</span></label>
-                                        <input type="checkbox" className="form-check-input m-1" id="isactive" />
+                                        <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick}/>
                                     </div>
                             </div>
                          </div>
                         <div className="modal-footer justify-content-between">
                             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save</button>
+                            <span className="text-danger">{this.state.errormsg}</span>
+                            <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>
                         </div>
                         </div>
                     </div>
@@ -310,4 +320,12 @@ export class UOM extends Component {
     }
 }
 
-export default UOM
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl
+    }
+  }
+export default connect(mapStateToProps)(UOM);
+
+//export default UOM
