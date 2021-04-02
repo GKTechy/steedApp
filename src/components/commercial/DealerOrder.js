@@ -74,57 +74,7 @@ export class DealerOrder extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>CP0202010003</td>
-                                        <td>27-OCT-2020</td>
-                                        <td>ceeyes store stock</td>
-                                        <td>DIESEL LOCOMOTIVE STOCKS</td>
-                                        <td>DIESEL LOCOMOTIVE STOCKS</td>
-                                        <td>EM 16-710G96</td>
-                                        <td>YES</td>
-                                        <td><span className="badge badge-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>&nbsp;&nbsp;View</a>&nbsp;&nbsp;
-                                            <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>&nbsp;&nbsp;
-                                         
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>CP0202010003</td>
-                                        <td>27-OCT-2020</td>
-                                        <td>ceeyes store stock</td>
-                                        <td>DIESEL LOCOMOTIVE STOCKS</td>
-                                        <td>DIESEL LOCOMOTIVE STOCKS</td>
-                                        <td>EM 16-710G96</td>
-                                        <td>YES</td>
-                                        <td><span className="badge badge-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>&nbsp;&nbsp;View</a>&nbsp;&nbsp;
-                                            <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>&nbsp;&nbsp;
-                                         
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>CP0202010003</td>
-                                        <td>27-OCT-2020</td>
-                                        <td>ceeyes store stock</td>
-                                        <td>DIESEL LOCOMOTIVE STOCKS</td>
-                                        <td>DIESEL LOCOMOTIVE STOCKS</td>
-                                        <td>EM 16-710G96</td>
-                                        <td>YES</td>
-                                        <td><span className="badge badge-success">Active</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>&nbsp;&nbsp;View</a>&nbsp;&nbsp;
-                                            <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>&nbsp;&nbsp;
-                                         
-                                        </td>
-                                    </tr>
+                                   
                                  
                                    
                                    
@@ -132,13 +82,7 @@ export class DealerOrder extends Component {
                                 </table>
                             </div>
                             <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                </ul>
+                               
                             </div>
                             </div>
                             
