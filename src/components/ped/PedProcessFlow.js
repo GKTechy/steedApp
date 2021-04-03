@@ -1,6 +1,114 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+import ReactDatatable from '@ashvin27/react-datatable';
+
 
 export class PedProcessFlow extends Component {
+    constructor(props) {
+        
+        super(props)
+          this.columns = [
+            {
+                key: "operationNo",
+                text: "Operation No",
+                sortable: true
+            },{
+                key: "productName",
+                text: "Product Name",
+                sortable: true
+            },{
+                key: "processName",
+                text: "Process Name",
+                sortable: true
+            } ,{
+                key: "cycleTime",
+                text: "Cycle Time",
+                sortable: true
+            } ,
+            {
+                key: "action",
+                text: "Action",
+                cell: (record, index) => {
+                    return (
+                            <button
+                                className="btn btn-info btn-sm"
+                               // data-toggle="modal" data-target="#uom-new-model"
+                                onClick={this.editRecord.bind(this, record, index)}
+                                style={{marginRight: '5px'}}>
+                                    <i className="fas fa-pencil-alt" ></i>Edit
+                            </button>
+                       
+                    );
+                }
+            }
+        ];
+
+        this.config = {
+            key_column: 'processFlowId',
+            page_size: 10,
+            length_menu: [10, 20, 50],
+            show_filter: true,
+            show_pagination: true,
+            pagination: 'advance',
+            filename: "Process Flow",
+            button: {
+                excel: true,
+                print: true,
+                csv: true
+            }
+        }
+        this.state = {
+            processFlowId:0,
+            productId:0,
+            processId:0,
+            operationNo:"",
+            cycleTime:"",
+
+            processName:"",
+            productName:"",
+            isActive:true,
+
+            showModal:false,
+            errormsg:"",
+            records:[],
+            productList:[],
+            processList:[],
+            isLoaded:false,
+            loginUser:this.props.profile
+        }
+       
+    }
+
+      
+    componentDidMount() {
+        this.getTableValues();
+//        console.log('props profile-->:'+this.props.apiurl)
+     }  
+    getTableValues(){
+        fetch(this.props.apiurl+"processflow/allProcessFlows")
+        .then(res => res.json())
+        .then( (result) => {
+              //  console.log("result-->"+JSON.stringify(result))
+                if(result.valid){
+                    this.setState({
+                        records: result.processFlowList,
+                        productList:result.productList,
+                        processList:result.processList,
+                    });
+                }else{}
+            },(error) => {
+            }
+        )
+    }
+
+    handleFormChange = event => {
+        this.setState({[event.target.name]: event.target.value});
+    };
+
+    handleCheckClick = () => {
+        this.setState({ isActive: !this.state.isActive });
+    }
+
     render() {
         return (
             <div>
@@ -14,28 +122,26 @@ export class PedProcessFlow extends Component {
                                 <div className="card-title">
                                          <div className="form-inline">
                                              <label htmlFor="inlineFormEmail" className="m-2">Product </label>
-                                            <select className="form-control form-control-sm">
-                                                <option>Product 1</option>
-                                                <option>Product 2</option>
-                                                <option>Product 3</option>
-                                                <option>Product 4</option>
-                                                <option>Product 5</option>
+                                            <select className="form-control form-control-sm" id="productId" name="productId" value={this.state.productId} onChange={this.handleFormChange}>
+                                                <option value="0">Select</option>
+                                                {this.state.productList.map(o => (
+                                                    <option value={o.productId}>{o.productName}</option>
+                                                ))}
                                             </select>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                        
                                             <label htmlFor="inlineFormEmail" className="m-2">Operation No <span class="text-danger">*</span></label>
-                                            <input type="email" className="form-control m-2 form-control-sm" id="inlineFormEmail" />
+                                            <input type="email" className="form-control m-2 form-control-sm" id="operationNo" name="operationNo" value= {this.state.operationNo} onChange={this.handleFormChange} placeholder="Operation No"  />
                                             <label htmlFor="inlineFormEmail" className="m-2">Process Name </label>
-                                            <select className="form-control form-control-sm">
-                                                <option>Process 1</option>
-                                                <option>Process 2</option>
-                                                <option>Process 3</option>
-                                                <option>Process 4</option>
-                                                <option>Process 5</option>
+                                            <select className="form-control form-control-sm" id="processId" name="processId" value={this.state.processId} onChange={this.handleFormChange}>
+                                                <option value="0">Select</option>
+                                                {this.state.processList.map(o => (
+                                                    <option value={o.processId}>{o.processName}</option>
+                                                ))}
                                             </select>
                                             <label htmlFor="inlineFormEmail" className="m-2">Cycle Time <span class="text-danger">*</span></label>
-                                            <input type="email" className="form-control m-2 form-control-sm" id="inlineFormEmail" />
-                                            <button type="button" className="btn btn-primary btn-flat btn-sm">Add &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                            <input type="email" className="form-control m-2 form-control-sm" id="cycleTime" name="cycleTime" value= {this.state.cycleTime} onChange={this.handleFormChange} placeholder="Cycle Time"  />
+                                            <button type="button" className="btn btn-primary btn-flat btn-sm">Save</button>
                                         </div>
 
                                 </div>
@@ -45,64 +151,16 @@ export class PedProcessFlow extends Component {
                             </div>
                             
                             <div className="card-body" style={{height: 500}}>
-                                <table className="table table-bordered table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                    <th>#ID</th>
-                                    <th>Operation No</th>
-                                    <th>Process Name</th>
-                                    <th>Cycle Time</th>
-                                    <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>10</td>
-                                        <td>Raw Material Cutting</td>
-                                        <td>30</td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>Delete</a>&nbsp;&nbsp;
-                                        </td>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>20</td>
-                                        <td>CENTERING</td>
-                                        <td>30</td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>Delete</a>&nbsp;&nbsp;
-                                        </td>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>30</td>
-                                        <td>DEEP HOLE DRILLING</td>
-                                        <td>30</td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>Delete</a>&nbsp;&nbsp;
-                                        </td>
-                                        
-                                    </tr>
+                                
 
-                                   
-                                   
-                                </tbody>
-                                </table>
+                                <ReactDatatable
+                                    config={this.config}
+                                    records={this.state.records}
+                                    columns={this.columns}/>
+
                             </div>
                             <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                </ul>
+                                
                             </div>
                             </div>
                             
@@ -117,4 +175,13 @@ export class PedProcessFlow extends Component {
     }
 }
 
-export default PedProcessFlow
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl
+    }
+  }
+export default connect(mapStateToProps)(PedProcessFlow);
+
+
+//export default PedProcessFlow

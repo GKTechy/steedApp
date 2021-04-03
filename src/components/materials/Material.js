@@ -175,12 +175,28 @@ export class Material extends Component {
  }
 
  saveClick= event =>{
-    //  console.log("state-->"+JSON.stringify(this.state))
+      console.log("state-->"+JSON.stringify(this.state))
       if(this.state.rawMaterialName === ""){
           this.setState({
               errormsg: "Enter Material Name"
           });
-      }else if(!this.state.isActive && this.state.rawMaterialId===0){
+      }else if(this.state.itemType === "0" || this.state.itemType === ""){
+        this.setState({
+            errormsg: "Select Item Type"
+        });
+    }else if(this.state.measurementType === "0" || this.state.measurementType === ""){
+        this.setState({
+            errormsg: "Select Measurement Type"
+        });
+    }else if(this.state.supplierId === "0" || this.state.supplierId === ""){
+        this.setState({
+            errormsg: "Select Supplier"
+        });
+    }else if(this.state.hsnCode === ""){
+        this.setState({
+            errormsg: "Enter HSN Code"
+        });
+    }else if(!this.state.isActive && this.state.rawMaterialId===0){
           this.setState({
               errormsg: "Select Active"
           });
@@ -242,7 +258,7 @@ export class Material extends Component {
                          
                       }else{
                          this.setState({ errormsg: data.responseMsg});
-                         this.resetClick();
+                        // this.resetClick();
                       } 
                   })
                   .catch(error => {
