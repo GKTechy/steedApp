@@ -50,7 +50,7 @@ export class Dealer extends Component {
                                 data-toggle="modal" data-target="#new_dealer"
                                 onClick={this.editRecord.bind(this, record, index)}
                                 style={{marginRight: '5px'}}>
-                                    <i className="fas fa-pencil-alt" ></i>Edit
+                                    <i className="fas fa-pencil-alt" ></i>&nbsp;Edit
                             </button>
                        
                     );
@@ -271,17 +271,7 @@ export class Dealer extends Component {
                                         </div>
 
                                 </div>
-                                <div className="card-tools">
-                                    <div className="input-group input-group-sm" style={{width: 350}}>
-                                    
-                                        <input type="text" name="table_search" className="form-control float-right" placeholder="Search" />
-                                        <div className="input-group-append">
-                                        <button type="submit" className="btn btn-default">
-                                            <i className="fas fa-search" />
-                                        </button>
-                                        </div>
-                                    </div>
-                                </div>
+                            
                             </div>
                             
                             <div className="card-body" style={{height: 500}}>

@@ -13,12 +13,24 @@ export class PedProduct extends Component {
                 text: "Name",
                 sortable: true
             },{
-                key: "productShortname",
-                text: "Short Name",
-                sortable: true
-            }  ,{
                 key: "productCode",
                 text: "Product Code",
+                sortable: true
+            },{
+                key: "orderCode",
+                text: "Order Code",
+                sortable: true
+            },{
+                key: "size",
+                text: "Size",
+                sortable: true
+            },{
+                key: "colors",
+                text: "Colors",
+                sortable: true
+            },{
+                key: "transmission",
+                text: "Transmission",
                 sortable: true
             } ,
             {
@@ -28,10 +40,10 @@ export class PedProduct extends Component {
                     return (
                             <button
                                 className="btn btn-info btn-sm"
-                               // data-toggle="modal" data-target="#uom-new-model"
+                                data-toggle="modal" data-target="#new_product"
                                 onClick={this.editRecord.bind(this, record, index)}
                                 style={{marginRight: '5px'}}>
-                                    <i className="fas fa-pencil-alt" ></i>Edit
+                                    <i className="fas fa-pencil-alt" ></i>&nbsp;Edit
                             </button>
                        
                     );
@@ -60,6 +72,21 @@ export class PedProduct extends Component {
             productCode:"",
             isActive:true,
 
+            orderCode:"",
+            colors:"",
+            size:"",
+            catgory:"",
+            transmission:"",
+            frame:"",
+            fork:"",
+            shifter:"",
+            brakes:"",
+            rim:"",
+            hub:"",
+            tires:"",
+            description:"",
+            image:"",
+     
             showModal:false,
             errormsg:"",
             records:[],
@@ -121,6 +148,21 @@ export class PedProduct extends Component {
             productShortname:"",
             productCode:"",
             isActive:true,
+            orderCode:"",
+            colors:"",
+            size:"",
+            catgory:"",
+            transmission:"",
+            frame:"",
+            fork:"",
+            shifter:"",
+            brakes:"",
+            rim:"",
+            hub:"",
+            tires:"",
+            description:"",
+           // image:"",
+            
             errormsg:"",
          });
     }
@@ -131,11 +173,13 @@ export class PedProduct extends Component {
               this.setState({
                   errormsg: "Enter Product Name"
               });
-          }else if(this.state.productShortname === ""){
-            this.setState({
-                errormsg: "Enter Product Short Name"
-            });
-        }  else if(!this.state.isActive && this.state.productId===0){
+          }
+        //   else if(this.state.productShortname === ""){
+        //     this.setState({
+        //         errormsg: "Enter Product Short Name"
+        //     });
+        // } 
+         else if(!this.state.isActive && this.state.productId===0){
               this.setState({
                   errormsg: "Select Active"
               });
@@ -152,6 +196,13 @@ export class PedProduct extends Component {
               const obj = {
                   'productName':this.state.productName,'productShortname':this.state.productShortname,'productCode':this.state.productCode,
                   "isActive":tempstatus,'productId':this.state.productId,
+                  "orderCode":this.state.orderCode,                  "colors":this.state.colors,
+                  "size":this.state.size,                  "catgory":this.state.catgory,
+                  "transmission":this.state.transmission,                  "frame":this.state.frame,
+                //   "fork":this.state.fork,                  "shifter":this.state.shifter,
+                //   "brakes":this.state.brakes,                  "rim":this.state.rim,
+                //   "hub":this.state.hub,                  "tires":this.state.tires, 
+                    "description":this.state.description,
                  
                   "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
   
@@ -197,6 +248,14 @@ export class PedProduct extends Component {
 
 
     render() {
+
+        const mystyle = {
+                leftAlign:{
+                    justifyContent: "left !important",
+                }
+          };
+
+
         return (
             <div>
                     <section className="content">
@@ -206,25 +265,14 @@ export class PedProduct extends Component {
                             <div className="card">
                             <div className="card-header">
                                 <div className="card-title">
-                                        <div className="form-inline">
-                                            <label htmlFor="inlineFormEmail" className="m-2">Name <span class="text-danger">*</span></label>
-                                            <input type="email" className="form-control m-2 form-control-sm" id="productName" name="productName" value= {this.state.productName} onChange={this.handleFormChange} placeholder="Name"  />
-                                            
-                                            <label htmlFor="inlineFormEmail" className="m-2">Short Name <span class="text-danger">*</span></label>
-                                            <input type="email" className="form-control m-2 form-control-sm" id="productShortname" name="productShortname" value= {this.state.productShortname} onChange={this.handleFormChange} placeholder="Short Name"  />
-                                            <label htmlFor="inlineFormEmail" className="m-2">Code <span class="text-danger">*</span></label>
-                                            <input type="email" className="form-control m-2 form-control-sm" id="productCode" name="productCode" value= {this.state.productCode} onChange={this.handleFormChange} placeholder="Code"  />
-                                            <label htmlFor="inlineFormEmail" className="m-2">is Active<span class="text-danger">*</span></label>
-                                            <input className="form-check-input" type="checkbox" checked={this.state.isActive}  onChange={this.handleCheckClick}/>
-                                            
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button type="button" className="btn btn-primary btn-sm m-2" onClick={this.saveClick}>Save</button>
-                                            <button type="button" className="btn btn-warning btn-sm m-2" onClick={this.resetClick}>Reset</button>
-                                            <span className="text-danger">{this.state.errormsg}</span>
+                                        <div className="input-group input-group-sm">
+                                            <span className="input-group-append">
+                                                <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#new_product">Create New  Product&nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                            </span>
                                         </div>
 
                                 </div>
-                               
+                              
                             </div>
                             <div className="card-body" style={{height: 500}}>
                                 <ReactDatatable
@@ -243,6 +291,77 @@ export class PedProduct extends Component {
                        
                     </div>
             </section>
+
+            <div className="modal fade" id="new_product">
+                    <div className="modal-dialog modal-xl">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">New Product</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                                <div className="container-fluid">
+                                    <div className="form-inline">
+
+                                        
+                                        <label htmlFor="code"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Product Code<span class="text-danger">*</span></label>
+                                        <input type="text"   className="form-control form-control-sm m-2 col-sm-3" id="productCode" name="productCode" value={this.state.productCode} onChange={this.handleFormChange} />
+                                        <label htmlFor="code"   style={mystyle.leftAlign}className="m-2 col-sm-2 font-weight-normal control-label" >Product Name<span class="text-danger">*</span></label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="productName" name="productName" value={this.state.productName} onChange={this.handleFormChange} />
+                                        
+                                        <label htmlFor="name"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Order Code</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="orderCode" name="orderCode" value={this.state.orderCode} onChange={this.handleFormChange} />
+                                        <label htmlFor="name"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Colors</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="colors" name="colors" value={this.state.colors} onChange={this.handleFormChange}/>
+                                        
+                                        <label htmlFor="name"   style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Size</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="size" name="size" value={this.state.size} onChange={this.handleFormChange} />
+                                        <label htmlFor="name"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal" >Catgory</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="catgory" name="catgory" value={this.state.catgory} onChange={this.handleFormChange} />
+                                       
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Transmission</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="transmission" name="transmission" value={this.state.transmission} onChange={this.handleFormChange} />
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Frame</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="frame" name="frame" value={this.state.frame} onChange={this.handleFormChange} />
+                                       
+                                        {/* <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Fork</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="fork" name="fork" value={this.state.fork} onChange={this.handleFormChange} />
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Shifter</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="shifter" name="shifter" value={this.state.shifter} onChange={this.handleFormChange} />
+                                       
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Brakes</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="brakes" name="brakes" value={this.state.brakes} onChange={this.handleFormChange} />
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Rim</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="rim" name="rim" value={this.state.rim} onChange={this.handleFormChange} />
+                          
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Hub</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="hub" name="hub" value={this.state.hub} onChange={this.handleFormChange} />
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Tires</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="tires" name="tires" value={this.state.tires} onChange={this.handleFormChange} /> */}
+
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Description</label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="description" name="description" value={this.state.description} onChange={this.handleFormChange} />
+                                        {/* <label htmlFor="name" className="m-2 col-sm-2" >image<span class="text-danger">*</span></label>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="image" name="image" value={this.state.image} onChange={this.handleFormChange} /> */}
+
+
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is Active<span class="text-danger">*</span></label>
+                                        <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick} />
+                                       
+                                    </div>
+                            </div>
+                         </div>
+                        <div className="modal-footer justify-content-between">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            <span className="text-danger">{this.state.errormsg}</span>
+                            <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         )
     }

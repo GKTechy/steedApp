@@ -1,15 +1,105 @@
 import React, { Component } from 'react'
 
+
+import { connect } from "react-redux";
+import ReactDatatable from '@ashvin27/react-datatable';
+
+
+
 export class DealerOrder extends Component {
 
     constructor(props) {
+        
         super(props)
-    
-        this.state = {
-             
+        
+     
+
+        this.columns = [
+            {
+                key: "orderNo",
+                text: "Order No",
+                sortable: true
+            },{
+                key: "orderDate",
+                text: "Date",
+                sortable: true
+            },{
+                key: "dealerName",
+                text: "Dealer Name",
+                sortable: true
+            } ,{
+                key: "productName",
+                text: "Product",
+                sortable: true
+            },
+            {
+                key: "colorCode",
+                text: "Color",
+                sortable: true
+            },{
+                key: "qty",
+                text: "Qty",
+                sortable: true
+            },
+            {
+                key: "action",
+                text: "Action",
+                cell: (record, index) => {
+                    return (
+                            <button
+                                className="btn btn-info btn-sm"
+                                data-toggle="modal" data-target="#new_dealer"
+                                onClick={this.editRecord.bind(this, record, index)}
+                                style={{marginRight: '5px'}}>
+                                    <i className="fas fa-pencil-alt" ></i>&nbsp;Edit
+                            </button>
+                       
+                    );
+                }
+            }
+        ];
+
+        this.config = {
+            key_column: 'dealerId',
+            page_size: 10,
+            length_menu: [10, 20, 50],
+            show_filter: true,
+            show_pagination: true,
+            pagination: 'advance',
+            filename: "Dealer",
+            button: {
+                excel: true,
+                print: true,
+                csv: true
+            }
         }
+        this.state = {
+            dealerId:0,
+            dealerName:"",
+            dealerCode:"",
+            dealerPhone:"",
+            dealerContactPerson:"",
+            mobile:"",
+            email:"",
+            fax:"",
+            gst:"",
+            pan:"",
+            remarks:"",
+            isActive:true,
+
+            address:"",
+            city:"",
+            state:"",
+            pinCode:"",
+
+            showModal:false,
+            errormsg:"",
+            records:[],
+            isLoaded:false,
+            loginUser:this.props.profile
+        }
+       
     }
-    
 
     render() {
         return (
@@ -19,71 +109,23 @@ export class DealerOrder extends Component {
                         <div className="row">
                         <div className="col-12">
                             <div className="card">
-                            <div className="card-header">
-                                 <div className="row">
-                                    <div className="col-8">
-                                         <form className="form-inline">
-                                            <label htmlFor="exampleSelectRounded0" className="my-1 mr-2" >Dealer</label>
-                                            <select className="form-control form-control-sm" id="exampleSelectRounded0">
-                                                <option>Value 1</option>
-                                                <option>Value 2</option>
-                                                <option>Value 3Value 3Value 3Value 3</option>
-                                            </select>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <label htmlFor="exampleSelectRounded0" className="my-1 mr-2" >Product</label>
-                                            <select className="form-control form-control-sm" id="exampleSelectRounded0">
-                                                <option>Product 1</option>
-                                                <option>Product 2</option>
-                                                <option>Product 444444444444444</option>
-                                            </select>
-
-                                        </form>
-                                     </div>
-                                    </div>
-                                    <div className="row my-2">
-                                        <form className="form-inline">
-                                            <label className="my-1 mr-2" for="inlineFormCustomSelectPref">PO Doc No</label>
-                                            <input type="text" class="form-control form-control-sm" id="validationDefault05" placeholder="PO Doc No" required />&nbsp;&nbsp;&nbsp;
-                                            <label className="my-1 mr-2" for="inlineFormCustomSelectPref">To No</label>
-                                            <input type="text" class="form-control form-control-sm" id="validationDefault05" placeholder="PO Doc No" required />&nbsp;&nbsp;&nbsp;
-
-                                            <label className="my-1 mr-2" for="inlineFormCustomSelectPref">PO Doc Date</label>
-                                            <input type="date" class="form-control form-control-sm" id="validationDefault05" placeholder="PO Doc No" required />&nbsp;&nbsp;&nbsp;
-                                            <label className="my-1 mr-2" for="inlineFormCustomSelectPref">To Date</label>
-                                            <input type="date" class="form-control form-control-sm" id="validationDefault05" placeholder="PO Doc No" required />
-
-                                        </form>    
-                                    </div> 
-                                   
-                            </div>
+                                <div className="card-header">
+                                    <div className="card-title">
+                                            <div className="input-group input-group-sm">
+                                                <span className="input-group-append">
+                                                <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#new_order">Create New Order &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                </div>
                             
                             <div className="card-body" style={{height: 500}}>
-                                <table className="table table-bordered table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                    <th>#ID</th>
-                                    <th>Doc No</th>
-                                    <th>Doc Date</th>
-                                    <th>PO No</th>
-                                    <th>Customer</th>
-                                    <th>Consign</th>
-                                    <th>Product</th>
-                                    <th>Cs NO</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                   
-                                 
-                                   
-                                   
-                                </tbody>
-                                </table>
+                                 <ReactDatatable
+                                    config={this.config}
+                                    records={this.state.records}
+                                    columns={this.columns}/>
                             </div>
-                            <div class="card-footer clearfix">
-                               
-                            </div>
+                            
                             </div>
                             
                         </div>
@@ -97,4 +139,13 @@ export class DealerOrder extends Component {
     }
 }
 
-export default DealerOrder
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl
+    }
+  }
+
+ export default connect(mapStateToProps)(DealerOrder);
+
+// export default DealerOrder

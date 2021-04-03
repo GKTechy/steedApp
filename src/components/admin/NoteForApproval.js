@@ -45,7 +45,7 @@ export class NoteForApproval extends Component {
                                 className="btn btn-info btn-sm"
                                 onClick={this.editRecord.bind(this, record, index)}
                                 style={{marginRight: '5px'}} data-toggle="modal" data-target="#note-model">
-                                    <i className="fas fa-pencil-alt"></i>Edit
+                                    <i className="fas fa-pencil-alt"></i>&nbsp;Edit
                             </button>
                        
                     );

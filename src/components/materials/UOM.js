@@ -43,7 +43,7 @@ export class UOM extends Component {
                                 data-toggle="modal" data-target="#uom-new-model"
                                 onClick={this.editRecord.bind(this, record, index)}
                                 style={{marginRight: '5px'}}>
-                                    <i className="fas fa-pencil-alt" ></i>Edit
+                                    <i className="fas fa-pencil-alt" ></i>&nbsp;Edit
                             </button>
                        
                     );
