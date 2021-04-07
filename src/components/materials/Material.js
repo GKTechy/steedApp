@@ -87,6 +87,9 @@ export class Material extends Component {
             supplierId:"",
             hsnCode:"",
             isBom:"",
+            isBasic:false,
+            isPremium:false,
+            isCommon:false,
             isActive:true,
 
             supplierName:"",
@@ -127,8 +130,29 @@ export class Material extends Component {
         this.setState({ isActive: !this.state.isActive });
     }
     handlebomClick= () => {
-        this.setState({ isBom: !this.state.isBom });
+        this.setState({ isBom: !this.state.isBom },()=>{
+            if(!this.state.isBom){
+                this.setState({ 
+                    isBasic:false,
+                    isPremium:false,
+                    isCommon:false
+                 });
+            }
+        });
     }
+
+    handlebasicClick= () => {
+        this.setState({ isBasic: !this.state.isBasic });
+    }
+
+    handlecommonClick= () => {
+        this.setState({ isCommon: !this.state.isCommon });
+    }
+
+    handlepremiumClick= () => {
+        this.setState({ isPremium: !this.state.isPremium });
+    }
+
   
     resetClick= () => {
         this.setState({ 
@@ -146,6 +170,9 @@ export class Material extends Component {
             isBom:"",
            isActive:true,
            errormsg:"",
+           isBasic:false,
+            isPremium:false,
+            isCommon:false,
         });
    }
    editRecord = (record, index) => {
@@ -170,12 +197,16 @@ export class Material extends Component {
         supplierId:record.supplierId,
         hsnCode:record.hsnCode,
         isBom:record.isBom,
-        isActive:tempstatus
+        isActive:tempstatus,
+        isBasic:record.isBasic,
+        isPremium:record.isPremium,
+        isCommon:record.isCommon,
+        
      });
  }
 
  saveClick= event =>{
-      console.log("state-->"+JSON.stringify(this.state))
+      //console.log("state-->"+JSON.stringify(this.state))
       if(this.state.rawMaterialName === ""){
           this.setState({
               errormsg: "Enter Material Name"
@@ -227,6 +258,7 @@ export class Material extends Component {
               'measurementType':this.state.measurementType,'remarks':this.state.remarks, 
               'units':this.state.units,'price':this.state.price,'referenceLevel':this.state.referenceLevel,'supplierId':this.state.supplierId,'hsnCode':this.state.hsnCode,'isBom':tempstatus1   , 
               "isActive":tempstatus,'rawMaterialId':this.state.rawMaterialId,
+              'isBasic':this.state.isBasic,'isCommon':this.state.isCommon,'isPremium':this.state.isPremium,
              
               "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
 
@@ -352,11 +384,44 @@ export class Material extends Component {
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="hsnCode" name="hsnCode" value={this.state.hsnCode} onChange={this.handleFormChange} />
                           
                                       
-                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is Active<span class="text-danger">*</span></label>
-                                        <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick} />
-                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is BOM<span class="text-danger">*</span></label>
-                                        <input type="checkbox" className="form-check-input m-1" checked={this.state.isBom}  onChange={this.handlebomClick} />
+
+
                                     </div>
+                                <form className="form-inline">
+                                        <div className="form-check row">
+                                            <input className="form-check-input" type="checkbox" id={this.state.isActive}  checked={this.state.isActive}  onChange={this.handleCheckClick}/>
+                                            <label className="form-check-label" htmlFor="inlineFormCheck">
+                                                Is Active
+                                            </label>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <input className="form-check-input" type="checkbox" id={this.state.isBom}  checked={this.state.isBom}  onChange={this.handlebomClick} />
+                                            <label className="form-check-label" htmlFor="inlineFormCheck">
+                                                Is BOM
+                                            </label>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                        {
+                                            this.state.isBom ?
+                                            <>
+                                                <input className="form-check-input" type="checkbox" id={this.state.isBasic}  checked={this.state.isBasic}  onChange={this.handlebasicClick} />
+                                                <label className="form-check-label" htmlFor="inlineFormCheck">
+                                                            Basic
+                                                </label>
+                                                &nbsp;&nbsp;
+                                                <input className="form-check-input" type="checkbox" id={this.state.isCommon}  checked={this.state.isCommon}  onChange={this.handlecommonClick}  />
+                                                <label className="form-check-label" htmlFor="inlineFormCheck">
+                                                            Premium
+                                                </label> &nbsp;&nbsp;
+                                                <input className="form-check-input" type="checkbox" id={this.state.isPremium}  checked={this.state.isPremium}  onChange={this.handlepremiumClick}  />
+                                                <label className="form-check-label" htmlFor="inlineFormCheck">
+                                                            Common
+                                                </label>
+                                            </>
+                                        :""}
+
+                                        </div>
+                                </form>
+
+
                             </div>
                          </div>
                         <div className="modal-footer justify-content-between">

@@ -18,8 +18,8 @@ const initialState = {
       profileImage: '',
       subscribenewsletter: false
     },
-  //  apiurl:"http://localhost:8080/steedapp/",
-    apiurl:"http://139.59.8.226:8080/steedapp/",
+    apiurl:"http://localhost:8080/steedapp/",
+  //  apiurl:"http://139.59.8.226:8080/steedapp/",
 }
 
 

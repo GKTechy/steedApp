@@ -20,9 +20,9 @@ export class CommercialAdmin extends Component {
                             <li className="nav-item">
                             <a className="nav-link" id="custom-tabs-two-profile-tab" data-toggle="pill" href="#custom-tabs-two-profile" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">Dealer Order</a>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                             <a className="nav-link" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#custom-tabs-two-messages" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">Color Code</a>
-                            </li>
+                            </li> */}
                         </ul>
                         </div>
                         <div className="card-body" >
@@ -33,9 +33,9 @@ export class CommercialAdmin extends Component {
                             <div className="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
                                 <DealerOrder/>
                             </div>
-                            <div className="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
+                            {/* <div className="tab-pane fade" id="custom-tabs-two-messages" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
                                 <ColorCode/>
-                            </div>
+                            </div> */}
                
                         </div>
                         </div>

@@ -318,7 +318,7 @@ export class PedProduct extends Component {
                                         
                                         <label htmlFor="name"   style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Size</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="size" name="size" value={this.state.size} onChange={this.handleFormChange} />
-                                        <label htmlFor="name"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal" >Catgory</label>
+                                        <label htmlFor="name"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal" >Varient</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="catgory" name="catgory" value={this.state.catgory} onChange={this.handleFormChange} />
                                        
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Transmission</label>
