@@ -1,6 +1,63 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+import ReactDatatable from '@ashvin27/react-datatable';
 
 export class Bom extends Component {
+
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            name:"",
+            shortName:"",
+            varientId:0,
+            isActive:true,
+            showModal:false,
+            errormsg:"",
+            productList:[],
+            productId:0,
+            isLoaded:false,
+            loginUser:this.props.profile
+        }
+    }
+
+    componentDidMount() {
+        this.getTableValues();
+//        console.log('props profile-->:'+this.props.apiurl)
+     }  
+    getTableValues(){
+        fetch(this.props.apiurl+"billOfMaterial/allBillOfMaterials")
+        .then(res => res.json())
+        .then( (result) => {
+               // console.log("result-->"+JSON.stringify(result))
+                if(result.valid){
+                    this.setState({
+                        productList: result.productList
+                    });
+                }else{}
+            },(error) => {
+            }
+        )
+    }
+    handleProductChange = event => {
+        this.setState({[event.target.name]: event.target.value});
+        const params={
+            productId:this.state.productId
+        }
+        fetch(this.props.apiurl+"billOfMaterial/productBoms",{params})
+        .then(res => res.json())
+        .then( (result) => {
+               // console.log("result-->"+JSON.stringify(result))
+                if(result.valid){
+                    this.setState({
+                        productList: result.productList
+                    });
+                }else{}
+            },(error) => {
+            }
+        )
+    };
+    
     render() {
         return (
             <div>
@@ -11,86 +68,32 @@ export class Bom extends Component {
                         <div className="col-12">
                             <div className="card">
                             <div className="card-header">
-                                <div className="card-title">
-                                         <div className="form-inline">
-                                             <label htmlFor="inlineFormEmail" className="m-2">Product </label>
-                                            <select className="form-control form-control-sm">
-                                                <option>Product 1</option>
-                                                <option>Product 2</option>
-                                                <option>Product 3</option>
-                                                <option>Product 4</option>
-                                                <option>Product 5</option>
-                                            </select>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                         
-                                            <label htmlFor="inlineFormEmail" className="m-2">Copy From </label>
-                                            <select className="form-control form-control-sm">
-                                                <option>Process 1</option>
-                                                <option>Process 2</option>
-                                                <option>Process 3</option>
-                                                <option>Process 4</option>
-                                                <option>Process 5</option>
-                                            </select>
-                                            &nbsp;&nbsp;&nbsp;
-                                            <button type="button" className="btn btn-primary btn-flat btn-sm">Search &nbsp;&nbsp;<i class="fas fa-search"></i></button>
-                                        </div>
 
-                                </div>
-                                <div className="card-tools">
+                                <form className="form-inline">
+                                    <div className="form-group">
+                                        <label htmlFor="inlineFormEmail " className="font-weight-normal">Product </label>&nbsp;&nbsp;
+                                        <select className="custom-select" id="productId" name="productId" value={this.state.productId} onChange={this.handleProductChange}>
+                                        <option value="0">Select Product</option>
+                                        {this.state.productList.map(o => (
+                                            <option value={o.productId}>{o.productCode+"_"+o.productName }</option>
+                                        ))}
+                                    </select>
+                                    </div>
+                                </form>
+
+                                        
+                                         
                                    
-                                </div>
+                                
                             </div>
                             
                             <div className="card-body" style={{height: 500}}>
-                                <table className="table table-bordered table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                    <th style={{width: 30}}>#ID</th>
-                                    <th>Item Type</th>
-                                    <th>Item Name</th>
-                                    <th>Qty</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>AC</td>
-                                        <td>AC00001-PIPE</td>
-                                        <td><input type="text" name="table_search" className="form-control  col-3" placeholder="Qty Nos" /> </td>
-                                       
-                                        
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>AC</td>
-                                        <td>AC00002-ELASTIC</td>
-                                        <td><input type="text" name="table_search" className="form-control col-3" placeholder="Qty Nos" /> </td>
-                                   
-                                        
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>AC</td>
-                                        <td>AC00001-SPECIAL STUD</td>
-                                        <td><input type="text" name="table_search" className="form-control col-3" placeholder="Qty Nos" /> </td>
-                                     
-                                        
-                                    </tr>
-
-                                   
-                                   
-                                </tbody>
-                                </table>
+                                <ReactDatatable
+                                    config={this.config}
+                                    records={this.state.records}
+                                    columns={this.columns}/>
                             </div>
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                </ul>
-                            </div>
+                            
                             </div>
                             
                         </div>
@@ -104,4 +107,14 @@ export class Bom extends Component {
     }
 }
 
-export default Bom
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl
+    }
+  }
+
+export default connect(mapStateToProps)(Bom);
+
+//export default Bom
+

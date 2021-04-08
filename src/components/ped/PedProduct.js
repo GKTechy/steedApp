@@ -275,16 +275,13 @@ export class PedProduct extends Component {
 
                                 </div>
                               
-                            </div>
-                            <div className="card-body" style={{height: 500}}>
-                                <ReactDatatable
-                                    config={this.config}
-                                    records={this.state.records}
-                                    columns={this.columns}/>
-                            </div>
-                            <div class="card-footer clearfix">
-                               
-                            </div>
+                                </div>
+                                <div className="card-body" style={{height: 500}}>
+                                    <ReactDatatable
+                                        config={this.config}
+                                        records={this.state.records}
+                                        columns={this.columns}/>
+                                </div>
                             </div>
                             
                         </div>
