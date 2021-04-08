@@ -75,7 +75,7 @@ export class PedProduct extends Component {
             orderCode:"",
             colors:"",
             size:"",
-            catgory:"",
+            varientId:"",
             transmission:"",
             frame:"",
             fork:"",
@@ -90,6 +90,7 @@ export class PedProduct extends Component {
             showModal:false,
             errormsg:"",
             records:[],
+            productVarientList:[],
             isLoaded:false,
             loginUser:this.props.profile
         }
@@ -108,7 +109,8 @@ export class PedProduct extends Component {
               //  console.log("result-->"+JSON.stringify(result))
                 if(result.valid){
                     this.setState({
-                        records: result.productList
+                        records: result.productList,
+                        productVarientList:result.productVarientList,
                     });
                 }else{}
             },(error) => {
@@ -151,7 +153,7 @@ export class PedProduct extends Component {
             orderCode:"",
             colors:"",
             size:"",
-            catgory:"",
+            varientId:"",
             transmission:"",
             frame:"",
             fork:"",
@@ -197,7 +199,7 @@ export class PedProduct extends Component {
                   'productName':this.state.productName,'productShortname':this.state.productShortname,'productCode':this.state.productCode,
                   "isActive":tempstatus,'productId':this.state.productId,
                   "orderCode":this.state.orderCode,                  "colors":this.state.colors,
-                  "size":this.state.size,                  "catgory":this.state.catgory,
+                  "size":this.state.size,                  "varientId":this.state.varientId,
                   "transmission":this.state.transmission,                  "frame":this.state.frame,
                 //   "fork":this.state.fork,                  "shifter":this.state.shifter,
                 //   "brakes":this.state.brakes,                  "rim":this.state.rim,
@@ -318,9 +320,14 @@ export class PedProduct extends Component {
                                         
                                         <label htmlFor="name"   style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Size</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="size" name="size" value={this.state.size} onChange={this.handleFormChange} />
-                                        <label htmlFor="name"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal" >Varient</label>
-                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="catgory" name="catgory" value={this.state.catgory} onChange={this.handleFormChange} />
+                                        <label htmlFor="name"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Varient</label>
                                        
+                                        <select className="form-control form-control-sm m-2 col-sm-3" id="varientId" name="varientId" value={this.state.varientId} onChange={this.handleFormChange}>
+                                                <option value="0">Select</option>
+                                                {this.state.productVarientList.map(o => (
+                                                    <option value={o.varientId}>{o.name}</option>
+                                                ))}
+                                            </select>
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Transmission</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="transmission" name="transmission" value={this.state.transmission} onChange={this.handleFormChange} />
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Frame</label>

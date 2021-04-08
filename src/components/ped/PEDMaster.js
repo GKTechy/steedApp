@@ -4,6 +4,7 @@ import Bom from './Bom'
 import PedProcess from './PedProcess'
 import PedProcessFlow from './PedProcessFlow'
 import PedProduct from './PedProduct'
+import PedProuductVarient from './PedProuductVarient'
 
 export class PEDMaster extends Component {
     render() {
@@ -23,6 +24,9 @@ export class PEDMaster extends Component {
                                 <a className="nav-link" id="custom-tabs-two-profile-tab" data-toggle="pill" href="#custom-tabs-two-processFlow" role="tab" aria-controls="custom-tabs-two-profile" aria-selected="false">ProcessFlow</a>
                                 </li>
                                 <li className="nav-item">
+                                <a className="nav-link" id="custom-tabs-two-varient-tab" data-toggle="pill" href="#custom-tabs-two-varient" role="tab" aria-controls="custom-tabs-two-varient" aria-selected="false">Product Varient</a>
+                                </li>
+                                <li className="nav-item">
                                 <a className="nav-link" id="custom-tabs-two-messages-tab" data-toggle="pill" href="#custom-tabs-product" role="tab" aria-controls="custom-tabs-two-messages" aria-selected="false">Products</a>
                                 </li>
                                 <li className="nav-item">
@@ -38,6 +42,9 @@ export class PEDMaster extends Component {
                                 </div>
                                 <div className="tab-pane fade" id="custom-tabs-two-processFlow" role="tabpanel" aria-labelledby="custom-tabs-two-profile-tab">
                                     <PedProcessFlow/>
+                                </div>
+                                <div className="tab-pane fade" id="custom-tabs-two-varient" role="tabpanel" aria-labelledby="custom-tabs-two-varient-tab">
+                                    <PedProuductVarient/>
                                 </div>
                                 <div className="tab-pane fade" id="custom-tabs-product" role="tabpanel" aria-labelledby="custom-tabs-two-messages-tab">
                                     <PedProduct/>
