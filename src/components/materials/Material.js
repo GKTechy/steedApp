@@ -355,7 +355,7 @@ export class Material extends Component {
                                             <option value="0">Select</option>
                                             <option value="Base">Base</option>
                                             <option value="Premium">Premium</option>
-                                            <option>M 3</option>
+                                            
                                         </select>
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Remarks</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="remarks" name="remarks" value={this.state.remarks} onChange={this.handleFormChange} />

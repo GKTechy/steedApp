@@ -6,7 +6,49 @@ export class Bom extends Component {
 
     constructor(props) {
         super(props)
-    
+        
+        this.columns = [
+            {
+                key: "rowSelected",
+                text: "#",
+                align: "right",
+                sortable: false,
+                width: 10,
+                cell: (record, index) => {
+                    return (
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="rowSelected" id="rowSelected" onClick={ (e)=>this.selectRecord(e,index)} />
+                        </div>
+                       
+                    );
+                }
+            },
+            {
+                key: "prouductName",
+                text: "Name",
+                sortable: true,
+                width: 300,
+            },{
+                key: "measurementType",
+                text: "Measurement Type",
+                sortable: true,
+                width: 300,
+            },
+            {
+                key: "qty",
+                text: "Qty",
+                width: 100,
+                cell: (record, index) => {
+                    return (
+                        <>
+                            <input type="text" className="form-control m-2 form-control-sm" name="qty" id="qty" value= {this.state.qty} onChange={ (e)=>this.editRecord(e,index)} />
+                        </>
+                       
+                    );
+                }
+            }
+        ];
+
         this.state = {
             name:"",
             shortName:"",
@@ -15,6 +57,7 @@ export class Bom extends Component {
             showModal:false,
             errormsg:"",
             productList:[],
+            records:[],
             productId:0,
             isLoaded:false,
             loginUser:this.props.profile
@@ -41,16 +84,14 @@ export class Bom extends Component {
     }
     handleProductChange = event => {
         this.setState({[event.target.name]: event.target.value});
-        const params={
-            productId:this.state.productId
-        }
-        fetch(this.props.apiurl+"billOfMaterial/productBoms",{params})
+        
+        fetch(this.props.apiurl+"billOfMaterial/productBoms?productId="+this.state.productId)
         .then(res => res.json())
         .then( (result) => {
                // console.log("result-->"+JSON.stringify(result))
                 if(result.valid){
                     this.setState({
-                        productList: result.productList
+                        records: result.bomProductList
                     });
                 }else{}
             },(error) => {
@@ -58,6 +99,22 @@ export class Bom extends Component {
         )
     };
     
+    editRecord = (e,index) => {
+        const { records } = this.state;
+        records[index].qty = e.target.value;
+      this.setState({ records: records },()=>{ 
+        });
+ 
+     }
+     selectRecord = (e,index) => {
+           const { records } = this.state;
+        //   console.log("check-->"+e.target.checked)
+           records[index].rowSelected = !e.target.value;
+           this.setState({ records: records },()=>{ 
+             });
+    
+    }
+
     render() {
         return (
             <div>

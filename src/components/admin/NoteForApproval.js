@@ -26,11 +26,11 @@ export class NoteForApproval extends Component {
                 text: "Title",
                 sortable: true
             },
-            // {
-            //     key: "nfaDescription",
-            //     text: "Description",
-            //     sortable: true
-            // },
+             {
+                 key: "status",
+                 text: "Status",
+                 sortable: true
+             },
             {
                 key: "isActive",
                 text: "Active",
@@ -73,6 +73,7 @@ export class NoteForApproval extends Component {
             nfaDocumentNo:"",
             nfaDocumentDate:"",
             nfaTitle:"",
+            status:0,
             nfaId:0,
             active:true,
             showModal:false,
@@ -82,6 +83,18 @@ export class NoteForApproval extends Component {
             loginUser:this.props.profile
         }
     }
+
+    resetClick  = () =>{
+        this.setState({
+            nfaDescription: 'Welcome to Steed Application',
+            nfaDocumentNo:"",
+            nfaDocumentDate:"",
+            nfaTitle:"",
+            status:0,
+            nfaId:0,
+         });
+    }
+
 
     componentDidMount() {
         this.getTableValues();
@@ -124,6 +137,7 @@ export class NoteForApproval extends Component {
             nfaDocumentDate:record.nfaDocumentDate,
             nfaTitle:record.nfaTitle,
             nfaId:record.nfaId,
+            status:record.status,
              active:tempstatus
          });
  
@@ -146,7 +160,12 @@ export class NoteForApproval extends Component {
             this.setState({
                 errormsg: "Enter Description"
             });
+        }else if(this.state.status === "0" || this.state.status === 0){
+            this.setState({
+                errormsg: "Select Action"
+            });
         }
+        
         // else if(!this.state.active && this.state.nfaId===0){
         //     this.setState({
         //         errormsg: "Select Active"
@@ -163,7 +182,7 @@ export class NoteForApproval extends Component {
             const obj = {
                 'nfaDocumentNo':this.state.nfaDocumentNo,'nfaDocumentDate':this.state.nfaDocumentDate, 
                 'nfaTitle':this.state.nfaTitle, 'nfaDescription':this.state.nfaDescription,  
-                 "isActive":tempstatus,'nfaId':this.state.nfaId,
+                 "isActive":tempstatus,'nfaId':this.state.nfaId,'status':this.state.status,
                  "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
 
                  ///console.log("--obj--"+JSON.stringify(obj))
@@ -238,21 +257,11 @@ export class NoteForApproval extends Component {
                                     <div className="input-group input-group-sm">
                                                 {/* <input type="text" className="form-control" placeholder="Enter Role..." /> */}
                                                 <span className="input-group-append">
-                                                    <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#note-model">Create New Note &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                                    <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#note-model" onClick={this.resetClick}>Create New Note &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
                                                 </span>
                                             </div>
                                     </div>
-                                    <div className="card-tools">
-                                        <div className="input-group input-group-sm" style={{width: 350}}>
-
-                                            <input type="text" name="table_search" className="form-control float-right" placeholder="Search" />
-                                            <div className="input-group-append">
-                                            <button type="submit" className="btn btn-default">
-                                                <i className="fas fa-search" />
-                                            </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                 </div>
                             
                             <div className="card-body" >
@@ -288,13 +297,19 @@ export class NoteForApproval extends Component {
             
                        <div className="container-fluid">
                             <form className="form-inline">
-                                <label htmlFor="nfaDocumentNo" className="m-2">Document No <span class="text-danger">*</span></label>
+                                <label htmlFor="nfaDocumentNo" className="m-2 font-weight-normal">Document No <span class="text-danger">*</span></label>
                                 <input type="text" className="form-control m-2 form-control-sm" name="nfaDocumentNo" id="nfaDocumentNo" value= {this.state.nfaDocumentNo} onChange={this.handleFormChange} />
-                                <label htmlFor="nfaDocumentDate" className="m-2">Document Date <span class="text-danger">*</span></label>
+                                <label htmlFor="nfaDocumentDate" className="m-2 font-weight-normal">Document Date <span class="text-danger">*</span></label>
                                 <input type="date" className="form-control m-2 form-control-sm" name="nfaDocumentDate" id="nfaDocumentDate" value= {this.state.nfaDocumentDate} onChange={this.handleFormChange}/>
-                                <label htmlFor="nfaTitle" className="m-2">Title <span class="text-danger">*</span></label>
+                                <label htmlFor="nfaTitle" className="m-2 font-weight-normal">Title <span class="text-danger">*</span></label>
                                 <input type="text" className="form-control m-2 form-control-sm" name="nfaTitle" id="nfaTitle" value= {this.state.nfaTitle} onChange={this.handleFormChange}/>
-                                <label htmlFor="nfaTitle" className="m-2"> <span className="text-danger">{this.state.errormsg}</span></label>
+                                <label htmlFor="exampleSelectRounded" class="m-2 font-weight-normal">Action</label>
+                                <select className="custom-select "  id="status" name="status" value={this.state.status} onChange={this.handleFormChange} >
+                                    <option value="0">Select</option>
+                                    <option value="Prepared">Prepared</option>
+                                    <option value="Approved">Approved</option>   
+                                </select>
+                                
                             </form>
                                 <div className="row">
                                 <div className="col-12">
@@ -345,6 +360,7 @@ export class NoteForApproval extends Component {
                             </div>
                             <div className="modal-footer justify-content-between">
                                 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                 <span className="text-danger">{this.state.errormsg}</span>
                                 <button type="button" className="btn btn-primary"  onClick={this.saveClick}>Save</button>
                             </div>
                             </div>

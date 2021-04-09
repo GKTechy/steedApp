@@ -63,7 +63,6 @@ export class ManageUsers extends Component {
                                         <td className="project-actions ">
                                             <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>Roles</a>&nbsp;&nbsp;
                                             <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>Delete</a>&nbsp;&nbsp;
                                             <a className="btn btn-warning btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-key"></i>Change Password</a>
                                         </td>
                                     </tr>
@@ -74,7 +73,6 @@ export class ManageUsers extends Component {
                                         <td className="project-actions ">
                                             <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>Roles</a>&nbsp;&nbsp;
                                             <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>Delete</a>&nbsp;&nbsp;
                                             <a className="btn btn-warning btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-key"></i>Change Password</a>
                                         </td>
                                     </tr>
@@ -85,7 +83,6 @@ export class ManageUsers extends Component {
                                         <td className="project-actions ">
                                             <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>Roles</a>&nbsp;&nbsp;
                                             <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>Delete</a>&nbsp;&nbsp;
                                             <a className="btn btn-warning btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-key"></i>Change Password</a>
                                         </td>
                                     </tr>
@@ -96,7 +93,6 @@ export class ManageUsers extends Component {
                                         <td className="project-actions ">
                                             <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>Roles</a>&nbsp;&nbsp;
                                             <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-trash"></i>Delete</a>&nbsp;&nbsp;
                                             <a className="btn btn-warning btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-key"></i>Change Password</a>
                                         </td>
                                     </tr>

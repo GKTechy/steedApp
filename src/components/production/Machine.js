@@ -344,7 +344,7 @@ export class Machine extends Component {
                                 <label htmlFor="name" className="m-2 col-sm-2" style={leftAlign}>Commissioning Date</label>
                                 <input type="date" className="form-control m-2 col-sm-3 form-control-sm " name="machineCommissioningDate" id="machineCommissioningDate"
                                  value= {this.state.machineCommissioningDate} defaultValue={this.state.machineCommissioningDate}  onChange={this.handleFormChange}/>
-                                <label htmlFor="code" className="m-2 col-sm-2" style={leftAlign}>Dispote Date</label>
+                                <label htmlFor="code" className="m-2 col-sm-2" style={leftAlign}>Dispose Date</label>
                                 <input type="date" className="form-control m-2 col-sm-3 form-control-sm" name="machineDispoteDate" id="machineDispoteDate" value= {this.state.machineDispoteDate} onChange={this.handleFormChange} />
                                 <label htmlFor="name" className="m-2 col-sm-2" style={leftAlign}>Inv No</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineInvNo" id="machineInvNo" value= {this.state.machineInvNo} onChange={this.handleFormChange} />
