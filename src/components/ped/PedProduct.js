@@ -32,7 +32,11 @@ export class PedProduct extends Component {
                 key: "transmission",
                 text: "Transmission",
                 sortable: true
-            } ,
+            } ,{
+                key: "category",
+                text: "Category",
+                sortable: true
+            },
             {
                 key: "action",
                 text: "Action",
@@ -140,6 +144,13 @@ export class PedProduct extends Component {
             productName:record.productName,
             productShortname:record.productShortname,
             productCode:record.productCode,
+            category:record.category,
+            orderCode:record.orderCode,
+            colors:record.colors,
+            varientId:record.varientId,
+            transmission:record.transmission,
+            frame:record.frame,
+            description:record.description,
             isActive:tempstatus
          });
      }
@@ -163,6 +174,7 @@ export class PedProduct extends Component {
             hub:"",
             tires:"",
             description:"",
+            category:"",
            // image:"",
             
             errormsg:"",
@@ -204,7 +216,7 @@ export class PedProduct extends Component {
                 //   "fork":this.state.fork,                  "shifter":this.state.shifter,
                 //   "brakes":this.state.brakes,                  "rim":this.state.rim,
                 //   "hub":this.state.hub,                  "tires":this.state.tires, 
-                    "description":this.state.description,
+                    "description":this.state.description,"category":this.state.category,
                  
                   "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
   
@@ -350,6 +362,12 @@ export class PedProduct extends Component {
                                         {/* <label htmlFor="name" className="m-2 col-sm-2" >image<span class="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="image" name="image" value={this.state.image} onChange={this.handleFormChange} /> */}
 
+                                        <label htmlFor="name"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Category</label>
+                                        <select className="form-control form-control-sm m-2 col-sm-3" id="category" name="category" value={this.state.category} onChange={this.handleFormChange}>
+                                               <option value="0">Select</option>
+                                               <option value="Basic">Basic</option>
+                                               <option value="Premium">Premium</option>
+                                        </select>
 
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is Active<span class="text-danger">*</span></label>
                                         <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick} />

@@ -24,8 +24,8 @@ export class Bom extends Component {
                 }
             },
             {
-                key: "prouductName",
-                text: "Name",
+                key: "productName",
+                text: "Material Name",
                 sortable: true,
                 width: 300,
             },{
@@ -83,20 +83,31 @@ export class Bom extends Component {
         )
     }
     handleProductChange = event => {
-        this.setState({[event.target.name]: event.target.value});
-        
-        fetch(this.props.apiurl+"billOfMaterial/productBoms?productId="+this.state.productId)
-        .then(res => res.json())
-        .then( (result) => {
-               // console.log("result-->"+JSON.stringify(result))
-                if(result.valid){
-                    this.setState({
-                        records: result.bomProductList
-                    });
-                }else{}
-            },(error) => {
+        this.setState({[event.target.name]: event.target.value},()=>{
+
+            if(this.state.productId == 0 || this.state.productId =="0"){
+                this.setState({
+                    records: []
+                });
+            }else{
+                fetch(this.props.apiurl+"billOfMaterial/productBoms?productId="+this.state.productId)
+                .then(res => res.json())
+                .then( (result) => {
+                       // console.log("result-->"+JSON.stringify(result))
+                        if(result.valid){
+                            this.setState({
+                                records: result.bomProductList
+                            });
+                        }else{}
+                    },(error) => {
+                    }
+                )
             }
-        )
+            
+
+        });
+        
+       
     };
     
     editRecord = (e,index) => {
@@ -123,34 +134,33 @@ export class Bom extends Component {
                    
                         <div className="row">
                         <div className="col-12">
-                            <div className="card">
-                            <div className="card-header">
-
-                                <form className="form-inline">
-                                    <div className="form-group">
-                                        <label htmlFor="inlineFormEmail " className="font-weight-normal">Product </label>&nbsp;&nbsp;
-                                        <select className="custom-select" id="productId" name="productId" value={this.state.productId} onChange={this.handleProductChange}>
-                                        <option value="0">Select Product</option>
-                                        {this.state.productList.map(o => (
-                                            <option value={o.productId}>{o.productCode+"_"+o.productName }</option>
-                                        ))}
-                                    </select>
-                                    </div>
-                                </form>
-
-                                        
-                                         
-                                   
-                                
-                            </div>
+                            <div className="card card-success card-outline">
+                                <div className="card-header">
+                                    <form className="form-inline">
+                                        <div className="form-group">
+                                            <label htmlFor="inlineFormEmail " className="font-weight-normal">Product </label>&nbsp;&nbsp;
+                                            <select className="custom-select" id="productId" name="productId" value={this.state.productId} onChange={this.handleProductChange}>
+                                            <option value="0">Select Product</option>
+                                            {this.state.productList.map(o => (
+                                                <option value={o.productId}>{o.productCode+"_"+o.productName }</option>
+                                            ))}
+                                        </select>
+                                        </div>
+                                    </form>
+                                </div>
                             
-                            <div className="card-body" style={{height: 500}}>
-                                <ReactDatatable
-                                    config={this.config}
-                                    records={this.state.records}
-                                    columns={this.columns}/>
-                            </div>
-                            
+                                <div className="card-body" style={{height: 500}}>
+                                    <ReactDatatable
+                                        config={this.config}
+                                        records={this.state.records}
+                                        columns={this.columns}/>
+                                </div>
+                                <div className="card-footer justify-content-between ">
+                                    <button type="button" className="btn btn-default" >Clear</button>
+                                    <span className="text-danger">{this.state.errormsg}</span>
+                                    <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>
+                                </div>
+
                             </div>
                             
                         </div>

@@ -23,28 +23,16 @@ export class ManageUsers extends Component {
                             <div className="card">
                             <div className="card-header">
                                 <div className="card-title">
-                                        {/* <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#user-model"><i class="fas fa-plus"></i></a> */}
                                         <div className="input-group input-group-sm">
-                                            {/* <input type="text" className="form-control" placeholder="Enter Role..." /> */}
                                             <span className="input-group-append">
                                                 <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#user-model">Create New User &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
                                             </span>
                                         </div>
 
                                 </div>
-                                <div className="card-tools">
-                                    <div className="input-group input-group-sm" style={{width: 350}}>
-                                    
-                                        <input type="text" name="table_search" className="form-control float-right" placeholder="Search" />
-                                        <div className="input-group-append">
-                                        <button type="submit" className="btn btn-default">
-                                            <i className="fas fa-search" />
-                                        </button>
-                                        </div>
-                                    </div>
-                                </div>
+                             
                             </div>
-                            {/* /.card-header */}
+                            
                             <div className="card-body" style={{height: 300}}>
                                 <table className="table table-bordered table-hover text-nowrap">
                                 <thead>
@@ -61,9 +49,7 @@ export class ManageUsers extends Component {
                                         <td>John Doe</td>
                                         <td><span className="badge badge-success">Active</span></td>
                                         <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>Roles</a>&nbsp;&nbsp;
                                             <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-warning btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-key"></i>Change Password</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -71,9 +57,7 @@ export class ManageUsers extends Component {
                                         <td>John Doe</td>
                                         <td><span className="badge badge-success">Active</span></td>
                                         <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>Roles</a>&nbsp;&nbsp;
                                             <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-warning btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-key"></i>Change Password</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -81,9 +65,7 @@ export class ManageUsers extends Component {
                                         <td>John Doe</td>
                                         <td><span className="badge badge-success">Active</span></td>
                                         <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>Roles</a>&nbsp;&nbsp;
                                             <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-warning btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-key"></i>Change Password</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -91,24 +73,14 @@ export class ManageUsers extends Component {
                                         <td>John Doe</td>
                                         <td><span className="badge badge-danger">Active</span></td>
                                         <td className="project-actions ">
-                                            <a className="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-folder"></i>Roles</a>&nbsp;&nbsp;
                                             <a className="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#user-model"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-warning btn-sm" href="#" data-toggle="modal" data-target="#modal-deleteUser"><i className="fas fa-key"></i>Change Password</a>
                                         </td>
                                     </tr>
                                    
                                 </tbody>
                                 </table>
                             </div>
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                </ul>
-                            </div>
+                           
                             </div>
                             
                         </div>
