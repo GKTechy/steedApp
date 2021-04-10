@@ -28,16 +28,16 @@ export class NoteForApproval extends Component {
                 text: "Title",
                 sortable: true
             },
-             {
-                 key: "status",
-                 text: "Status",
-                 sortable: true
-             },
-            {
-                key: "isActive",
-                text: "Active",
-                sortable: true
-            },
+            //  {
+            //      key: "status",
+            //      text: "Status",
+            //      sortable: true
+            //  },
+            // {
+            //     key: "isActive",
+            //     text: "Active",
+            //     sortable: true
+            // },
             {
                 key: "action",
                 text: "Action",
@@ -70,13 +70,20 @@ export class NoteForApproval extends Component {
             }
         }
 
+        
+        var curr = new Date();
+        curr.setDate(curr.getDate());
+        var todaydate = curr.toISOString().substr(0, 10);
+
+
         this.state = {
             nfaDescription: 'Welcome to Steed Application',
             nfaDocumentNo:"",
-            nfaDocumentDate:"",
+            nfaDocumentDate:todaydate,
             nfaTitle:"",
             status:0,
             nfaId:0,
+            preparedBy:0,
             active:true,
             showModal:false,
             errormsg:"",
@@ -87,13 +94,20 @@ export class NoteForApproval extends Component {
     }
 
     resetClick  = () =>{
+
+        var curr = new Date();
+        curr.setDate(curr.getDate());
+        var todaydate = curr.toISOString().substr(0, 10);
+
+
         this.setState({
             nfaDescription: 'Welcome to Steed Application',
             nfaDocumentNo:"",
-            nfaDocumentDate:"",
+            nfaDocumentDate:todaydate,
             nfaTitle:"",
             status:0,
             nfaId:0,
+            preparedBy:0,
          });
     }
 
@@ -139,6 +153,7 @@ export class NoteForApproval extends Component {
             nfaDocumentDate:record.nfaDocumentDate,
             nfaTitle:record.nfaTitle,
             nfaId:record.nfaId,
+            preparedBy:record.preparedBy,
             status:record.status,
              active:tempstatus
          });
@@ -162,9 +177,9 @@ export class NoteForApproval extends Component {
             this.setState({
                 errormsg: "Enter Description"
             });
-        }else if(this.state.status === "0" || this.state.status === 0){
+        }else if(this.state.preparedBy === "0" || this.state.preparedBy === 0){
             this.setState({
-                errormsg: "Select Action"
+                errormsg: "Select Request By"
             });
         }
         
@@ -185,6 +200,7 @@ export class NoteForApproval extends Component {
                 'nfaDocumentNo':this.state.nfaDocumentNo,'nfaDocumentDate':this.state.nfaDocumentDate, 
                 'nfaTitle':this.state.nfaTitle, 'nfaDescription':this.state.nfaDescription,  
                  "isActive":tempstatus,'nfaId':this.state.nfaId,'status':this.state.status,
+                 "preparedBy":this.state.preparedBy,
                  "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
 
                  ///console.log("--obj--"+JSON.stringify(obj))
@@ -223,14 +239,7 @@ export class NoteForApproval extends Component {
                             });
                         }else{
                             this.setState({ errormsg: data.responseMsg});
-                            this.setState({
-                                nfaDescription:"",
-                                nfaDocumentNo:"",
-                                nfaDocumentDate:"",
-                                nfaTitle:"",
-                                nfaId:0,
-                                active:true
-                            },()=>{});
+                           
                         }
                            
                     })
@@ -301,18 +310,24 @@ export class NoteForApproval extends Component {
             
                        <div className="container-fluid">
                             <form className="form-inline">
-                                <label htmlFor="nfaDocumentNo" className="m-2 font-weight-normal">Document No <span class="text-danger">*</span></label>
-                                <input type="text" className="form-control m-2 form-control-sm" name="nfaDocumentNo" id="nfaDocumentNo" value= {this.state.nfaDocumentNo} onChange={this.handleFormChange} />
-                                <label htmlFor="nfaDocumentDate" className="m-2 font-weight-normal">Document Date <span class="text-danger">*</span></label>
-                                <input type="date" className="form-control m-2 form-control-sm" name="nfaDocumentDate" id="nfaDocumentDate" value= {this.state.nfaDocumentDate} onChange={this.handleFormChange}/>
-                                <label htmlFor="nfaTitle" className="m-2 font-weight-normal">Title <span class="text-danger">*</span></label>
-                                <input type="text" className="form-control m-2 form-control-sm" name="nfaTitle" id="nfaTitle" value= {this.state.nfaTitle} onChange={this.handleFormChange}/>
-                                <label htmlFor="exampleSelectRounded" class="m-2 font-weight-normal">Action</label>
-                                <select className="custom-select "  id="status" name="status" value={this.state.status} onChange={this.handleFormChange} >
-                                    <option value="0">Select</option>
-                                    <option value="Prepared">Prepared</option>
-                                    <option value="Approved">Approved</option>   
-                                </select>
+                                <div class="form-group">
+                                    <label htmlFor="nfaDocumentNo" className="m-2 font-weight-normal">Document No <span class="text-danger">*</span></label>
+                                    <input type="text" className="form-control m-2 form-control-sm" name="nfaDocumentNo" id="nfaDocumentNo" value= {this.state.nfaDocumentNo} onChange={this.handleFormChange} />
+                                    <label htmlFor="nfaDocumentDate" className="m-2 font-weight-normal">Document Date <span class="text-danger">*</span></label>
+                                    <input type="date" className="form-control m-2 form-control-sm" name="nfaDocumentDate" id="nfaDocumentDate" value= {this.state.nfaDocumentDate} onChange={this.handleFormChange}/>
+                                </div>
+                                <div class="form-group">
+                                    <label htmlFor="nfaTitle" className="m-2 font-weight-normal">Title <span class="text-danger">*</span></label>
+                                    <input type="text" className="form-control m-2 form-control-sm" name="nfaTitle" id="nfaTitle" value= {this.state.nfaTitle} onChange={this.handleFormChange}/>
+                                    <label htmlFor="exampleSelectRounded" class="m-2 font-weight-normal">Request By</label>
+                                    <select className="custom-select "  id="preparedBy" name="preparedBy" value={this.state.preparedBy} onChange={this.handleFormChange} >
+                                        <option value="0">Select</option>
+                                        <option value="1">User 1</option>
+                                        <option value="2">User 2</option>   
+                                    </select>
+                                </div>
+                                
+                                
                                 
                             </form>
                                 <div className="row">
