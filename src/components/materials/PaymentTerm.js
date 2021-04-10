@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import ReactDatatable from '@ashvin27/react-datatable';
-
-
-
+import $ from 'jquery';
 
 export class PaymentTerm extends Component {
     constructor(props) {
@@ -114,7 +112,18 @@ export class PaymentTerm extends Component {
         });
     }
     
-    
+    resetClick = ()=>{
+        this.state = {
+            paymentTermsId:0,
+            content:"",
+            description:"",
+            isActive:true,
+            errormsg:"",
+            records:[],
+            loginUser:this.props.profile,
+
+        }
+    }
     saveClick= event =>{
         if(this.state.content === ""){
             this.setState({
@@ -157,23 +166,13 @@ export class PaymentTerm extends Component {
 
                         if(data.valid){
                              //  console.log("c role->"+obj)
-                             this.setState({
-                                errormsg: "",
-                                records: data.paymentTermList,
-                                content:"",
-                                description:"",
-                                paymentTermsId:0,
-                                isActive:true
-                            },()=>{});
+                             
+                             this.setState({ records: data.paymentTermList});
+                             $("#new-paymentterm-model .close").click();
+                             this.resetClick();
                         }else{
                             this.setState({ errormsg: data.responseMsg});
-                            this.setState({
-                                errormsg: "",
-                                content:"",
-                                description:"",
-                                paymentTermsId:0,
-                                isActive:true
-                            },()=>{});
+                            
                         }
                            
                     })
@@ -261,7 +260,7 @@ export class PaymentTerm extends Component {
                     <div className="modal-dialog modal-xl">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <h4 className="modal-title">New Payment Term</h4>
+                            <h4 className="modal-title font-weight-normal">New Payment Term</h4>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                             </button>
@@ -270,13 +269,13 @@ export class PaymentTerm extends Component {
                                 <div className="container-fluid">
                                     <div className="form-inline">
                                       
-                                        <label htmlFor="name" className="m-2 col-sm-2" >Description<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Description<span class="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-8" name="description" id="description" value= {this.state.description} onChange={this.handleFormChange}/>
-                                        <label htmlFor="code" className="m-2 col-sm-2" >Content<span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Content<span class="text-danger">*</span></label>
                                         &nbsp;&nbsp;
                                         <textarea class="col-sm-8 form-control" placeholder="Content" required data-error="Please enter Content" id="content" name="content" id="content" value= {this.state.content} onChange={this.handleFormChange}></textarea>
 
-                                        <label htmlFor="name" className="m-2 col-sm-2">Active<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Active<span class="text-danger">*</span></label>
                                         <input type="checkbox" className="form-check-input m-1" id="isactive" checked={this.state.isActive}  onChange={this.handleCheckClick}/><br/><br/>
 
                                         <label htmlFor="name" className="m-6 col-sm-6"><span class="text-danger">{this.state.errormsg}</span></label>

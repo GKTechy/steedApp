@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import ReactDatatable from '@ashvin27/react-datatable';
 
-
+import $ from 'jquery';
 export class UOM extends Component {
 
 
@@ -218,6 +218,7 @@ export class UOM extends Component {
                                 errormsg: "Supplier Details Saved Successfully",
                                 records: data.uomList,
                             },()=>{
+                                $("#uom-new-model .close").click();
                                 this.resetClick();
                             });
                            
@@ -272,7 +273,7 @@ export class UOM extends Component {
                     <div className="modal-dialog modal-xl">
                         <div className="modal-content">
                         <div className="modal-header">
-                            <h4 className="modal-title">New UOM</h4>
+                            <h4 className="modal-title font-weight-normal">New UOM</h4>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                             </button>
@@ -280,27 +281,27 @@ export class UOM extends Component {
                         <div className="modal-body">
                                 <div className="container-fluid">
                                     <div className="form-inline">
-                                        <label htmlFor="code" className="m-2 col-sm-2" >Measurement Type<span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Measurement Type<span class="text-danger">*</span></label>
                                         <select className="form-control m-2 col-sm-3" id="measurementType" name="measurementType" value={this.state.measurementType} onChange={this.handleFormChange} >
-                                            <option value="0"></option>
+                                            <option value="0">Select Measurement</option>
                                             <option value="Mass">Mass</option>
                                             <option value="Volume">Volume</option>
                                             <option value="Unit">Unit</option>
                                             <option value="Distance">Distance</option>
                                         </select>
-                                        <label htmlFor="name" className="m-2 col-sm-2">Base Measurement</label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Base Measurement</label>
                                         <input type="checkbox" className="form-check-input m-1" checked={this.state.baseMeasurement}  onChange={this.handlebaseClick} />
-                                        <label htmlFor="name" className="m-2 col-sm-2">is Varied</label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">is Varied</label>
                                         <input type="checkbox" className="form-check-input" checked={this.state.variedMeasurement}  onChange={this.handlevariedClick} />
-                                        <label htmlFor="name" className="m-2 col-sm-2" >Measurement Name<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Measurement Name<span class="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="measurementName" name="measurementName" value= {this.state.measurementName} onChange={this.handleFormChange} placeholder="Measurement Name" />
-                                        <label htmlFor="code" className="m-2 col-sm-2" >Short Name</label>
+                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Short Name</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="measurementShortName" name="measurementShortName" value= {this.state.measurementShortName} onChange={this.handleFormChange} placeholder="Short Name" />
-                                        <label htmlFor="name" className="m-2 col-sm-2" >Equalant Value</label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Equalant Value</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="equivalentValueWithBase" name="equivalentValueWithBase" value= {this.state.equivalentValueWithBase} onChange={this.handleFormChange} placeholder="Equalant Value" />
-                                        <label htmlFor="name" className="m-2 col-sm-2" >Description</label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Description</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="description" name="description" value= {this.state.description} onChange={this.handleFormChange} placeholder="Description"/>
-                                        <label htmlFor="name" className="m-2 col-sm-2">Active<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Active<span class="text-danger">*</span></label>
                                         <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick}/>
                                     </div>
                             </div>

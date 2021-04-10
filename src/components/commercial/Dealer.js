@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from "react-redux";
 import ReactDatatable from '@ashvin27/react-datatable';
+import $ from 'jquery';
 
 
 
@@ -235,6 +236,7 @@ export class Dealer extends Component {
                                 errormsg: "Dealer Details Saved Successfully",
                                 records: data.dealerList,
                             },()=>{
+                                $("#new_dealer .close").click();
                                 this.resetClick();
                             });
                            
@@ -322,27 +324,27 @@ export class Dealer extends Component {
                                             <form>
                                                     <div className="form-row m-2">
                                                      
-                                                        <div className="form-group col-md-4">
-                                                            <label htmlFor="dealerCode">Dealer Code <span class="text-danger">*</span></label>
+                                                        <div className="form-group col-md-4 ">
+                                                            <label htmlFor="dealerCode" className="font-weight-normal">Dealer Code <span class="text-danger">*</span></label>
                                                             <input type="text" className="form-control form-control-sm" id="dealerCode" name="dealerCode" value= {this.state.dealerCode} onChange={this.handleFormChange} placeholder="Dealer Code " readOnly/>
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="dealerName">Name <span class="text-danger">*</span></label>
+                                                        <label htmlFor="dealerName" className="font-weight-normal">Name <span class="text-danger">*</span></label>
                                                         <input type="text" className="form-control form-control-sm" id="dealerName" name="dealerName" value= {this.state.dealerName} onChange={this.handleFormChange} placeholder="Name" />
                                                         </div>
                                                         
                                                     </div>
                                                     <div className="form-row m-2">
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="dealerContactPerson">Contact Person</label>
+                                                        <label htmlFor="dealerContactPerson" className="font-weight-normal">Contact Person</label>
                                                         <input type="text" className="form-control form-control-sm" id="dealerContactPerson" name="dealerContactPerson" value= {this.state.dealerContactPerson} onChange={this.handleFormChange} placeholder="Contact Person " />
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="mobile">Mobile</label>
+                                                        <label htmlFor="mobile" className="font-weight-normal">Mobile</label>
                                                         <input type="text" className="form-control form-control-sm" id="mobile" name="mobile" value= {this.state.mobile} onChange={this.handleFormChange} placeholder="Mobile" />
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="email">Email</label>
+                                                        <label htmlFor="email" className="font-weight-normal">Email</label>
                                                         <input type="text" className="form-control form-control-sm" id="email" name="email" value= {this.state.email} onChange={this.handleFormChange} placeholder="Email" />
                                                         </div>
                                                     </div>
@@ -353,45 +355,45 @@ export class Dealer extends Component {
                                                     
                                                     <div className="form-row m-2">
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="fax">Fax</label>
+                                                        <label htmlFor="fax" className="font-weight-normal">Fax</label>
                                                         <input type="text" className="form-control form-control-sm" id="fax" name="fax" value= {this.state.fax} onChange={this.handleFormChange} placeholder="Fax" />
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="gst">GST</label>
+                                                        <label htmlFor="gst" className="font-weight-normal">GST</label>
                                                         <input type="text" className="form-control form-control-sm" id="gst" name="gst" value= {this.state.gst} onChange={this.handleFormChange} placeholder="GST" />
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="pan">PAN</label>
+                                                        <label htmlFor="pan" className="font-weight-normal">PAN</label>
                                                         <input type="text" className="form-control form-control-sm" id="pan" name="pan" value= {this.state.pan} onChange={this.handleFormChange} placeholder="PAN" />
                                                         </div>
                                                     </div>
                                                     <div className="form-row m-2">
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="address1">Address</label>
+                                                        <label htmlFor="address1" className="font-weight-normal">Address</label>
                                                         <input type="text" className="form-control form-control-sm" id="address" name="address" value= {this.state.address} onChange={this.handleFormChange} placeholder="address" />
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="city">City</label>
+                                                        <label htmlFor="city" className="font-weight-normal"> City</label>
                                                         <input type="text" className="form-control form-control-sm" id="city" name="city" value= {this.state.city} onChange={this.handleFormChange} placeholder="city" />
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="state">State</label>
+                                                        <label htmlFor="state" className="font-weight-normal">State</label>
                                                         <input type="text" className="form-control form-control-sm" id="state" name="state" value= {this.state.state} onChange={this.handleFormChange} placeholder="state" />
                                                         </div>
                                                     </div>
                                                    
                                                     <div className="form-row m-2">
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="inputEmail4">Pin Code</label>
+                                                        <label htmlFor="inputEmail4" className="font-weight-normal">Pin Code</label>
                                                         <input type="text" className="form-control form-control-sm" id="pinCode" name="pinCode" value= {this.state.pinCode} onChange={this.handleFormChange} placeholder="Pin Code" />
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="inputEmail4">Remarks</label>
+                                                        <label htmlFor="inputEmail4" className="font-weight-normal">Remarks</label>
                                                         <input type="text" className="form-control form-control-sm" id="remarks" name="remarks" value= {this.state.remarks} onChange={this.handleFormChange} placeholder="Remarks" />
                                                         </div>
                                                        
                                                         <div className="col-md-4 form-inline">
-                                                        <label htmlFor="inputPassword4">Is Active</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <label htmlFor="inputPassword4" className="font-weight-normal">Is Active</label>&nbsp;&nbsp;&nbsp;&nbsp;
                                                         <input type="checkbox" className="form-control form-control-sm" checked={this.state.isActive}  onChange={this.handleCheckClick} />
                                                         </div>
                                                     </div>

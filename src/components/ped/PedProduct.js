@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import { connect } from "react-redux";
 import ReactDatatable from '@ashvin27/react-datatable';
+import $ from 'jquery';
+
 export class PedProduct extends Component {
 
     constructor(props) {
@@ -244,6 +246,7 @@ export class PedProduct extends Component {
                                   records: data.productList,
                               },()=>{
                                   this.resetClick();
+                                  $("#new_product .close").click();
                               });
                              
                           }else{

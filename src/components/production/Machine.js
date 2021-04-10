@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from "react-redux";
 import ReactDatatable from '@ashvin27/react-datatable';
-
+import $ from 'jquery';
 
 
 export class Machine extends Component {
@@ -211,20 +211,13 @@ export class Machine extends Component {
                         if(data.valid){
                              //  console.log("c role->"+obj)
                              this.setState({
-                                errormsg: "",
-                                records: data.machineList,
-                                rolename:"",
-                                roleid:0,
-                                active:true
-                            },()=>{});
+                                records: data.machineList
+                            });
+                            $("#new-machine .close").click();
+                            this.resetClick();
                         }else{
                             this.setState({ errormsg: data.responseMsg});
-                            this.setState({
-                                errormsg: "",
-                                rolename:"",
-                                roleid:0,
-                                active:true
-                            },()=>{});
+                            
                         }
                            
                     })
@@ -333,34 +326,34 @@ export class Machine extends Component {
 
                        <div className="container-fluid">
                             <form className="form-inline">
-                                <label htmlFor="code" className="m-2 col-sm-2" style={leftAlign}>Machine Code <span class="text-danger">*</span></label>
+                                <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" style={leftAlign}>Machine Code <span class="text-danger">*</span></label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineCode" id="machineCode" value= {this.state.machineCode} onChange={this.handleFormChange}/>
-                                <label htmlFor="name" className="m-2 col-sm-2" style={leftAlign}>Machine Name<span class="text-danger">*</span></label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" style={leftAlign}>Machine Name<span class="text-danger">*</span></label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineName" id="machineName" value= {this.state.machineName} onChange={this.handleFormChange} />
-                                <label htmlFor="code" className="m-2 col-sm-2" style={{textAlign: "left !important"}}>Make</label>
+                                <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" style={{textAlign: "left !important"}}>Make</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineMake" id="machineMake" value= {this.state.machineMake} onChange={this.handleFormChange} />
-                                <label htmlFor="name" className="m-2 col-sm-2" style={leftAlign}>Type</label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" style={leftAlign}>Type</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineType" id="machineType" value= {this.state.machineType} onChange={this.handleFormChange} />
-                                <label htmlFor="name" className="m-2 col-sm-2" style={leftAlign}>Commissioning Date</label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" style={leftAlign}>Commissioning Date</label>
                                 <input type="date" className="form-control m-2 col-sm-3 form-control-sm " name="machineCommissioningDate" id="machineCommissioningDate"
                                  value= {this.state.machineCommissioningDate} defaultValue={this.state.machineCommissioningDate}  onChange={this.handleFormChange}/>
-                                <label htmlFor="code" className="m-2 col-sm-2" style={leftAlign}>Dispose Date</label>
+                                <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" style={leftAlign}>Dispose Date</label>
                                 <input type="date" className="form-control m-2 col-sm-3 form-control-sm" name="machineDispoteDate" id="machineDispoteDate" value= {this.state.machineDispoteDate} onChange={this.handleFormChange} />
-                                <label htmlFor="name" className="m-2 col-sm-2" style={leftAlign}>Inv No</label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" style={leftAlign}>Inv No</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineInvNo" id="machineInvNo" value= {this.state.machineInvNo} onChange={this.handleFormChange} />
-                                <label htmlFor="code" className="m-2 col-sm-2">Inv Date</label>
+                                <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal">Inv Date</label>
                                 <input type="date" className="form-control m-2 col-sm-3 form-control-sm" name="machineInvDate" id="machineInvDate" value= {this.state.machineInvDate} onChange={this.handleFormChange}/>
-                                <label htmlFor="name" className="m-2 col-sm-2">Inv Value</label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Inv Value</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineInvValue" id="machineInvValue" value= {this.state.machineInvValue} onChange={this.handleFormChange} />
-                                <label htmlFor="name" className="m-2 col-sm-2">Location</label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Location</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineLocation" id="machineLocation" value= {this.state.machineLocation} onChange={this.handleFormChange} />
-                                <label htmlFor="name" className="m-2 col-sm-2">Status</label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Status</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineStatus" id="machineStatus" value= {this.state.machineStatus} onChange={this.handleFormChange} />
-                                <label htmlFor="name" className="m-2 col-sm-2">Capacity</label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Capacity</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineCapacity" id="machineCapacity" value= {this.state.machineCapacity} onChange={this.handleFormChange}/>
-                                <label htmlFor="name" className="m-2 col-sm-2">Is Active<span class="text-danger">*</span></label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is Active<span class="text-danger">*</span></label>
                                 <input type="checkbox" className="form-check-input m-2 form-control-sm" id="active" name="active" checked={this.state.active}  onChange={this.handleCheckClick}/>
-                                <label htmlFor="name" className="m-2 col-sm-2">Is QC Machine <span class="text-danger">*</span> </label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is QC Machine <span class="text-danger">*</span> </label>
                                 <input type="checkbox" className="form-check-input m-2 form-control-sm" id="isQCMachine" name="isQCMachine" checked={this.state.isQCMachine}  onChange={this.handleCheckClick1}/>
                                 <br></br>
                                

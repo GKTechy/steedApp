@@ -212,18 +212,18 @@ export class MachineProcessMap extends Component {
                             <div className="card">
                             <div className="card-header form-inline">
                                 <div className="form-group col-md-3">
-                                    <label htmlFor="exampleSelectRounded0">Machine Name</label>&nbsp;&nbsp;&nbsp;
-                                    <select className="custom-select custom-select-sm rounded-0"  id="machineId" name="machineId" value={this.state.machineId} onChange={this.handleChange} >
-                                        <option value="0"></option>
+                                    <label htmlFor="exampleSelectRounded0" className="font-weight-normal">Machine Name</label>&nbsp;&nbsp;&nbsp;
+                                    <select className="custom-select  "  id="machineId" name="machineId" value={this.state.machineId} onChange={this.handleChange} >
+                                        <option value="0">Select Machine</option>
                                         {this.state.machineList.map(o => (
                                             <option value={o.machineId}>{o.machineName}</option>
                                         ))}
                                     </select>
                                 </div>
                                 <div className="form-group col-md-3">
-                                    <label htmlFor="exampleSelectRounded0">Process Name</label>&nbsp;&nbsp;&nbsp;
-                                    <select className="custom-select  custom-select-sm rounded-0" id="processId" name="processId" value={this.state.processId} onChange={this.handleChange} >
-                                        <option value="0"></option>
+                                    <label htmlFor="exampleSelectRounded0" className="font-weight-normal">Process Name</label>&nbsp;&nbsp;&nbsp;
+                                    <select className="custom-select  " id="processId" name="processId" value={this.state.processId} onChange={this.handleChange} >
+                                        <option value="0">Select Process</option>
                                          {optionTemplate}
                                     </select>
                                 </div>

@@ -106,8 +106,6 @@ export class Bom extends Component {
             
 
         });
-        
-       
     };
     
     editRecord = (e,index) => {
@@ -126,6 +124,11 @@ export class Bom extends Component {
     
     }
 
+
+    saveClick= event =>{
+
+        
+    }
     render() {
         return (
             <div>
@@ -156,9 +159,9 @@ export class Bom extends Component {
                                         columns={this.columns}/>
                                 </div>
                                 <div className="card-footer justify-content-between ">
-                                    <button type="button" className="btn btn-default" >Clear</button>
+                                    <button type="button" className="btn btn-default float-left" >Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span className="text-danger">{this.state.errormsg}</span>
-                                    <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>
+                                    <button type="button" className="btn btn-primary float-right" onClick={this.saveClick}>Save</button>
                                 </div>
 
                             </div>

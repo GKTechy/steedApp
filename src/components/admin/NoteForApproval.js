@@ -5,6 +5,8 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { connect } from "react-redux";
 import ReactDatatable from '@ashvin27/react-datatable';
 
+import $ from 'jquery';
+
 
 export class NoteForApproval extends Component {
 
@@ -216,7 +218,9 @@ export class NoteForApproval extends Component {
                                 nfaId:0,
                                 active:true
                                 
-                            },()=>{});
+                            },()=>{
+                               $("#note-model .close").click();
+                            });
                         }else{
                             this.setState({ errormsg: data.responseMsg});
                             this.setState({
@@ -232,7 +236,7 @@ export class NoteForApproval extends Component {
                     })
                     .catch(error => {
                         this.setState({ errormsg: error.toString() });
-                        console.error('There was an error!', error);
+                       // console.error('There was an error!', error);
                     });
                     
           
@@ -330,20 +334,20 @@ export class NoteForApproval extends Component {
                                                 data={this.state.nfaDescription}
                                                 onReady={ editor => {
                                                     // You can store the "editor" and use when it is needed.
-                                                    console.log( 'Editor is ready to use!', editor );
+                                                    //console.log( 'Editor is ready to use!', editor );
                                                 } }
                                                 onChange={ ( event, editor ) => {
                                                     const data = editor.getData();
-                                                    console.log( { event, editor, data } );
+                                                   // console.log( { event, editor, data } );
                                                     this.setState({
                                                         nfaDescription: data
                                                     });
                                                 } }
                                                 onBlur={ ( event, editor ) => {
-                                                    console.log( 'Blur.', editor );
+                                                   // console.log( 'Blur.', editor );
                                                 } }
                                                 onFocus={ ( event, editor ) => {
-                                                    console.log( 'Focus.', editor );
+                                                   // console.log( 'Focus.', editor );
                                                 } }
                                             />
                                     </div>

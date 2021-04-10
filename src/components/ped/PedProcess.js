@@ -196,10 +196,10 @@ export class PedProcess extends Component {
                                 <div className="card-header">
                                     <div className="card-title">
                                             <div className="form-inline">
-                                                <label htmlFor="inlineFormEmail" className="m-2">Name <span class="text-danger">*</span></label>
+                                                <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">Name <span class="text-danger">*</span></label>
                                                 <input type="text" className="form-control m-2 form-control-sm" name="processName" id="processName" value= {this.state.processName} onChange={this.handleFormChange} />
                                             
-                                                <label htmlFor="inlineFormEmail" className="m-2">is Active<span class="text-danger">*</span></label>
+                                                <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">is Active<span class="text-danger">*</span></label>
                                                 <input className="form-check-input" type="checkbox" checked={this.state.isActive}  onChange={this.handleCheckClick}/>
                                                 
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
