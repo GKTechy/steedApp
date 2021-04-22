@@ -235,7 +235,7 @@ export class MachineProcessMap extends Component {
 
                             
                             </div>
-                            <div className="card-body" style={{height: 300}}>
+                            <div className="card-body" >
                                 <ReactDatatable
                                     config={this.config}
                                     records={this.state.records}

@@ -113,16 +113,16 @@ export class PaymentTerm extends Component {
     }
     
     resetClick = ()=>{
-        this.state = {
+
+        this.setState({
             paymentTermsId:0,
             content:"",
             description:"",
             isActive:true,
             errormsg:"",
-            records:[],
             loginUser:this.props.profile,
+        });
 
-        }
     }
     saveClick= event =>{
         if(this.state.content === ""){
@@ -199,7 +199,7 @@ export class PaymentTerm extends Component {
                             <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#new-paymentterm-model">New Payment Term&nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#new-paymentterm-model">New Payment Term&nbsp;&nbsp;<i class="fas fa-plus"></i></button>
                                             </span>
                                         </div>
 
@@ -208,47 +208,11 @@ export class PaymentTerm extends Component {
                             </div>
                             <div className="card-body">
 
-
                             <ReactDatatable
                                     config={this.config}
                                     records={this.state.records}
                                     columns={this.columns}/>
 
-
-
-                           {/*   <table id="paymentterm_master_table" className="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Description</th>
-                                    <th>Content</th>
-                                    <th>Active</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                               {
-                                    this.state.uomList.map((item) =>
-                                    
-                                    <tr key={item.id}>
-                                        
-                                        <td>{item.code}</td>
-                                        <td><span className="tag tag-success">{item.desc}</span></td>
-                                        <td className="project-actions ">
-                                            <a className="btn btn-info btn-sm" href="#"><i className="fas fa-pencil-alt"></i>Edit</a>&nbsp;&nbsp;
-                                            <a className="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#modal-default"><i className="fas fa-trash"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                )} 
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th>Description</th>
-                                    <th>Content</th>
-                                    <th>Active</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
-                            </table>*/}
                             </div>
                         </div>
                         </div>
@@ -273,7 +237,7 @@ export class PaymentTerm extends Component {
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-8" name="description" id="description" value= {this.state.description} onChange={this.handleFormChange}/>
                                         <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Content<span class="text-danger">*</span></label>
                                         &nbsp;&nbsp;
-                                        <textarea class="col-sm-8 form-control" placeholder="Content" required data-error="Please enter Content" id="content" name="content" id="content" value= {this.state.content} onChange={this.handleFormChange}></textarea>
+                                        <textarea class="col-sm-8 form-control" placeholder="Content" required data-error="Please enter Content" id="content" name="content" value= {this.state.content} onChange={this.handleFormChange}></textarea>
 
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Active<span class="text-danger">*</span></label>
                                         <input type="checkbox" className="form-check-input m-1" id="isactive" checked={this.state.isActive}  onChange={this.handleCheckClick}/><br/><br/>

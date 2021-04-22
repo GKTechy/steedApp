@@ -145,7 +145,7 @@ export class Machine extends Component {
     };
 
     handleCheckClick = () => {
-        this.setState({ isActive: !this.state.isActive });
+        this.setState({ active: !this.state.active });
     }
 
     handleCheckClick1 = () => {
@@ -160,10 +160,6 @@ export class Machine extends Component {
         }else if(!this.state.active && this.state.machineId===0){
             this.setState({
                 errormsg: "Select Active"
-            });
-        }else if(!this.state.isQCMachine && this.state.machineId===0){
-            this.setState({
-                errormsg: "Select QC Machine"
             });
         }else{
             var tempstatus=""
@@ -353,7 +349,7 @@ export class Machine extends Component {
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineCapacity" id="machineCapacity" value= {this.state.machineCapacity} onChange={this.handleFormChange}/>
                                 <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is Active<span class="text-danger">*</span></label>
                                 <input type="checkbox" className="form-check-input m-2 form-control-sm" id="active" name="active" checked={this.state.active}  onChange={this.handleCheckClick}/>
-                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is QC Machine <span class="text-danger">*</span> </label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is QC Machine </label>
                                 <input type="checkbox" className="form-check-input m-2 form-control-sm" id="isQCMachine" name="isQCMachine" checked={this.state.isQCMachine}  onChange={this.handleCheckClick1}/>
                                 <br></br>
                                

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ColorCode from './ColorCode'
+//import ColorCode from './ColorCode'
 import Dealer from './Dealer'
 import DealerOrder from './DealerOrder'
 

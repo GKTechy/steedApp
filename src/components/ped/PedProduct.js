@@ -151,6 +151,7 @@ export class PedProduct extends Component {
             colors:record.colors,
             varientId:record.varientId,
             transmission:record.transmission,
+            size:record.size,
             frame:record.frame,
             description:record.description,
             isActive:tempstatus

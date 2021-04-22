@@ -177,8 +177,7 @@ export class MaterialType extends Component {
                                 records: data.materialTypeList,
                                 typeName:"",
                                 typeDesc:"",
-                                typeId:"",
-                                typeId:0,
+                               typeId:0,
                                 isActive:true
                             },()=>{});
                         }else{
@@ -187,7 +186,6 @@ export class MaterialType extends Component {
                                 errormsg: "",
                                 typeName:"",
                                 typeDesc:"",
-                                typeId:"",
                                 typeId:0,
                                 isActive:true
                             },()=>{});
@@ -216,9 +214,9 @@ export class MaterialType extends Component {
                                 <div className="container-fluid">
                                     <div className="form-inline" >
                                         <label htmlFor="code" className="m-2 font-weight-normal" >Item Type <span class="text-danger">*</span></label>
-                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="typeName" name="typeName" id="typeName" value= {this.state.typeName} onChange={this.handleFormChange}/>
+                                        <input type="text" className="form-control form-control-sm m-2 col-sm-3" name="typeName" id="typeName" value= {this.state.typeName} onChange={this.handleFormChange}/>
                                         <label htmlFor="name" className="m-2 font-weight-normal" >Description<span class="text-danger">*</span></label>
-                                        <input type="text" className="form-control m-2 col-sm-3 form-control-sm" id="typeDesc" name="typeDesc" id="typeDesc" value= {this.state.typeDesc} onChange={this.handleFormChange}/>
+                                        <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="typeDesc" id="typeDesc" value= {this.state.typeDesc} onChange={this.handleFormChange}/>
                                         <label htmlFor="code" className="font-weight-normal" >isActive</label>
                                         <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick}/> &nbsp;&nbsp;&nbsp;
                                         <button className="btn btn-primary btn-sm" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;

@@ -110,11 +110,11 @@ export class PedProcessFlow extends Component {
 
     saveClick= event =>{
         //  console.log("state-->"+JSON.stringify(this.state))
-          if(this.state.productId === "" || this.state.productId == "0"){
+          if(this.state.productId === "" || this.state.productId === "0"){
               this.setState({
                   errormsg: "Select Product Name"
               });
-          }else if(this.state.processId === "" || this.state.processId == "0"){
+          }else if(this.state.processId === "" || this.state.processId === "0"){
             this.setState({
                 errormsg: "Select Process"
             });

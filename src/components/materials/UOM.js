@@ -28,11 +28,11 @@ export class UOM extends Component {
                 text: "Is Base",
                 sortable: true
             },
-            {
-                key: "equivalentValueWithBase",
-                text: "Is Varied",
-                sortable: true
-            },
+            // {
+            //     key: "equivalentValueWithBase",
+            //     text: "Is Varied",
+            //     sortable: true
+            // },
             {
                 key: "action",
                 text: "Action",
@@ -249,7 +249,7 @@ export class UOM extends Component {
                             <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#uom-new-model">Create New  UOM&nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                                <button type="button" className="btn btn-primary btn-flat"  onClick={this.resetClick} data-toggle="modal" data-target="#uom-new-model" >Create New  UOM&nbsp;&nbsp;<i class="fas fa-plus"></i></button>
                                             </span>
                                         </div>
 

@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import { Redirect, Switch, Route, Link } from "react-router-dom";
+import {  Switch,  Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
 
 import Header from './Header'
-import Menu from './Menu';
 import Content from './Content';
-import IndexDashboard from './IndexDashboard';
-import AdminMaster from './admin/AdminMaster';
 
 export class Dashboard extends Component {  
 
@@ -27,10 +24,10 @@ export class Dashboard extends Component {
                  <Header/>
 
                  <aside className="main-sidebar sidebar-dark-primary elevation-4">
-                <a href="#" className="brand-link">
-                    <span className="brand-text font-weight-light">Steed App</span>
-                    
-                </a>
+                    <a href="#" className="brand-link">
+                        <span className="brand-text font-weight-light">Steed App</span>
+                        
+                    </a>
                 {/* Sidebar */}
                 <div className="sidebar">
                     {/* Sidebar user panel (optional) */}

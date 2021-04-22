@@ -85,7 +85,7 @@ export class Bom extends Component {
     handleProductChange = event => {
         this.setState({[event.target.name]: event.target.value},()=>{
 
-            if(this.state.productId == 0 || this.state.productId =="0"){
+            if(this.state.productId === 0 || this.state.productId ==="0"){
                 this.setState({
                     records: []
                 });
