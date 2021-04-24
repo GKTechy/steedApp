@@ -11,7 +11,7 @@ export class Bom extends Component {
             {
                 key: "rowSelected",
                 text: "#",
-                align: "right",
+                align: "left",
                 sortable: false,
                 width: 10,
                 cell: (record, index) => {
@@ -24,6 +24,12 @@ export class Bom extends Component {
                 }
             },
             {
+                key: "productCode",
+                text: "Code",
+                sortable: true,
+                width: 100,
+            },
+            {
                 key: "productName",
                 text: "Material Name",
                 sortable: true,
@@ -32,17 +38,43 @@ export class Bom extends Component {
                 key: "measurementType",
                 text: "Measurement Type",
                 sortable: true,
-                width: 300,
+                width: 100,
+            },{
+                key: "measurementName",
+                text: "Measurement Name",
+                sortable: true,
+                width: 100,
+            },{
+                key: "uomType",
+                text: "UOM Type",
+                sortable: true,
+                width: 100,
             },
             {
                 key: "qty",
                 text: "Qty",
-                width: 100,
+                width: 50,
                 cell: (record, index) => {
                     return (
                         <>
-                            <input type="text" className="form-control m-2 form-control-sm" name="qty" id="qty" value= {this.state.qty} onChange={ (e)=>this.editRecord(e,index)} />
+                            <input type="text" className="form-control form-control-sm" name="qty" id="qty" value={record.qty} onChange={ (e)=>this.editRecord(e,index)} />
                         </>
+                       
+                    );
+                }
+            },
+            {
+                key: "action",
+                text: "Action",
+                width: 100,
+                cell: (record, index) => {
+                    return (
+                            <button
+                                className="btn btn-warning btn-sm"
+                                style={{marginRight: '5px'}}
+                                onClick={ (e)=>this.clearRecord(e,index)}>
+                                    <i className="fas fa-times" ></i>&nbsp;Clear
+                            </button>
                        
                     );
                 }
@@ -96,7 +128,8 @@ export class Bom extends Component {
                        // console.log("result-->"+JSON.stringify(result))
                         if(result.valid){
                             this.setState({
-                                records: result.bomProductList
+                                records: result.bomProductList,
+                                errormsg: ""
                             });
                         }else{}
                     },(error) => {
@@ -115,17 +148,93 @@ export class Bom extends Component {
         });
  
      }
+
+     clearRecord = (e,index) => {
+         
+        const { records } = this.state;
+      //  console.log("-->"+JSON.stringify(records[index]))
+        records[index].qty = '';
+      //  this.state.qty=''
+        this.setState({ records: records },()=>{ 
+          //  console.log("AFTER-->"+JSON.stringify(records[index]))
+        });
+ 
+     }
+
+     
      selectRecord = (e,index) => {
            const { records } = this.state;
-        //   console.log("check-->"+e.target.checked)
+         
+           
+         //  console.log("check-->"+e.target.checked)
            records[index].rowSelected = !e.target.value;
-           this.setState({ records: records },()=>{ 
+                this.setState({ records: records },()=>{ 
              });
     
     }
 
 
     saveClick= event =>{
+
+        const { records } = this.state;
+        let result = records.filter(el => el.qty === '' ||el.qty === '0');
+        console.log('varlen--'+result.length)
+        
+        if(records.length === 0){
+            this.setState({
+                errormsg: "Select Product and Enter Any one Values"
+            });
+        } else  if(records.length === result.length){
+            this.setState({
+                errormsg: "Enter Any one Qty Values"
+            });
+        } else{
+            this.setState({
+                errormsg: ""
+            });
+
+            var obj = {
+                "bomProductList":this.state.records,
+                "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
+            }
+
+            
+               // POST request using fetch with error handling
+               const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({  "bomProductList":this.state.records,"updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId,"productId":this.state.productId})
+            };
+            fetch(this.props.apiurl+"billOfMaterial/saveBillOfMaterial", requestOptions)
+                .then(async response => {
+                    const data = await response.json();
+               //     console.log("--data--"+JSON.stringify(data))
+                    // check for error response
+                    if (!response.ok) {
+                        // get error message from body or default to response status
+                        const error = (data && data.message) || response.status;
+                        return Promise.reject(error);
+                    }
+
+                    if(data.valid){
+                         //  console.log("c role->"+obj)
+                         this.setState({
+                            errormsg: data.responseMsg,
+                            records: result.bomProductList,
+                        },()=>{
+                            //this.resetClick();
+                        });
+                       
+                    }else{
+                       this.setState({ errormsg: data.responseMsg});
+                      // this.resetClick();
+                    } 
+                })
+                .catch(error => {
+                    this.setState({ errormsg: error.toString() });
+                  //  console.error('There was an error!', error);
+                });
+
 
         
     }
@@ -145,14 +254,14 @@ export class Bom extends Component {
                                             <select className="custom-select" id="productId" name="productId" value={this.state.productId} onChange={this.handleProductChange}>
                                             <option value="0">Select Product</option>
                                             {this.state.productList.map(o => (
-                                                <option value={o.productId}>{o.productCode+"_"+o.productName }</option>
+                                                <option value={o.productId}>{o.orderCode+"_"+o.productName }</option>
                                             ))}
                                         </select>
                                         </div>
                                     </form>
                                 </div>
                             
-                                <div className="card-body" style={{height: 500}}>
+                                <div className="card-body">
                                     <ReactDatatable
                                         config={this.config}
                                         records={this.state.records}
@@ -160,7 +269,7 @@ export class Bom extends Component {
                                 </div>
                                 <div className="card-footer justify-content-between ">
                                     <button type="button" className="btn btn-default float-left" >Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span className="text-danger">{this.state.errormsg}</span>
+                                    <span className="text-danger float-center">{this.state.errormsg}</span>
                                     <button type="button" className="btn btn-primary float-right" onClick={this.saveClick}>Save</button>
                                 </div>
 

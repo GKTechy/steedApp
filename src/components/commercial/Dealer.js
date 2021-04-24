@@ -92,6 +92,8 @@ export class Dealer extends Component {
             state:"",
             pinCode:"",
 
+            nextDealerCode:"",
+
             showModal:false,
             errormsg:"",
             records:[],
@@ -114,8 +116,12 @@ export class Dealer extends Component {
               //  console.log("result-->"+JSON.stringify(result))
                 if(result.valid){
                     this.setState({
-                        records: result.dealerList
+                        records: result.dealerList,
+                        nextDealerCode:result.sObj.value+result.sObj.currentNext,
+                        dealerCode:result.sObj.value+result.sObj.currentNext
                     });
+
+                  //  console.log("nextDealerCode-->"+result.sObj.currentNext)
                 }else{}
             },(error) => {
             }
@@ -162,7 +168,7 @@ export class Dealer extends Component {
          this.setState({ 
             dealerId:0,
             dealerName:"",
-            dealerCode:"",
+            dealerCode:this.state.nextDealerCode,
             dealerPhone:"",
             dealerContactPerson:"",
             mobile:"",
@@ -232,17 +238,20 @@ export class Dealer extends Component {
 
                         if(data.valid){
                              //  console.log("c role->"+obj)
+                             this.resetClick();
                              this.setState({
                                 errormsg: "Dealer Details Saved Successfully",
                                 records: data.dealerList,
+                                nextDealerCode:data.sObj.value+data.sObj.currentNext,
+                                dealerCode:data.sObj.value+data.sObj.currentNext
                             },()=>{
-                                $("#new_dealer .close").click();
-                                this.resetClick();
+                                //$("#new_dealer .close").click();
+                                
                             });
                            
                         }else{
                            this.setState({ errormsg: data.responseMsg});
-                           this.resetClick();
+                          // this.resetClick();
                         } 
                     })
                     .catch(error => {

@@ -83,7 +83,7 @@ export class Supplier extends Component {
             city:"",
             state:"",
             pinCode:"",
-
+            nextsupplierCode:"",
 
             remarks:"",
             isActive:true,
@@ -112,7 +112,9 @@ export class Supplier extends Component {
               //  console.log("result-->"+JSON.stringify(result))
                 if(result.valid){
                     this.setState({
-                        records: result.supplierList
+                        records: result.supplierList,
+                        nextsupplierCode:result.sObj.value+result.sObj.currentNext,
+                        supplierCode:result.sObj.value+result.sObj.currentNext
                     });
                 }else{}
             },(error) => {
@@ -160,7 +162,7 @@ export class Supplier extends Component {
          this.setState({ 
             supplierId:0,
             supplierName:"",
-            supplierCode:"",
+            supplierCode:this.state.nextsupplierCode,
             supplierContactPerson:"",
             mobile:"",
             email:"",
@@ -235,6 +237,8 @@ export class Supplier extends Component {
                              this.setState({
                                 errormsg: "Supplier Details Saved Successfully",
                                 records: data.supplierList,
+                                nextsupplierCode:data.sObj.value+data.sObj.currentNext,
+                                supplierCode:data.sObj.value+data.sObj.currentNext
                             },()=>{
                                 $("#new_supplier .close").click();
                                 this.resetClick();
@@ -242,7 +246,7 @@ export class Supplier extends Component {
                            
                         }else{
                            this.setState({ errormsg: data.responseMsg});
-                           this.resetClick();
+                           //this.resetClick();
                         } 
                     })
                     .catch(error => {
