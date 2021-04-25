@@ -201,6 +201,12 @@ export class MaterialType extends Component {
         }
      }
 
+     refreshClick = () => {
+        this.resetClick();
+        this.componentDidMount();
+    }
+
+    
     render() {
         return (
             <div>
@@ -221,6 +227,7 @@ export class MaterialType extends Component {
                                         <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick}/> &nbsp;&nbsp;&nbsp;
                                         <button className="btn btn-primary btn-sm" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
                                         <button type="button" className="btn btn-primary btn-sm" onClick={this.resetClick}>Reset</button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
 
                                         <label htmlFor="code" className="m-2 " ><span class="text-danger">{this.state.errormsg}</span></label>
                                     </div>

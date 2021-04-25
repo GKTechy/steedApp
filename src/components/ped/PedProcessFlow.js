@@ -208,6 +208,11 @@ export class PedProcessFlow extends Component {
         });
    }
 
+   refreshClick = () => {
+    this.resetClick();
+    this.componentDidMount();
+}
+
     render() {
         return (
             <div>
@@ -242,6 +247,7 @@ export class PedProcessFlow extends Component {
                                             <input type="email" className="form-control m-2 form-control-sm" id="cycleTime" name="cycleTime" value= {this.state.cycleTime} onChange={this.handleFormChange} placeholder="Cycle Time"  />
                                             <button type="button" className="btn btn-primary  btn-sm" onClick={this.saveClick}>Save</button> &nbsp;&nbsp;&nbsp;
                                             <button type="button" className="btn btn-warning  btn-sm" onClick={this.resetClick}>Clear</button> &nbsp;&nbsp;&nbsp;
+                                            <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
                                             <span className="text-danger">{this.state.errormsg}</span>
                                         </div>
 

@@ -264,6 +264,11 @@ export class Dealer extends Component {
      }
 
 
+    refreshClick = () => {
+        this.resetClick();
+        this.componentDidMount();
+    }
+
     render() {
         return (
             <div>
@@ -277,7 +282,8 @@ export class Dealer extends Component {
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
                                             {/* <Link to="/addDealer"><button type="button" className="btn btn-primary btn-flat" >Create New Dealer &nbsp;&nbsp;<i class="fas fa-plus"></i></button></Link> */}
-                                            <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#new_dealer">Create New Dealer &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                            <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#new_dealer">Create New Dealer &nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
                                             </span>
                                         </div>
 

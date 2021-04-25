@@ -196,7 +196,12 @@ export class MachineProcessMap extends Component {
         }
      }
 
+     refreshClick = () => {
+        this.resetClick();
+        this.componentDidMount();
+    }
 
+    
     render() {
         let optionTemplate = this.state.processList.map(v => (
             <option value={v.processId}>{v.processName}</option>
@@ -231,6 +236,7 @@ export class MachineProcessMap extends Component {
                                          
                                         <button type="button" className="btn btn-primary" id="save" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
                                         <button type="button" className="btn btn-primary" id="save" onClick={this.resetClick}>Clear</button>&nbsp;&nbsp;&nbsp;
+                                        <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
                                 </div>
 
                             

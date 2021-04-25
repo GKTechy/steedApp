@@ -101,6 +101,11 @@ export class DealerOrder extends Component {
        
     }
 
+    refreshClick = () => {
+        this.resetClick();
+        this.componentDidMount();
+    }
+    
     render() {
         return (
             <div>
@@ -113,7 +118,8 @@ export class DealerOrder extends Component {
                                     <div className="card-title">
                                             <div className="input-group input-group-sm">
                                                 <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#new_order">Create New Order &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                                <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#new_order">Create New Order &nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
                                                 </span>
                                             </div>
                                         </div>

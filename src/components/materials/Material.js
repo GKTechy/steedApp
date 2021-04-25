@@ -363,6 +363,12 @@ export class Material extends Component {
       }
   }
 
+  refreshClick = () => {
+    this.resetClick();
+    this.componentDidMount();
+}
+
+
 
     render() {
 
@@ -385,7 +391,8 @@ export class Material extends Component {
                             <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#material-new-model">Create New  Material&nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#material-new-model">Create New  Material&nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
                                             </span>
                                         </div>
 

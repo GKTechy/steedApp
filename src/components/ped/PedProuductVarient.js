@@ -188,6 +188,11 @@ export class PedProuductVarient extends Component {
 
     }
 
+    refreshClick = () => {
+        this.resetClick();
+        this.componentDidMount();
+    }
+
 
     render() {
         return (
@@ -211,7 +216,9 @@ export class PedProuductVarient extends Component {
                                                 <input className="form-check-input" type="checkbox" checked={this.state.isActive}  onChange={this.handleCheckClick}/>
                                                 
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <button type="button" className="btn btn-primary btn-sm m-2" onClick={this.saveClick}>Save</button>
+                                                <button type="button" className="btn btn-primary btn-sm m-2" onClick={this.saveClick}>Save</button> &nbsp;&nbsp;&nbsp;
+                                            <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                                
                                                 {/* <button type="button" className="btn btn-warning btn-sm m-2">Reset</button> */}
                                                 <span className="text-danger">{this.state.errormsg}</span>
                                             </div>

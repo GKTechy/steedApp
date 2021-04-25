@@ -234,10 +234,31 @@ export class Bom extends Component {
                     this.setState({ errormsg: error.toString() });
                   //  console.error('There was an error!', error);
                 });
-
-
-        
+       
     }
+
+    resetClick= () => {
+        this.setState({ 
+            name:"",
+            shortName:"",
+            varientId:0,
+            isActive:true,
+            showModal:false,
+            errormsg:"",
+            productList:[],
+            records:[],
+            productId:0,
+            isLoaded:false,
+        });
+   }
+
+
+    refreshClick = () => {
+        this.resetClick();
+        this.componentDidMount();
+    }
+
+
     render() {
         return (
             <div>
@@ -257,6 +278,8 @@ export class Bom extends Component {
                                                 <option value={o.productId}>{o.orderCode+"_"+o.productName }</option>
                                             ))}
                                         </select>
+
+                                      
                                         </div>
                                     </form>
                                 </div>
@@ -269,8 +292,11 @@ export class Bom extends Component {
                                 </div>
                                 <div className="card-footer justify-content-between ">
                                     <button type="button" className="btn btn-default float-left" >Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="button" className="btn btn-success  " onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
                                     <span className="text-danger float-center">{this.state.errormsg}</span>
-                                    <button type="button" className="btn btn-primary float-right" onClick={this.saveClick}>Save</button>
+                                    <button type="button" className="btn btn-primary float-right" onClick={this.saveClick}>Save</button>  &nbsp;&nbsp;&nbsp;
+                                         
+                                            
                                 </div>
 
                             </div>

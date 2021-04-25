@@ -181,7 +181,11 @@ export class Roles extends Component {
 
     }
 
-    
+    refreshClick = () => {
+        this.resetClick();
+        this.componentDidMount();
+    }
+
   
     render() {
         return (
@@ -199,9 +203,9 @@ export class Roles extends Component {
                                         <input className="form-check-input" type="checkbox" checked={this.state.active}  onChange={this.handleCheckClick}/><label className="form-check-label">Active</label>
                                 </div>
                             </div>
-                            <div className="col-1">
+                            <div className="col-2">
                                 <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
-                                {/* <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick}>Reset</button> */}
+                                 <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
                             </div>
                             <div className="col-2">
                                  <span className="text-danger">{this.state.errormsg}</span>

@@ -252,6 +252,10 @@ export class NoteForApproval extends Component {
         }
      }
 
+     refreshClick = () => {
+        this.resetClick();
+        this.componentDidMount();
+    }
 
 
     render() {
@@ -270,7 +274,8 @@ export class NoteForApproval extends Component {
                                     <div className="input-group input-group-sm">
                                                 {/* <input type="text" className="form-control" placeholder="Enter Role..." /> */}
                                                 <span className="input-group-append">
-                                                    <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#note-model" onClick={this.resetClick}>Create New Note &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                                    <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#note-model" onClick={this.resetClick}>Create New Note &nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                    <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
                                                 </span>
                                             </div>
                                     </div>
