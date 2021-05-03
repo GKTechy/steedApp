@@ -23,39 +23,39 @@ export class DealerOrder extends Component {
                 text: "Date",
                 sortable: true
             },{
+                key: "reference",
+                text: "Reference",
+                sortable: true
+            } ,{
+                key: "orderFor",
+                text: "Order For",
+                sortable: true
+            },{
                 key: "dealerName",
                 text: "Dealer Name",
                 sortable: true
-            } ,{
-                key: "productName",
-                text: "Product",
-                sortable: true
-            },
-            {
-                key: "colorCode",
-                text: "Color",
-                sortable: true
             },{
-                key: "qty",
-                text: "Qty",
+                key: "dealerContactPerson",
+                text: "Contact Person",
                 sortable: true
-            },
-            // {
-            //     key: "action",
-            //     text: "Action",
-            //     cell: (record, index) => {
-            //         return (
-            //                 <button
-            //                     className="btn btn-info btn-sm"
-            //                     data-toggle="modal" data-target="#new_dealer"
-            //                     onClick={this.editRecord.bind(this, record, index)}
-            //                     style={{marginRight: '5px'}}>
-            //                         <i className="fas fa-pencil-alt" ></i>&nbsp;Edit
-            //                 </button>
+            }  ,
+            
+            {
+                key: "action",
+                text: "Action",
+                cell: (record, index) => {
+                    return (
+                            <button
+                                className="btn btn-info btn-sm"
+                                data-toggle="modal" data-target="#new_order"
+                                onClick={this.editRecord.bind(this, record, index)}
+                                style={{marginRight: '5px'}}>
+                                    <i className="fas fa-pencil-alt" ></i>&nbsp;Edit
+                            </button>
                        
-            //         );
-            //     }
-            // }
+                    );
+                }
+            }
         ];
 
         this.config = {
@@ -78,7 +78,8 @@ export class DealerOrder extends Component {
             dealerId:"",
             reference:"",
             dealerContactPerson:"",
-
+            orderFor:"Dealer",
+            dealerOrderId:0,
 
             subtotal:"",
 			taxTotal:"",
@@ -90,6 +91,7 @@ export class DealerOrder extends Component {
             dealerList:[],
             productList:[],
             orderDetailsList:[],
+            productsearch:[],
             isLoaded:false,
             loginUser:this.props.profile
         }
@@ -110,6 +112,13 @@ export class DealerOrder extends Component {
                         records: result.dealerOrderList,
                         dealerList: result.dealerList,
                         productList:result.productList
+                    },()=>{
+                            for (const [index, value] of this.state.productList.entries()) {
+                                this.state.productsearch.push({
+                                    label: value.orderCode,
+                                    value: value.productId
+                                });
+                            }
                     });
 
                   //  console.log("nextDealerCode-->"+result.sObj.currentNext)
@@ -279,17 +288,133 @@ export class DealerOrder extends Component {
     };
 
 
+    saveClick= event =>{
+        
+        if(this.state.orderDate === ""){
+            this.setState({
+                errormsg: "Enter Date"
+            });
+        }else if(this.state.dealerId === ""){
+            this.setState({
+                errormsg: "Select Dealer"
+            });
+        }else if(this.state.orderDetailsList.length === 0){
+            this.setState({
+                errormsg: "Enter Products"
+            });
+        }else{
+           
+        
+
+            var headerobj={
+                "dealerOrderId":this.state.dealerOrderId,
+                'orderNo':this.state.orderNo,'orderDate':this.state.orderDate,
+                'reference':this.state.reference, 'orderFor':this.state.orderFor,'dealerId':this.state.dealerId, 
+                'subtotal':this.state.subtotal, 'taxTotal':this.state.taxTotal, 'total':this.state.total, 
+            }
+            const obj = {
+                "dealerOrderObj":headerobj,
+                 "dealerOrderProductsList":this.state.orderDetailsList,
+                "updatedBy":this.state.loginUser.userId,"createdBy":this.state.loginUser.userId};
+
+             // POST request using fetch with error handling
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify( obj)
+                };
+              
+                console.log("save obj-->"+JSON.stringify( obj))
+                
+                fetch(this.props.apiurl+"dealerOrder/saveDealerOrder", requestOptions)
+                .then(async response => {
+                    const data = await response.json();
+               //     console.log("--data--"+JSON.stringify(data))
+                    // check for error response
+                    if (!response.ok) {
+                        // get error message from body or default to response status
+                        const error = (data && data.message) || response.status;
+                        return Promise.reject(error);
+                    }
+
+                    if(data.valid){
+                        this.setState({ errormsg: "Successfully Added the New Order"});
+                    }else{
+                       this.setState({ errormsg: data.responseMsg});
+                      // this.resetClick();
+                    } 
+                })
+                .catch(error => {
+                    this.setState({ errormsg: error.toString() });
+                  //  console.error('There was an error!', error);
+                });
+     
+                
+          
+        }
+     }
+
+
+     editRecord = (record, index) => {
+
+        this.setState({
+            orderDate:record.orderDate,
+            orderNo:record.orderNo,
+            dealerId:record.dealerId,
+            reference:record.reference,
+            dealerContactPerson:record.dealerContactPerson,
+            orderFor:record.orderFor,
+            dealerOrderId:record.dealerOrderId,
+
+            subtotal:record.subtotal,
+            taxTotal:record.taxTotal,
+            total:record.total,
+        });
+
+        fetch(this.props.apiurl+"dealerOrder/getProductDetails?id="+record.dealerOrderId)
+        .then(res => res.json())
+        .then( (result) => {
+              //  console.log("result-->"+JSON.stringify(result))
+                if(result.valid){
+                    this.setState({
+                        orderDetailsList: result.dealerOrderProductsList,
+                       // dealerList: result.dealerList,
+                      //  productList:result.productList
+                    },()=>{
+                        
+                      
+                        const { orderDetailsList } = this.state;
+
+
+                        orderDetailsList.map((ord,i)=>{
+                            orderDetailsList[i].orderCode = ord.productId
+                            var product=this.state.productList.filter( (d)=> d.productId == ord.productId)
+                            orderDetailsList[i].productName = product[0].productCode
+                            orderDetailsList[i].size = product[0].size
+                            orderDetailsList[i].colors = product[0].colors
+                        })
+                        this.setState({ orderDetailsList:orderDetailsList,errormsg: "" },()=>{
+                            
+                            console.log("orderDetailsList-->"+JSON.stringify(this.state.orderDetailsList))
+                            console.log("productList-->"+JSON.stringify(this.state.productsearch))
+                        });
+
+
+                    });
+
+                  //  console.log("nextDealerCode-->"+result.sObj.currentNext)
+                }else{}
+            },(error) => {
+            }
+        )
+
+
+     }
+
     render() {
 
-        const productsearch=[];
+        //const productsearch=[];
 
-          
-        for (const [index, value] of this.state.productList.entries()) {
-            productsearch.push({
-                label: value.orderCode,
-                value: value.productId
-            });
-        }
 
 
         return (
@@ -351,7 +476,7 @@ export class DealerOrder extends Component {
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Reference</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="reference" name="reference" value= {this.state.reference} onChange={this.handleFormChange} placeholder="Order Reference" />
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Order For</label>
-                                        <select className="form-control m-2 col-sm-3" id="dealerId" name="dealerId" value={this.state.dealerId} onChange={this.handleFormChange} >
+                                        <select className="form-control m-2 col-sm-3" id="orderFor" name="orderFor" value={this.state.orderFor} onChange={this.handleFormChange} >
                                             <option value="Dealer">Dealer</option>
                                             <option value="Customer">Customer</option>
                                         </select>
@@ -404,9 +529,9 @@ export class DealerOrder extends Component {
                                                                      </select> */}
 
                                                                     <Select
-                                                                            value={productsearch.filter(({ value }) => value === ord.orderCode)}
+                                                                            value={this.state.productsearch.filter(({ value }) => value === ord.orderCode)}
                                                                             onChange={(e)=>this.handleChange(i,e)}
-                                                                            options={productsearch}
+                                                                            options={this.state.productsearch}
                                                                         />
                                                                         
                                                                 </td>
