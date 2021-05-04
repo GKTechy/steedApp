@@ -38,6 +38,10 @@ export class DealerOrder extends Component {
                 key: "dealerContactPerson",
                 text: "Contact Person",
                 sortable: true
+            },{
+                key: "total",
+                text: "Amount",
+                sortable: true
             }  ,
             
             {
@@ -98,6 +102,26 @@ export class DealerOrder extends Component {
        
     }
 
+    resetClick = ()=>{
+        this.setState({
+            orderDate:"",
+            orderNo:"",
+            dealerId:"",
+            reference:"",
+            dealerContactPerson:"",
+            orderFor:"Dealer",
+            dealerOrderId:0,
+
+            subtotal:"",
+			taxTotal:"",
+			total:"",
+
+            errormsg:"",
+            orderDetailsList:[],
+        });
+
+    }
+
     componentDidMount() {
         this.getTableValues();
 //        console.log('props profile-->:'+this.props.apiurl)
@@ -154,11 +178,11 @@ export class DealerOrder extends Component {
             productName:"",
             size:"",
             colors:"",
-            qty:"",
-            price:"",
-            amount:"",
+            qty:0,
+            price:0,
+            amount:0,
             gst:"GST_0",
-            gstAmt:""
+            gstAmt:0
         }
 
         let orderDetailsListtemp = this.state.orderDetailsList
@@ -183,7 +207,10 @@ export class DealerOrder extends Component {
          orderDetailsList[ind].productName = product[0].productCode
          orderDetailsList[ind].size = product[0].size
          orderDetailsList[ind].colors = product[0].colors
-         orderDetailsList[ind].qty = 
+         orderDetailsList[ind].qty = 0
+        orderDetailsList[ind].price = 0
+        orderDetailsList[ind].amount = 0
+        orderDetailsList[ind].gstAmt = 0
          
          
         this.setState({ orderDetailsList:orderDetailsList },()=>{
@@ -237,10 +264,10 @@ export class DealerOrder extends Component {
           //  console.log('amt--'+amt)
             this.setState({ orderDetailsList:orderDetailsList },()=>{
 
-                var subtotal = this.state.orderDetailsList.reduce((total, currentValue) => total = total + currentValue.amount,0);
-                var taxamt = this.state.orderDetailsList.reduce((total, currentValue) => total = total + currentValue.gstAmt,0);
+                var subtotal = this.state.orderDetailsList.reduce((total, currentValue) => total = parseFloat(total) + parseFloat(currentValue.amount),0);
+                var taxamt = this.state.orderDetailsList.reduce((total, currentValue) => total = parseFloat(total) + parseFloat(currentValue.gstAmt),0);
                // console.log("subtotal-->"+subtotal)
-               // console.log("taxamt-->"+taxamt)
+                //console.log("taxamt-->"+taxamt)
                 this.setState({ subtotal:subtotal,taxTotal:taxamt,total:taxamt+subtotal });
             });
         }
@@ -260,7 +287,10 @@ export class DealerOrder extends Component {
              orderDetailsList[ind].productName = ''
              orderDetailsList[ind].size = ''
              orderDetailsList[ind].colors = ''
-             orderDetailsList[ind].qty = 
+             orderDetailsList[ind].qty = 0
+             orderDetailsList[ind].price = 0
+             orderDetailsList[ind].amount = 0
+             orderDetailsList[ind].gstAmt = 0
 
             this.setState({orderDetailsList:orderDetailsList, errormsg: event.label+" Order code Already Added " },()=>{});
         }else{
@@ -273,9 +303,18 @@ export class DealerOrder extends Component {
              orderDetailsList[ind].productName = product[0].productCode
              orderDetailsList[ind].size = product[0].size
              orderDetailsList[ind].colors = product[0].colors
-             orderDetailsList[ind].qty = 
+             orderDetailsList[ind].qty = 0
+             orderDetailsList[ind].price = 0
+             orderDetailsList[ind].amount = 0
+             orderDetailsList[ind].gstAmt = 0
              
-            this.setState({ orderDetailsList:orderDetailsList,errormsg: "" },()=>{});
+            this.setState({ orderDetailsList:orderDetailsList,errormsg: "" },()=>{
+                var subtotal = this.state.orderDetailsList.reduce((total, currentValue) => total = parseFloat(total) + parseFloat(currentValue.amount),0);
+                var taxamt = this.state.orderDetailsList.reduce((total, currentValue) => total = parseFloat(total) + parseFloat(currentValue.gstAmt),0);
+               // console.log("subtotal-->"+subtotal)
+                //console.log("taxamt-->"+taxamt)
+                this.setState({ subtotal:subtotal,taxTotal:taxamt,total:taxamt+subtotal });
+            });
         }
     
     };
@@ -284,7 +323,13 @@ export class DealerOrder extends Component {
         const { orderDetailsList } = this.state;
         orderDetailsList.splice(ind,1);
           
-         this.setState({ orderDetailsList:orderDetailsList,errormsg: "" },()=>{});
+         this.setState({ orderDetailsList:orderDetailsList,errormsg: "" },()=>{
+            var subtotal = this.state.orderDetailsList.reduce((total, currentValue) => total = parseFloat(total) + parseFloat(currentValue.amount),0);
+            var taxamt = this.state.orderDetailsList.reduce((total, currentValue) => total = parseFloat(total) + parseFloat(currentValue.gstAmt),0);
+           // console.log("subtotal-->"+subtotal)
+            //console.log("taxamt-->"+taxamt)
+            this.setState({ subtotal:subtotal,taxTotal:taxamt,total:taxamt+subtotal });
+         });
     };
 
 
@@ -324,7 +369,7 @@ export class DealerOrder extends Component {
                     body: JSON.stringify( obj)
                 };
               
-                console.log("save obj-->"+JSON.stringify( obj))
+              //  console.log("save obj-->"+JSON.stringify( obj))
                 
                 fetch(this.props.apiurl+"dealerOrder/saveDealerOrder", requestOptions)
                 .then(async response => {
@@ -387,7 +432,7 @@ export class DealerOrder extends Component {
 
 
                         orderDetailsList.map((ord,i)=>{
-                            orderDetailsList[i].orderCode = ord.productId
+                            orderDetailsList[i].orderCode = Number(ord.productId)
                             var product=this.state.productList.filter( (d)=> d.productId == ord.productId)
                             orderDetailsList[i].productName = product[0].productCode
                             orderDetailsList[i].size = product[0].size
@@ -395,8 +440,8 @@ export class DealerOrder extends Component {
                         })
                         this.setState({ orderDetailsList:orderDetailsList,errormsg: "" },()=>{
                             
-                            console.log("orderDetailsList-->"+JSON.stringify(this.state.orderDetailsList))
-                            console.log("productList-->"+JSON.stringify(this.state.productsearch))
+                          //  console.log("orderDetailsList-->"+JSON.stringify(this.state.orderDetailsList))
+                          //  console.log("productList-->"+JSON.stringify(this.state.productsearch))
                         });
 
 
@@ -428,7 +473,7 @@ export class DealerOrder extends Component {
                                     <div className="card-title">
                                             <div className="input-group input-group-sm">
                                                 <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#new_order">Create New Order &nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#new_order">Create New Order &nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
                                                 <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
                                                 </span>
                                             </div>
