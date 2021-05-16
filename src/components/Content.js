@@ -21,6 +21,7 @@ import MaterialReport from './materials/MaterialReport';
 import IndexDashboard from './IndexDashboard';
 
 import { withRouter } from "react-router";
+import UserProfile from './UserProfile';
 
 export class Content extends Component {
 
@@ -63,7 +64,7 @@ export class Content extends Component {
 
                 <Route exact path={`${match.path}/PEDMaster`}  component={PEDMaster} />
                 
-                
+                <Route exact path={`${match.path}/userProfile`}  component={UserProfile} />
                 
 
                 

@@ -306,7 +306,7 @@ export class Bom extends Component {
                    
                        
                     </div>
-                    </section>
+                    </section> 
             </div>
         )
     }

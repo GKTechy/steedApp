@@ -28,19 +28,18 @@ export class Dashboard extends Component {
                         <span className="brand-text font-weight-light">Steed App</span>
                         
                     </a>
-                {/* Sidebar */}
                 <div className="sidebar">
-                    {/* Sidebar user panel (optional) */}
+              
                     <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div className="image">
-                        <img src="dist/img/avatar5.png" className="img-circle elevation-2" alt="User Image" />
+                        {/* <img src="dist/img/avatar5.png" className="img-circle elevation-2" alt="User Image" /> */}
+                        <img alt="Avatar" class="img-circle" src="../../dist/img/avatar5.png"></img>
                     </div>
                     <div className="info">
-                        <a href="#" className="d-block">User 1</a>
+                        <Link to={`${match.path}/userProfile`}>  <a href="#" className="d-block">User 1</a></Link>
                     </div>
                     </div>
                
-                    {/* Sidebar Menu */}
                     <nav className="mt-2">
                         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-users-cog"/><p>Admin </p></a>

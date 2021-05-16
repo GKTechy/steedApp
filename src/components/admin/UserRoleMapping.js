@@ -1,6 +1,54 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+
 
 export class UserRoleMapping extends Component {
+
+
+    constructor(props) {
+        super(props)
+        
+        
+        this.state = {
+            roleid:0,
+            active:true,
+            showModal:false,
+            errormsg:"",
+            records:[],
+            roleList:[],
+            mainMenuList:[],
+            isLoaded:false,
+            loginUser:this.props.profile
+        }
+       
+    }
+
+
+    componentDidMount() {
+        this.getTableValues();
+      
+    } 
+
+    getTableValues(){
+           console.log('MachineProcessMap props profile-->:'+this.props.apiurl)
+            fetch(this.props.apiurl+"role/allRolesModules")
+            .then(res => res.json())
+            .then( (result) => {
+                   // console.log("result-->"+JSON.stringify(result))
+                    if(result.valid){
+                        this.setState({
+                            roleList: result.roleList,
+                            mainMenuList: result.mainMenuList,
+                        });
+                    }else{}
+                },(error) => {
+                }
+            )
+    }
+
+    handleChange = (event) =>{
+        this.setState({[event.target.name]: event.target.value});
+    }
     render() {
         return (
             <div>
@@ -12,104 +60,60 @@ export class UserRoleMapping extends Component {
                             <div className="card-header">
                                     <div className="form-inline">
                                              <label htmlFor="inlineFormEmail" className="m-2">User Role </label>
-                                            <select className="form-control">
-                                                <option>Role 1</option>
-                                                <option>Role 2</option>
-                                                <option>Role 3</option>
-                                                <option>Role 4</option>
-                                                <option>Role 5</option>
+                                             <select className="custom-select"  id="roleId" name="roleId" value={this.state.roleId} onChange={this.handleChange} >
+                                                <option value="0">Select Roles</option>
+                                                {this.state.roleList.map(o => (
+                                                    <option value={o.roleId}>{o.roleName}</option>
+                                                ))}
                                             </select>
-                                            <label htmlFor="inlineFormEmail" className="m-2">Module </label>
-                                            <select className="form-control">
-                                                <option>Module 1</option>
-                                                <option>Module 2</option>
-                                                <option>Module 3</option>
-                                                <option>Module 4</option>
-                                                <option>Module 5</option>
-                                            </select>
+                                            
                                         </div>
                             </div>
                             
                             <div className="card-body">
-                                <div className="row">
-                                   <table className="table table-hover">
-                                            <tbody>
-                                               
-                                                <tr data-widget="expandable-table" aria-expanded="false">
-                                                    <td>
-                                                        <i className="fas fa-caret-right fa-fw" />
-                                                        Admin
-                                                    </td>
-                                                </tr>
-                                                <tr className="expandable-body d-none">
-                                                        <td>
-                                                            <div className="p-0" style={{display: 'none'}}>
-                                                            <table className="table table-hover">
-                                                                <tbody>
-                                                                <tr data-widget="expandable-table" aria-expanded="false">
-                                                                      <td>
-                                                                    <i className="fas fa-caret-right fa-fw" />
-                                                                    Master
-                                                                    </td>
-                                                                </tr>
-                                                                <tr className="expandable-body d-none">
-                                                                    <td>
-                                                                    <div className="p-0" style={{display: 'none'}}>
-                                                                        <table className="table table-hover">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                            <td>Manage Users</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                            <td>Roles</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                            <td>Note for Approval</td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr data-widget="expandable-table" aria-expanded="false">
-                                                                      <td>
-                                                                    <i className="fas fa-caret-right fa-fw" />
-                                                                    Transaction
-                                                                    </td>
-                                                                </tr>
-                                                                    <tr className="expandable-body d-none">
-                                                                        <td>
-                                                                        <div className="p-0" style={{display: 'none'}}>
-                                                                            <table className="table table-hover">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                <td>Users Role Mapping</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                <td>Roles Mapping</td>
-                                                                                </tr>
-                                                                               
-                                                                            </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                        </td>
-                                                                    </tr>
-                                                            
-                                                                </tbody>
-                                                            </table>
-                                                            </div>
-                                                        </td>
-                                                </tr>
-                                                <tr data-widget="expandable-table" aria-expanded="false">
-                                                    <td>
-                                                        <i className="fas fa-caret-right fa-fw" />
-                                                         Production
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            </table>
+                                <div id="accordion" className="col-md-6">
 
+                                {this.state.mainMenuList.map((obj,index) => (
+                                    <div className="card card-primary" id={obj.mainMenuId}>
+                                        <div className="card-header">
+                                            <h4 className="card-title ">
+                                                <a className="d-block  collapsed" data-toggle="collapse" href={"#"+obj.mainMenuName+"_"+obj.mainMenuId} aria-expanded="false">
+                                                    {obj.mainMenuName}
+                                                </a>
+                                            </h4>
+                                        </div>
+
+                                        
+                                            <div id={obj.mainMenuName+"_"+obj.mainMenuId} class="collapse" data-parent="#accordion" >
+                                                <div class="card-body">
+                                                {obj.subMenuList.map(sobj => (
+                                                    <p>{sobj.subMenuName}</p>   
+                                                ))}
+                                                </div>
+                                            </div>
+                                         
+                                    </div>
+                                ))}
+
+                                    
+                                        {/* <div id="collapseOne" className="collapse" data-parent="#accordion" >
+                                            <div className="card-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                                                3
+                                                wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                                                laborum
+                                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee
+                                                nulla
+                                                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                                                nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                                beer
+                                                farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                                                labore sustainable VHS.
+                                            </div>
+                                        </div> */}
+                                    
                                 </div>
+               
 
                             </div>
                             <div class="card-footer clearfix">
@@ -128,4 +132,15 @@ export class UserRoleMapping extends Component {
     }
 }
 
-export default UserRoleMapping
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl
+    }
+  }
+
+ export default connect(mapStateToProps)(UserRoleMapping);
+
+
+
+//export default UserRoleMapping
