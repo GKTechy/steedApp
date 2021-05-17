@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-
 import ReactDatatable from '@ashvin27/react-datatable';
+import $ from "jquery";
 
 export class PedProuductVarient extends Component {
 
@@ -71,6 +71,9 @@ export class PedProuductVarient extends Component {
     componentDidMount() {
         this.getTableValues();
 //        console.log('props profile-->:'+this.props.apiurl)
+        $("#as-react-datatable-container").find('select').addClass("form-control-sm");
+        $("#as-react-datatable-container").find('input').addClass("form-control-sm");
+
      }  
     getTableValues(){
         fetch(this.props.apiurl+"product/allProductVarients")
@@ -80,7 +83,7 @@ export class PedProuductVarient extends Component {
                 if(result.valid){
                     this.setState({
                         records: result.productVarientList
-                    });
+                    },()=>{ $("#as-react-datatable td").css({"padding":'0.50rem'});});
                 }else{}
             },(error) => {
             }

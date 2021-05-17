@@ -115,6 +115,9 @@ export class NoteForApproval extends Component {
     componentDidMount() {
         this.getTableValues();
 //        console.log('props profile-->:'+this.props.apiurl)
+    $("#as-react-datatable-container").find('select').addClass("form-control-sm");
+    $("#as-react-datatable-container").find('input').addClass("form-control-sm");
+
      }  
     getTableValues(){
         fetch(this.props.apiurl+"noteforapproval/allNoteForApprovals")
@@ -124,6 +127,8 @@ export class NoteForApproval extends Component {
                 if(result.valid){
                     this.setState({
                         records: result.noteForApprovalList
+                    },()=>{
+                        $("#as-react-datatable td").css({"padding":'0.50rem'});
                     });
                 }else{}
             },(error) => {

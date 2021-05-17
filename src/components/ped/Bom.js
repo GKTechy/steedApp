@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import ReactDatatable from '@ashvin27/react-datatable';
+import $ from "jquery";
 
 export class Bom extends Component {
 
@@ -99,6 +100,9 @@ export class Bom extends Component {
     componentDidMount() {
         this.getTableValues();
 //        console.log('props profile-->:'+this.props.apiurl)
+        $("#as-react-datatable-container").find('select').addClass("form-control-sm");
+        $("#as-react-datatable-container").find('input').addClass("form-control-sm");
+
      }  
     getTableValues(){
         fetch(this.props.apiurl+"billOfMaterial/allBillOfMaterials")
@@ -108,7 +112,7 @@ export class Bom extends Component {
                 if(result.valid){
                     this.setState({
                         productList: result.productList
-                    });
+                    },()=>{ $("#as-react-datatable td").css({"padding":'0.50rem'});});
                 }else{}
             },(error) => {
             }
@@ -178,7 +182,7 @@ export class Bom extends Component {
 
         const { records } = this.state;
         let result = records.filter(el => el.qty === '' ||el.qty === '0');
-        console.log('varlen--'+result.length)
+  //      console.log('varlen--'+result.length)
         
         if(records.length === 0){
             this.setState({

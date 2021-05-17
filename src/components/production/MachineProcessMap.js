@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import ReactDatatable from '@ashvin27/react-datatable';
+import $ from 'jquery';
 
 export class MachineProcessMap extends Component {
 
@@ -74,7 +75,8 @@ export class MachineProcessMap extends Component {
 
     componentDidMount() {
         this.getTableValues();
-      
+        $("#as-react-datatable-container").find('select').addClass("form-control-sm");
+        $("#as-react-datatable-container").find('input').addClass("form-control-sm");
      }  
 
      getTableValues(){
@@ -89,7 +91,7 @@ export class MachineProcessMap extends Component {
                         machineList: result.machineList,
                         processList: result.processList
 
-                    });
+                    },()=>{ $("#as-react-datatable td").css({"padding":'0.50rem'});});
                 }else{}
             },(error) => {
             }

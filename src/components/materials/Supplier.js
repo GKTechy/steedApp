@@ -104,6 +104,9 @@ export class Supplier extends Component {
     componentDidMount() {
         this.getTableValues();
 //        console.log('props profile-->:'+this.props.apiurl)
+    $("#as-react-datatable-container").find('select').addClass("form-control-sm");
+    $("#as-react-datatable-container").find('input').addClass("form-control-sm");
+
      }  
     getTableValues(){
         fetch(this.props.apiurl+"supplier/allSuppliers")
@@ -115,7 +118,7 @@ export class Supplier extends Component {
                         records: result.supplierList,
                         nextsupplierCode:result.sObj.value+result.sObj.currentNext,
                         supplierCode:result.sObj.value+result.sObj.currentNext
-                    });
+                    },()=>{ $("#as-react-datatable td").css({"padding":'0.50rem'});});
                 }else{}
             },(error) => {
             }

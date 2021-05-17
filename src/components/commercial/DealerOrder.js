@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-
-
 import { connect } from "react-redux";
 import ReactDatatable from '@ashvin27/react-datatable';
 import Select from 'react-select';
+import $ from 'jquery';
 
 export class DealerOrder extends Component {
 
@@ -125,6 +124,9 @@ export class DealerOrder extends Component {
     componentDidMount() {
         this.getTableValues();
 //        console.log('props profile-->:'+this.props.apiurl)
+        $("#as-react-datatable-container").find('select').addClass("form-control-sm");
+        $("#as-react-datatable-container").find('input').addClass("form-control-sm");
+
      }  
     getTableValues(){
         fetch(this.props.apiurl+"dealerOrder/allDealerOrders")
@@ -143,6 +145,7 @@ export class DealerOrder extends Component {
                                     value: value.productId
                                 });
                             }
+                            $("#as-react-datatable td").css({"padding":'0.50rem'});
                     });
 
                   //  console.log("nextDealerCode-->"+result.sObj.currentNext)

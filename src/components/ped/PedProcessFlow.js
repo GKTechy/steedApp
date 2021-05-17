@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import ReactDatatable from '@ashvin27/react-datatable';
+import $ from "jquery";
 
 
 export class PedProcessFlow extends Component {
@@ -82,6 +83,9 @@ export class PedProcessFlow extends Component {
     componentDidMount() {
         this.getTableValues();
 //        console.log('props profile-->:'+this.props.apiurl)
+    $("#as-react-datatable-container").find('select').addClass("form-control-sm");
+    $("#as-react-datatable-container").find('input').addClass("form-control-sm");
+
      }  
     getTableValues(){
         fetch(this.props.apiurl+"processflow/allProcessFlows")
@@ -93,7 +97,7 @@ export class PedProcessFlow extends Component {
                         records: result.processFlowList,
                         productList:result.productList,
                         processList:result.processList,
-                    });
+                    },()=>{ $("#as-react-datatable td").css({"padding":'0.50rem'});});
                 }else{}
             },(error) => {
             }
