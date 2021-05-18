@@ -3,6 +3,9 @@ import { Redirect } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { connect } from "react-redux";
+import { ActionCreators } from '../redux/actions';
+
 
 export class Login extends Component {
 
@@ -14,8 +17,8 @@ constructor(props) {
      
     islogged: false,
       loginParams: {
-        user_id: "",
-        user_password: ""
+        user_id: "admin",
+        user_password: "123"
     },
     iserror:false,
     pwdvisible:false,
@@ -40,25 +43,54 @@ handleFormChange = event => {
 login = event => {
   let user_id = this.state.loginParams.user_id;
   let user_password = this.state.loginParams.user_password;
-  if (user_id === "admin" && user_password === "123") {
-    localStorage.setItem("steedApptoken", "SAt");
-    this.setState({
-      islogged: true,
-      iserror: false
-    });
-  }else if (user_id === "" || user_password === "") {
+  if (user_id === "" || user_password === "") {
       toast.error("Enter User Name & Password")
 
     this.setState({
       iserror: true,
-      iserrormsg:"Enter All Values"
+     // iserrormsg:"Enter All Values"
     });
   }else{
-    toast.error("Invalid Login")
-    this.setState({
-      iserror: true,
-      iserrormsg:"Invalid Login"
-    });
+    
+            //  // POST request using fetch with error handling
+                 const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "userName": user_id,"password": user_password })
+                };
+                fetch(this.props.apiurl+"user/userLogin", requestOptions)
+                    .then(async response => {
+                        const data = await response.json();
+                       // console.log("--data--"+JSON.stringify(data))
+                        // check for error response
+                        if (!response.ok) {
+                            // get error message from body or default to response status
+                            const error = (data && data.message) || response.status;
+                            return Promise.reject(error);
+                        }
+
+                        if(data.valid){
+                            
+                            this.props.dispatch(ActionCreators.addProfile(data.usersList));
+                           // this.props.dispatch(ActionCreators.addUserMenus(data.menuList));
+                            this.setState({
+                              islogged: true,
+                              iserror: false
+                            },()=>{
+                              localStorage.setItem("steedApptoken", "SAt");
+                            });
+                        }else{
+                            this.setState({ errormsg: data.responseMsg});
+                        
+                        }
+                           
+                    })
+                    .catch(error => {
+                        this.setState({ errormsg: error.toString() });
+                      //  console.error('There was an error!', error);
+                    });
+
+   
   }
   event.preventDefault();
 };
@@ -143,5 +175,14 @@ changeIcon =()=>{
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    profile: state.user.profile,
+    apiurl: state.user.apiurl
+  }
+}
 
-export default Login;
+export default connect(mapStateToProps)(Login);
+
+
+//export default Login;

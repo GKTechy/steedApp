@@ -31,8 +31,8 @@ export class UserRoleMapping extends Component {
                 sortable: true,
                 cell: (record, index) => {
                     return (
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="readOnly" id="readOnly" checked={record.readOnly} onChange={ (e)=>this.selectReadRecord(e,index)} />
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" name="readOnly" id="readOnly" checked={record.readOnly} onChange={ (e)=>this.selectReadRecord(e,index)} />
                         </div>
                        
                     );
@@ -44,8 +44,8 @@ export class UserRoleMapping extends Component {
                 sortable: true,
                 cell: (record, index) => {
                     return (
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="readWriteOnly" id="readWriteOnly" checked={record.readWriteOnly} onChange={ (e)=>this.selectWriteRecord(e,index)} />
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" name="readWriteOnly" id="readWriteOnly" checked={record.readWriteOnly} onChange={ (e)=>this.selectWriteRecord(e,index)} />
                         </div>
                        
                     );

@@ -259,7 +259,7 @@ export class ManageUsers extends Component {
                                 <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#user-model">Create New User &nbsp;&nbsp;<i class="fas fa-plus"></i></button>
+                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#user-model">Create New User &nbsp;&nbsp;<i className="fas fa-plus"></i></button>
                                             </span>
                                         </div>
 
@@ -299,13 +299,13 @@ export class ManageUsers extends Component {
 
                        <div className="container-fluid">
                             <form className="form-inline">
-                                <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">User Name <span class="text-danger">*</span></label>
+                                <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">User Name <span className="text-danger">*</span></label>
                                 <input type="email" className="form-control col-2 form-control-sm" name="username" id="username" value= {this.state.username} onChange={this.handleFormChange} />
-                                <label htmlFor="inlineFormPassword" className="m-2 font-weight-normal">Password <span class="text-danger">*</span></label>
+                                <label htmlFor="inlineFormPassword" className="m-2 font-weight-normal">Password <span className="text-danger">*</span></label>
                                 <input type="password" className="form-control  col-2 form-control-sm" name="userpwd" id="userpwd" value= {this.state.userpwd} onChange={this.handleFormChange} />
-                                <label htmlFor="confirmFormPassword" className="m-2 font-weight-normal">Confirm Password <span class="text-danger">*</span></label>
+                                <label htmlFor="confirmFormPassword" className="m-2 font-weight-normal">Confirm Password <span className="text-danger">*</span></label>
                                 <input type="password" className="form-control  col-2 form-control-sm" name="userconfirmpwd" id="userconfirmpwd" value= {this.state.userconfirmpwd} onChange={this.handleFormChange} />
-                                <label htmlFor="isActive" className="m-2 font-weight-normal">Active<span class="text-danger">*</span></label>
+                                <label htmlFor="isActive" className="m-2 font-weight-normal">Active<span className="text-danger">*</span></label>
                                 <input type="checkbox" className="form-check-input" id="isActive"  checked={this.state.active} onChange={this.handleCheckClick}/>
                             </form>
                                 <div className="row">
@@ -345,7 +345,7 @@ export class ManageUsers extends Component {
                         </div>
                         <div className="modal-footer justify-content-between">
                             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button> &nbsp;&nbsp;
-                             <span class="text-danger"> {this.state.errormsg}</span>
+                             <span className="text-danger"> {this.state.errormsg}</span>
                             <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>
                         </div>
                         </div>

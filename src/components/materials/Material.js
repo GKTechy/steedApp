@@ -393,8 +393,8 @@ export class Material extends Component {
                             <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#material-new-model">Create New  Material&nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
-                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#material-new-model">Create New  Material&nbsp;&nbsp;<i className="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                             </span>
                                         </div>
 
@@ -426,19 +426,19 @@ export class Material extends Component {
                                 <div className="container-fluid">
                                     <div className="form-inline">
                                         
-                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Material Type<span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Material Type<span className="text-danger">*</span></label>
                                         <select className="form-control m-2 col-sm-3" id="itemType" name="itemType" value={this.state.itemType} onChange={this.handleFormChange}>
                                              <option value="0">Select</option>
                                               {optionTemplate}
                                         </select>
-                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Material Code<span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Material Code<span className="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="materialCode" name="materialCode" value={this.state.materialCode} onChange={this.handleFormChange} />
-                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Material Name<span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Material Name<span className="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="rawMaterialName" name="rawMaterialName" value={this.state.rawMaterialName} onChange={this.handleFormChange} />
                                        
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Remarks</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="remarks" name="remarks" value={this.state.remarks} onChange={this.handleFormChange} />
-                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >MeasureMent Type<span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >MeasureMent Type<span className="text-danger">*</span></label>
                                         <select className="form-control m-2 col-sm-3" id="measurementType" name="measurementType" value={this.state.measurementType} onChange={this.handleFormChange1} >
                                             <option value="0">Select</option>
                                             <option value="Mass">Mass</option>
@@ -446,7 +446,7 @@ export class Material extends Component {
                                             <option value="Unit">Unit</option>
                                             <option value="Distance">Distance</option>
                                         </select>
-                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Units <span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Units <span className="text-danger">*</span></label>
                                         <select className="form-control m-2 col-sm-3" id="units" name="units" value={this.state.units} onChange={this.handleFormChange} >
                                             <option value="0">Select</option>
                                              {optionTemplate1}
@@ -457,7 +457,7 @@ export class Material extends Component {
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="price" name="price" value={this.state.price} onChange={this.handleFormChange}/>
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Reference Level</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="referenceLevel" name="referenceLevel" value={this.state.referenceLevel} onChange={this.handleFormChange} />
-                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Supplier Name<span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Supplier Name<span className="text-danger">*</span></label>
                                         <select className="form-control m-2 col-sm-3" id="supplierId" name="supplierId" value={this.state.supplierId} onChange={this.handleFormChange}>
                                             <option value="0">Select</option>
                                             {this.state.supplierList.map(o => (

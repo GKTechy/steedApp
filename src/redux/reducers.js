@@ -2,47 +2,37 @@ import { Types } from './Types';
 
 
 const initialState = {
-    profile: {
-      userId:"100",
-      firstName: '',
-      lastName: '',
-      telephone: '',
-      age: 28,
-      email: '',
-      state: '',
-      country: '',
-      address: 'Home',
-      address1: '',
-      address2: '',
-      interests: [],
-      profileImage: '',
-      subscribenewsletter: false
-    },
+    profile:'',
     apiurl:"http://localhost:8080/steedapp/",
+    usermenus:[],
   //  apiurl:"http://139.59.8.226:8080/steedapp/",
 }
 
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
+   switch (action.type) {
       case Types.LOGIN:
-      console.log('login', action.payload.user)
+     
         return {
           ...state,
-          profile: action.payload.user,
-          formSubmitted: false // after update user formsubmition reset
+          profile: action.payload.user[0],
         }
       case Types.ADD_USER:
+      //  console.log('calling ADD_USER--<', action.payload.menu)
         return {
           ...state,
-          profile: action.payload.user,
-          formSubmitted: false // after update user formsubmition reset
-        }
+          profile: action.payload.user[0],
+      }
+      case Types.ADD_MENU:
+      
+        return {
+          ...state,
+          usermenus: action.payload.user,
+      }
       case Types.UPDATE_USER:
         return {
           ...state,
           profile: action.payload.user,
-          formSubmitted: false // after update user formsubmition reset
         }
       case Types.UPDATE_PROFILE_PICTURE:
         return {

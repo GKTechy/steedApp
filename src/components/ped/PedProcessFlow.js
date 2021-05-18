@@ -238,7 +238,7 @@ export class PedProcessFlow extends Component {
                                             </select>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                        
-                                            <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">Operation No <span class="text-danger">*</span></label>
+                                            <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">Operation No <span className="text-danger">*</span></label>
                                             <input type="email" className="form-control m-2 form-control-sm" id="operationNo" name="operationNo" value= {this.state.operationNo} onChange={this.handleFormChange} placeholder="Operation No"  />
                                             <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">Process Name </label>
                                             <select className="form-control form-control-sm" id="processId" name="processId" value={this.state.processId} onChange={this.handleFormChange}>
@@ -247,11 +247,11 @@ export class PedProcessFlow extends Component {
                                                     <option value={o.processId}>{o.processName}</option>
                                                 ))}
                                             </select>
-                                            <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">Cycle Time <span class="text-danger">*</span></label>
+                                            <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">Cycle Time <span className="text-danger">*</span></label>
                                             <input type="email" className="form-control m-2 form-control-sm" id="cycleTime" name="cycleTime" value= {this.state.cycleTime} onChange={this.handleFormChange} placeholder="Cycle Time"  />
                                             <button type="button" className="btn btn-primary  btn-sm" onClick={this.saveClick}>Save</button> &nbsp;&nbsp;&nbsp;
                                             <button type="button" className="btn btn-warning  btn-sm" onClick={this.resetClick}>Clear</button> &nbsp;&nbsp;&nbsp;
-                                            <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                            <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                             <span className="text-danger">{this.state.errormsg}</span>
                                         </div>
 
@@ -270,7 +270,7 @@ export class PedProcessFlow extends Component {
                                     columns={this.columns}/>
 
                             </div>
-                            <div class="card-footer clearfix">
+                            <div className="card-footer clearfix">
                                 
                             </div>
                             </div>

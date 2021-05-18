@@ -201,13 +201,13 @@ export class ColorCode extends Component {
                             <div className="card-header">
                                 <div className="card-title">
                                         <div className="form-inline">
-                                            <label htmlFor="orderCode" className="m-2">Order Code <span class="text-danger">*</span></label>
+                                            <label htmlFor="orderCode" className="m-2">Order Code <span className="text-danger">*</span></label>
                                                 <input type="text" className="form-control m-2 form-control-sm" id="orderCode" name="orderCode" value= {this.state.orderCode} onChange={this.handleFormChange} />
                                            
-                                            <label htmlFor="colorCode" className="m-2">Color Code<span class="text-danger">*</span></label>
+                                            <label htmlFor="colorCode" className="m-2">Color Code<span className="text-danger">*</span></label>
                                              <input type="text" className="form-control m-2 form-control-sm" id="colorCode" name="colorCode" value= {this.state.colorCode} onChange={this.handleFormChange} />
                                             
-                                             <label htmlFor="a3" className="m-2">is Active<span class="text-danger">*</span></label>
+                                             <label htmlFor="a3" className="m-2">is Active<span className="text-danger">*</span></label>
                                             <input className="form-check-input" type="checkbox" checked={this.state.isActive}  onChange={this.handleCheckClick}/>
 
              
@@ -228,7 +228,7 @@ export class ColorCode extends Component {
                                     columns={this.columns}/>
 
                             </div>
-                            <div class="card-footer clearfix">
+                            <div className="card-footer clearfix">
                                
                             </div>
                             </div>

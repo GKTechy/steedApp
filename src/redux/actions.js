@@ -3,6 +3,7 @@ import { Types } from './Types';
 export const ActionCreators = {
 
   addProfile: (user) => ({ type: Types.ADD_USER, payload: { user } }),
+  addUserMenus: (user) => ({ type: Types.ADD_MENU, payload: { user } }),
 
   updateProfileImage: (image) => ({ type: Types.UPDATE_PROFILE_PICTURE, payload: { image } }),
 

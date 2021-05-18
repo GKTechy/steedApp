@@ -292,8 +292,8 @@ export class Machine extends Component {
                                 <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#new-machine">Create New Machine &nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
-                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#new-machine">Create New Machine &nbsp;&nbsp;<i className="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                             </span>
                                         </div>
                                 </div>
@@ -330,9 +330,9 @@ export class Machine extends Component {
 
                        <div className="container-fluid">
                             <form className="form-inline">
-                                <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" style={leftAlign}>Machine Code <span class="text-danger">*</span></label>
+                                <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" style={leftAlign}>Machine Code <span className="text-danger">*</span></label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineCode" id="machineCode" value= {this.state.machineCode} onChange={this.handleFormChange}/>
-                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" style={leftAlign}>Machine Name<span class="text-danger">*</span></label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" style={leftAlign}>Machine Name<span className="text-danger">*</span></label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineName" id="machineName" value= {this.state.machineName} onChange={this.handleFormChange} />
                                 <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" style={{textAlign: "left !important"}}>Make</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineMake" id="machineMake" value= {this.state.machineMake} onChange={this.handleFormChange} />
@@ -355,7 +355,7 @@ export class Machine extends Component {
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineStatus" id="machineStatus" value= {this.state.machineStatus} onChange={this.handleFormChange} />
                                 <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Capacity</label>
                                 <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="machineCapacity" id="machineCapacity" value= {this.state.machineCapacity} onChange={this.handleFormChange}/>
-                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is Active<span class="text-danger">*</span></label>
+                                <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is Active<span className="text-danger">*</span></label>
                                 <input type="checkbox" className="form-check-input m-2 form-control-sm" id="active" name="active" checked={this.state.active}  onChange={this.handleCheckClick}/>
                                 <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is QC Machine </label>
                                 <input type="checkbox" className="form-check-input m-2 form-control-sm" id="isQCMachine" name="isQCMachine" checked={this.state.isQCMachine}  onChange={this.handleCheckClick1}/>

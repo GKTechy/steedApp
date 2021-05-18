@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {  Switch,  Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
-
+import { connect } from "react-redux";
 import Header from './Header'
 import Content from './Content';
 
@@ -11,10 +11,27 @@ export class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          islogout: false
+          islogout: false,
+          userMenus:[]
         };
-      }
+    }
 
+    componentDidMount(){
+        //this.setmenus();
+    }
+
+    setmenus(){
+        //console.log("called menus fns-->")
+        setTimeout(
+            () => this.setState({ userMenus: this.props.usermenus },()=>{
+                 this.loadMenus();
+            }), 
+            3000
+        )
+    }
+    loadMenus=()=>{
+      //  console.log("user Menus-->"+JSON.stringify(this.state.userMenus))
+    }
     render() {
         const { match } = this.props;
 
@@ -33,7 +50,7 @@ export class Dashboard extends Component {
                     <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div className="image">
                         {/* <img src="dist/img/avatar5.png" className="img-circle elevation-2" alt="User Image" /> */}
-                        <img alt="Avatar" class="img-circle" src="../../dist/img/avatar5.png"></img>
+                        <img alt="Avatar" className="img-circle" src="../../dist/img/avatar5.png"></img>
                     </div>
                     <div className="info">
                         <Link to={`${match.path}/userProfile`}>  <a href="#" className="d-block">User 1</a></Link>
@@ -42,6 +59,8 @@ export class Dashboard extends Component {
                
                     <nav className="mt-2">
                         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
+                          
+                            
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-users-cog"/><p>Admin </p></a>
                                   
                                     <ul className="nav nav-treeview">
@@ -59,26 +78,26 @@ export class Dashboard extends Component {
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-industry" /><p>Production</p></a>
                                 <ul className="nav nav-treeview">
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/productionMaster`} > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/productionMaster`} > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i className="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/productionTransaction`} > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/productionTransaction`} > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i className="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/productionReport`} > <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/productionReport`} > <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i className="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                 </ul>
                             </li>
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-chart-pie" /><p>Commercial</p></a>
                                 <ul className="nav nav-treeview">
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/commercialMaster`}> <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/commercialMaster`}> <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i className="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                         <li className="nav-item">
-                                             <Link to={`${match.path}/commercialTransaction`}> <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
+                                             <Link to={`${match.path}/commercialTransaction`}> <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i className="right fas fa-angle-left"></i></p></a></Link>
                                         </li> 
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/commercialReports`}> <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/commercialReports`}> <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i className="right fas fa-angle-left"></i></p></a></Link>
                                        </li>
                                     </ul>
                             </li>
@@ -92,26 +111,26 @@ export class Dashboard extends Component {
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-search-dollar" /><p>Quality</p></a>
                                 <ul className="nav nav-treeview">
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/qualityMaster`}  > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/qualityMaster`}  > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i className="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/qualityTransaction`}  > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/qualityTransaction`}  > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i className="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                         <li className="nav-item">
-                                         <Link to={`${match.path}/qualityReport`}  > <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i class="right fas fa-angle-left"></i></p></a></Link>
+                                         <Link to={`${match.path}/qualityReport`}  > <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i className="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                 </ul>
                             </li>
                             <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-people-carry" /><p>Materials</p></a>
                                 <ul className="nav nav-treeview">
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/materialMaster`}   > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/materialMaster`}   > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master <i className="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/materialTransaction`}  > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/materialTransaction`}  > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction <i className="right fas fa-angle-left"></i></p></a></Link>
                                          </li>
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/materialReport`} > <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i class="right fas fa-angle-left"></i></p></a></Link>
+                                            <Link to={`${match.path}/materialReport`} > <a href="#" className="nav-link"><i className="far fa-file nav-icon" /><p>Reports <i className="right fas fa-angle-left"></i></p></a></Link>
                                         </li>
                                 </ul>
                             </li>
@@ -154,4 +173,15 @@ export class Dashboard extends Component {
     }
 }
 
-export default withRouter(Dashboard);
+const mapStateToProps = (state) => {
+    return {
+      profile: state.user.profile,
+      apiurl: state.user.apiurl,
+      usermenus: state.user.usermenus,
+    }
+  }
+
+export default connect(mapStateToProps)(withRouter(Dashboard));
+
+
+//export default withRouter(Dashboard);

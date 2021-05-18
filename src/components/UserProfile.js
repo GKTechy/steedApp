@@ -16,7 +16,7 @@ export class UserProfile extends Component {
                                     <div className="card-body box-profile">
                                     <div className="text-center">
                                         {/* <img className="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture" /> */}
-                                        <img alt="Avatar" class="img-circle" src="../../dist/img/avatar5.png"></img>
+                                        <img alt="Avatar" className="img-circle" src="../../dist/img/avatar5.png"></img>
                                     </div>
                                     <h3 className="profile-username text-center">Selva</h3>
                                     <p className="text-muted text-center">Admin</p>

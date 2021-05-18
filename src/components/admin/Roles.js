@@ -210,7 +210,7 @@ export class Roles extends Component {
                             </div>
                             <div className="col-2">
                                 <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
-                                 <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                 <button type="button" className="btn btn-success" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                             </div>
                             <div className="col-2">
                                  <span className="text-danger">{this.state.errormsg}</span>

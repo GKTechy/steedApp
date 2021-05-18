@@ -206,8 +206,8 @@ export class PaymentTerm extends Component {
                             <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary" onClick={this.resetClick} data-toggle="modal" data-target="#new-paymentterm-model">New Payment Term&nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
-                                                <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                                <button type="button" className="btn btn-primary" onClick={this.resetClick} data-toggle="modal" data-target="#new-paymentterm-model">New Payment Term&nbsp;&nbsp;<i className="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                             </span>
                                         </div>
 
@@ -241,16 +241,16 @@ export class PaymentTerm extends Component {
                                 <div className="container-fluid">
                                     <div className="form-inline">
                                       
-                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Description<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Description<span className="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-8" name="description" id="description" value= {this.state.description} onChange={this.handleFormChange}/>
-                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Content<span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Content<span className="text-danger">*</span></label>
                                         &nbsp;&nbsp;
-                                        <textarea class="col-sm-8 form-control" placeholder="Content" required data-error="Please enter Content" id="content" name="content" value= {this.state.content} onChange={this.handleFormChange}></textarea>
+                                        <textarea className="col-sm-8 form-control" placeholder="Content" required data-error="Please enter Content" id="content" name="content" value= {this.state.content} onChange={this.handleFormChange}></textarea>
 
-                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Active<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Active<span className="text-danger">*</span></label>
                                         <input type="checkbox" className="form-check-input m-1" id="isactive" checked={this.state.isActive}  onChange={this.handleCheckClick}/><br/><br/>
 
-                                        <label htmlFor="name" className="m-6 col-sm-6"><span class="text-danger">{this.state.errormsg}</span></label>
+                                        <label htmlFor="name" className="m-6 col-sm-6"><span className="text-danger">{this.state.errormsg}</span></label>
                                     </div>
                             </div>
                          </div>

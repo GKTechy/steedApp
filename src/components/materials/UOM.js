@@ -257,8 +257,8 @@ export class UOM extends Component {
                             <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat"  onClick={this.resetClick} data-toggle="modal" data-target="#uom-new-model" >Create New  UOM&nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
-                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                                <button type="button" className="btn btn-primary btn-flat"  onClick={this.resetClick} data-toggle="modal" data-target="#uom-new-model" >Create New  UOM&nbsp;&nbsp;<i className="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                             </span>
                                         </div>
 
@@ -290,7 +290,7 @@ export class UOM extends Component {
                         <div className="modal-body">
                                 <div className="container-fluid">
                                     <div className="form-inline">
-                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Measurement Type<span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Measurement Type<span className="text-danger">*</span></label>
                                         <select className="form-control m-2 col-sm-3" id="measurementType" name="measurementType" value={this.state.measurementType} onChange={this.handleFormChange} >
                                             <option value="0">Select Measurement</option>
                                             <option value="Mass">Mass</option>
@@ -302,7 +302,7 @@ export class UOM extends Component {
                                         <input type="checkbox" className="form-check-input m-1" checked={this.state.baseMeasurement}  onChange={this.handlebaseClick} />
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">is Varied</label>
                                         <input type="checkbox" className="form-check-input" checked={this.state.variedMeasurement}  onChange={this.handlevariedClick} />
-                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Measurement Name<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Measurement Name<span className="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="measurementName" name="measurementName" value= {this.state.measurementName} onChange={this.handleFormChange} placeholder="Measurement Name" />
                                         <label htmlFor="code" className="m-2 col-sm-2 font-weight-normal" >Short Name</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="measurementShortName" name="measurementShortName" value= {this.state.measurementShortName} onChange={this.handleFormChange} placeholder="Short Name" />
@@ -310,7 +310,7 @@ export class UOM extends Component {
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="equivalentValueWithBase" name="equivalentValueWithBase" value= {this.state.equivalentValueWithBase} onChange={this.handleFormChange} placeholder="Equalant Value" />
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Description</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="description" name="description" value= {this.state.description} onChange={this.handleFormChange} placeholder="Description"/>
-                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Active<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Active<span className="text-danger">*</span></label>
                                         <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick}/>
                                     </div>
                             </div>

@@ -279,8 +279,8 @@ export class NoteForApproval extends Component {
                                     <div className="input-group input-group-sm">
                                                 {/* <input type="text" className="form-control" placeholder="Enter Role..." /> */}
                                                 <span className="input-group-append">
-                                                    <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#note-model" onClick={this.resetClick}>Create New Note &nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
-                                                    <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                                    <button type="button" className="btn btn-primary btn-flat" data-toggle="modal" data-target="#note-model" onClick={this.resetClick}>Create New Note &nbsp;&nbsp;<i className="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                    <button type="button" className="btn btn-success" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                                 </span>
                                             </div>
                                     </div>
@@ -294,7 +294,7 @@ export class NoteForApproval extends Component {
                                     columns={this.columns}/>
 
                             </div>
-                            <div class="card-footer clearfix">
+                            <div className="card-footer clearfix">
                                
                             </div>
                             </div>
@@ -320,16 +320,16 @@ export class NoteForApproval extends Component {
             
                        <div className="container-fluid">
                             <form className="form-inline">
-                                <div class="form-group">
-                                    <label htmlFor="nfaDocumentNo" className="m-2 font-weight-normal">Document No <span class="text-danger">*</span></label>
+                                <div className="form-group">
+                                    <label htmlFor="nfaDocumentNo" className="m-2 font-weight-normal">Document No <span className="text-danger">*</span></label>
                                     <input type="text" className="form-control m-2 form-control-sm" name="nfaDocumentNo" id="nfaDocumentNo" value= {this.state.nfaDocumentNo} onChange={this.handleFormChange} />
-                                    <label htmlFor="nfaDocumentDate" className="m-2 font-weight-normal">Document Date <span class="text-danger">*</span></label>
+                                    <label htmlFor="nfaDocumentDate" className="m-2 font-weight-normal">Document Date <span className="text-danger">*</span></label>
                                     <input type="date" className="form-control m-2 form-control-sm" name="nfaDocumentDate" id="nfaDocumentDate" value= {this.state.nfaDocumentDate} onChange={this.handleFormChange}/>
                                 </div>
-                                <div class="form-group">
-                                    <label htmlFor="nfaTitle" className="m-2 font-weight-normal">Title <span class="text-danger">*</span></label>
+                                <div className="form-group">
+                                    <label htmlFor="nfaTitle" className="m-2 font-weight-normal">Title <span className="text-danger">*</span></label>
                                     <input type="text" className="form-control m-2 form-control-sm" name="nfaTitle" id="nfaTitle" value= {this.state.nfaTitle} onChange={this.handleFormChange}/>
-                                    <label htmlFor="exampleSelectRounded" class="m-2 font-weight-normal">Request By</label>
+                                    <label htmlFor="exampleSelectRounded" className="m-2 font-weight-normal">Request By</label>
                                     <select className="custom-select "  id="preparedBy" name="preparedBy" value={this.state.preparedBy} onChange={this.handleFormChange} >
                                         <option value="0">Select</option>
                                         <option value="1">User 1</option>

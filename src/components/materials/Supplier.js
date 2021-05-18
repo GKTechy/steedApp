@@ -278,8 +278,8 @@ export class Supplier extends Component {
                                 <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                            <button type="button" className="btn btn-primary"  onClick={this.resetClick} data-toggle="modal" data-target="#new_supplier">Create New Supplier &nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
-                                                <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                            <button type="button" className="btn btn-primary"  onClick={this.resetClick} data-toggle="modal" data-target="#new_supplier">Create New Supplier &nbsp;&nbsp;<i className="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                             </span>
                                         </div>
 
@@ -303,7 +303,7 @@ export class Supplier extends Component {
                                     records={this.state.records}
                                     columns={this.columns}/>
                             </div>
-                            <div class="card-footer clearfix">
+                            <div className="card-footer clearfix">
                                
                             </div>
                             </div>
@@ -345,11 +345,11 @@ export class Supplier extends Component {
                                                     <div className="form-row m-2">
                                                      
                                                         <div className="form-group col-md-4">
-                                                            <label htmlFor="dealerCode" className="font-weight-normal">Supplier Code <span class="text-danger">*</span></label>
+                                                            <label htmlFor="dealerCode" className="font-weight-normal">Supplier Code <span className="text-danger">*</span></label>
                                                             <input type="text" className="form-control form-control-sm" id="supplierCode" name="supplierCode" value= {this.state.supplierCode} onChange={this.handleFormChange} placeholder="Supplier Code " readOnly/>
                                                         </div>
                                                         <div className="form-group col-md-4">
-                                                        <label htmlFor="dealerName" className="font-weight-normal">Name <span class="text-danger">*</span></label>
+                                                        <label htmlFor="dealerName" className="font-weight-normal">Name <span className="text-danger">*</span></label>
                                                         <input type="text" className="form-control form-control-sm" id="supplierName" name="supplierName" value= {this.state.supplierName} onChange={this.handleFormChange} placeholder="Name" />
                                                         </div>
                                                         

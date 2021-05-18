@@ -294,8 +294,8 @@ export class PedProduct extends Component {
                                 <div className="card-title">
                                         <div className="input-group input-group-sm">
                                             <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#new_product">Create New  Product&nbsp;&nbsp;<i class="fas fa-plus"></i></button> &nbsp;&nbsp;&nbsp;
-                                            <button type="button" className="btn btn-success " onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#new_product">Create New  Product&nbsp;&nbsp;<i className="fas fa-plus"></i></button> &nbsp;&nbsp;&nbsp;
+                                            <button type="button" className="btn btn-success " onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                             </span>
                                         </div>
 
@@ -331,9 +331,9 @@ export class PedProduct extends Component {
                                     <div className="form-inline">
 
                                         
-                                        <label htmlFor="code"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Product Code<span class="text-danger">*</span></label>
+                                        <label htmlFor="code"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Product Code<span className="text-danger">*</span></label>
                                         <input type="text"   className="form-control form-control-sm m-2 col-sm-3" id="productCode" name="productCode" value={this.state.productCode} onChange={this.handleFormChange} />
-                                        <label htmlFor="code"   style={mystyle.leftAlign}className="m-2 col-sm-2 font-weight-normal control-label" >Product Name<span class="text-danger">*</span></label>
+                                        <label htmlFor="code"   style={mystyle.leftAlign}className="m-2 col-sm-2 font-weight-normal control-label" >Product Name<span className="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="productName" name="productName" value={this.state.productName} onChange={this.handleFormChange} />
                                         
                                         <label htmlFor="name"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Order Code</label>
@@ -373,7 +373,7 @@ export class PedProduct extends Component {
 
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Description</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="description" name="description" value={this.state.description} onChange={this.handleFormChange} />
-                                        {/* <label htmlFor="name" className="m-2 col-sm-2" >image<span class="text-danger">*</span></label>
+                                        {/* <label htmlFor="name" className="m-2 col-sm-2" >image<span className="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="image" name="image" value={this.state.image} onChange={this.handleFormChange} /> */}
 
                                         <label htmlFor="name"  style={mystyle.leftAlign} className="m-2 col-sm-2 font-weight-normal control-label" >Category</label>
@@ -383,7 +383,7 @@ export class PedProduct extends Component {
                                                <option value="Premium">Premium</option>
                                         </select>
 
-                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is Active<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Is Active<span className="text-danger">*</span></label>
                                         <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick} />
                                        
                                     </div>

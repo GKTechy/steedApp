@@ -476,8 +476,8 @@ export class DealerOrder extends Component {
                                     <div className="card-title">
                                             <div className="input-group input-group-sm">
                                                 <span className="input-group-append">
-                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#new_order">Create New Order &nbsp;&nbsp;<i class="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
-                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                                <button type="button" className="btn btn-primary btn-flat" onClick={this.resetClick} data-toggle="modal" data-target="#new_order">Create New Order &nbsp;&nbsp;<i className="fas fa-plus"></i></button>&nbsp;&nbsp;&nbsp;
+                                                <button type="button" className="btn btn-success" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                                 </span>
                                             </div>
                                         </div>
@@ -505,7 +505,7 @@ export class DealerOrder extends Component {
                         <div className="modal-header">
                             <h4 className="modal-title font-weight-normal">New Order</h4>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <div class="ml-5">
+                            <div className="ml-5">
                                  <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>
                             </div>
                             
@@ -517,9 +517,9 @@ export class DealerOrder extends Component {
                         <div className="modal-body">
                                 <div className="container-fluid">
                                     <div className="form-inline">
-                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Date<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Date<span className="text-danger">*</span></label>
                                         <input type="date" className="form-control form-control-sm m-2 col-sm-3" id="orderDate" name="orderDate" value= {this.state.orderDate}   onChange={this.handleFormChange} />
-                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Order No<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal">Order No<span className="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="orderNo" name="orderNo" value= {this.state.orderNo} onChange={this.handleFormChange} placeholder="Order No" readOnly />
                                         <label htmlFor="name" className="m-2 col-sm-2 font-weight-normal" >Reference</label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" id="reference" name="reference" value= {this.state.reference} onChange={this.handleFormChange} placeholder="Order Reference" />
@@ -607,7 +607,7 @@ export class DealerOrder extends Component {
                                                                 <td className="" style={{width: 100}}>{ord.gstAmt}</td>
                                                                 <td className="" style={{width: 100}}>{ord.amount}</td>
                                                                 <td style={{width: 5}}>
-                                                                    <button className="btn btn-danger btn-sm" onClick={(e)=>this.removeProductRow(i)}> <i class="far fa-trash-alt"></i></button>
+                                                                    <button className="btn btn-danger btn-sm" onClick={(e)=>this.removeProductRow(i)}> <i className="far fa-trash-alt"></i></button>
                                                                 </td>
                                                             </tr>
                                                          ))

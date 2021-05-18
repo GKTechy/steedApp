@@ -209,18 +209,18 @@ export class PedProuductVarient extends Component {
                                 <div className="card-header">
                                     <div className="card-title">
                                             <div className="form-inline"> 
-                                                <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">Name <span class="text-danger">*</span></label>
+                                                <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">Name <span className="text-danger">*</span></label>
                                                 <input type="text" className="form-control m-2 form-control-sm" name="name" id="name" value= {this.state.name} onChange={this.handleFormChange} />
                                             
-                                                <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">Short Name <span class="text-danger">*</span></label>
+                                                <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">Short Name <span className="text-danger">*</span></label>
                                                 <input type="text" className="form-control m-2 form-control-sm" name="shortName" id="shortName" value= {this.state.shortName} onChange={this.handleFormChange} />
                                             
-                                                <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">is Active<span class="text-danger">*</span></label>
+                                                <label htmlFor="inlineFormEmail" className="m-2 font-weight-normal">is Active<span className="text-danger">*</span></label>
                                                 <input className="form-check-input" type="checkbox" checked={this.state.isActive}  onChange={this.handleCheckClick}/>
                                                 
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <button type="button" className="btn btn-primary btn-sm m-2" onClick={this.saveClick}>Save</button> &nbsp;&nbsp;&nbsp;
-                                            <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                            <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                                 
                                                 {/* <button type="button" className="btn btn-warning btn-sm m-2">Reset</button> */}
                                                 <span className="text-danger">{this.state.errormsg}</span>
@@ -236,7 +236,7 @@ export class PedProuductVarient extends Component {
                                     columns={this.columns}/>
                            
                             </div>
-                            <div class="card-footer clearfix">
+                            <div className="card-footer clearfix">
                                
                             </div>
                             </div>

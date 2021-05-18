@@ -17,8 +17,8 @@ export class Bom extends Component {
                 width: 10,
                 cell: (record, index) => {
                     return (
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="rowSelected" id="rowSelected" onClick={ (e)=>this.selectRecord(e,index)} />
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" name="rowSelected" id="rowSelected" onClick={ (e)=>this.selectRecord(e,index)} />
                         </div>
                        
                     );
@@ -296,7 +296,7 @@ export class Bom extends Component {
                                 </div>
                                 <div className="card-footer justify-content-between ">
                                     <button type="button" className="btn btn-default float-left" >Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <button type="button" className="btn btn-success  " onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                    <button type="button" className="btn btn-success  " onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                                     <span className="text-danger float-center">{this.state.errormsg}</span>
                                     <button type="button" className="btn btn-primary float-right" onClick={this.saveClick}>Save</button>  &nbsp;&nbsp;&nbsp;
                                          

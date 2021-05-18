@@ -221,17 +221,17 @@ export class MaterialType extends Component {
                             <div className="card-header">
                                 <div className="container-fluid">
                                     <div className="form-inline" >
-                                        <label htmlFor="code" className="m-2 font-weight-normal" >Item Type <span class="text-danger">*</span></label>
+                                        <label htmlFor="code" className="m-2 font-weight-normal" >Item Type <span className="text-danger">*</span></label>
                                         <input type="text" className="form-control form-control-sm m-2 col-sm-3" name="typeName" id="typeName" value= {this.state.typeName} onChange={this.handleFormChange}/>
-                                        <label htmlFor="name" className="m-2 font-weight-normal" >Description<span class="text-danger">*</span></label>
+                                        <label htmlFor="name" className="m-2 font-weight-normal" >Description<span className="text-danger">*</span></label>
                                         <input type="text" className="form-control m-2 col-sm-3 form-control-sm" name="typeDesc" id="typeDesc" value= {this.state.typeDesc} onChange={this.handleFormChange}/>
                                         <label htmlFor="code" className="font-weight-normal" >isActive</label>
                                         <input type="checkbox" className="form-check-input m-1" checked={this.state.isActive}  onChange={this.handleCheckClick}/> &nbsp;&nbsp;&nbsp;
                                         <button className="btn btn-primary btn-sm" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
                                         <button type="button" className="btn btn-primary btn-sm" onClick={this.resetClick}>Reset</button>&nbsp;&nbsp;&nbsp;
-                                                <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i class="fas fa-sync"></i>&nbsp;Refresh</button>
+                                                <button type="button" className="btn btn-success btn-sm" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
 
-                                        <label htmlFor="code" className="m-2 " ><span class="text-danger">{this.state.errormsg}</span></label>
+                                        <label htmlFor="code" className="m-2 " ><span className="text-danger">{this.state.errormsg}</span></label>
                                     </div>
                                     
                                 </div>
