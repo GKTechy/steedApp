@@ -70,15 +70,15 @@ login = event => {
                         }
 
                         if(data.valid){
-                            
-                            this.props.dispatch(ActionCreators.addProfile(data.usersList));
+                        ///  console.log("user menus->"+JSON.stringify(data.usersList[0].menuList))
+                            localStorage.setItem("steedUserMenus", JSON.stringify(data.usersList[0].menuList));
+                           // this.props.dispatch(ActionCreators.addProfile(data.usersList));
                            // this.props.dispatch(ActionCreators.addUserMenus(data.menuList));
+                            localStorage.setItem("steedApptoken", "SAt")
                             this.setState({
                               islogged: true,
                               iserror: false
-                            },()=>{
-                              localStorage.setItem("steedApptoken", "SAt");
-                            });
+                            },()=>{});
                         }else{
                             this.setState({ errormsg: data.responseMsg});
                         

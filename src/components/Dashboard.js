@@ -12,35 +12,30 @@ export class Dashboard extends Component {
         super(props);
         this.state = {
           islogout: false,
-          userMenus:[]
+          userMenus:[],
         };
     }
 
     componentDidMount(){
-        //this.setmenus();
+        //console.log("steedUserMenus-->"+JSON.stringify(localStorage.getItem("steedUserMenus")))
+      
+       this.setState({userMenus: localStorage.getItem("steedUserMenus")})
+       console.log("componentDidMount userMenus-->"+this.state.userMenus)
+
+      
     }
 
-    setmenus(){
-        //console.log("called menus fns-->")
-        setTimeout(
-            () => this.setState({ userMenus: this.props.usermenus },()=>{
-                 this.loadMenus();
-            }), 
-            3000
-        )
-    }
-    loadMenus=()=>{
-      //  console.log("user Menus-->"+JSON.stringify(this.state.userMenus))
-    }
     render() {
+        console.log("render userMenus-->"+this.state.userMenus)
+        console.log("render userMenus- length ->"+this.state.userMenus.length)
         const { match } = this.props;
-
         return (
             
+            
             <div>
-                 <Header/>
-
-                 <aside className="main-sidebar sidebar-dark-primary elevation-4">
+                
+                    <Header/>
+                    <aside className="main-sidebar sidebar-dark-primary elevation-4">
                     <a href="#" className="brand-link">
                         <span className="brand-text font-weight-light">Steed App</span>
                         
@@ -59,9 +54,11 @@ export class Dashboard extends Component {
                
                     <nav className="mt-2">
                         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
-                          
                             
-                            <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-users-cog"/><p>Admin </p></a>
+                           
+
+                            
+                                 <li className="nav-item"><a href="#" className="nav-link"><i className="nav-icon fas fa-users-cog"/><p>Admin </p></a>
                                   
                                     <ul className="nav nav-treeview">
                                         <li className="nav-item">
@@ -150,23 +147,24 @@ export class Dashboard extends Component {
                                         <li className="nav-item"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>ChartJS</p></a></li>
                                         <li className="nav-item"><a href="#" className="nav-link"><i className="far fa-circle nav-icon" /><p>ChartJS</p></a></li>
                                     </ul>
-                            </li>
+                            </li> 
                           
                         </ul>
-                    </nav>
+                        </nav>
                     
-                </div>
+                     </div>
                 
-        </aside>
-
-            <main role="main">
-              <div className="main">
+                </aside>
+                        <main role="main">
+                            <div className="main">
+                            
+                                <Switch>
+                                <Content/>
+                                </Switch>
+                            </div>
+                            </main>
                
-                <Switch>
-                   <Content/>
-                </Switch>
-              </div>
-            </main>
+           
           </div>
           
         )
