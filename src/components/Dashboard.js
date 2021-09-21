@@ -20,14 +20,13 @@ export class Dashboard extends Component {
         //console.log("steedUserMenus-->"+JSON.stringify(localStorage.getItem("steedUserMenus")))
       
        this.setState({userMenus: localStorage.getItem("steedUserMenus")})
-       console.log("componentDidMount userMenus-->"+this.state.userMenus)
+    //   console.log("componentDidMount userMenus-->"+this.state.userMenus)
 
-      
     }
 
     render() {
-        console.log("render userMenus-->"+this.state.userMenus)
-        console.log("render userMenus- length ->"+this.state.userMenus.length)
+       // console.log("render userMenus-->"+this.state.userMenus)
+        //console.log("render userMenus- length ->"+this.state.userMenus.length)
         const { match } = this.props;
         return (
             
@@ -62,7 +61,7 @@ export class Dashboard extends Component {
                                   
                                     <ul className="nav nav-treeview">
                                         <li className="nav-item">
-                                            <Link to={`${match.path}/adminMaster`} > <a href="#" className="nav-link"><i className="far fa-envelope nav-icon" /><p>Master </p></a></Link>
+                                            <Link to={`${match.path}/adminMaster`} > <a href="#" className="nav-link active"><i className="far fa-envelope nav-icon" /><p>Master </p></a></Link>
                                         </li>
                                         <li className="nav-item">
                                             <Link to={`${match.path}/adminTransaction`} > <a href="#" className="nav-link"><i className="far fa-edit nav-icon" /><p>Transaction </p></a></Link>

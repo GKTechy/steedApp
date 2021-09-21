@@ -234,8 +234,8 @@ export class MachineProcessMap extends Component {
                                          {optionTemplate}
                                     </select>
                                 </div>
-                                <div className="col-md-3">
-                                         
+                                <div className="col-md-3 offset-md-1">
+                                
                                         <button type="button" className="btn btn-primary" id="save" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
                                         <button type="button" className="btn btn-primary" id="save" onClick={this.resetClick}>Clear</button>&nbsp;&nbsp;&nbsp;
                                         <button type="button" className="btn btn-success" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>

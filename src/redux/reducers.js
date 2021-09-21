@@ -3,9 +3,9 @@ import { Types } from './Types';
 
 const initialState = {
     profile:'',
-    //apiurl:"http://localhost:8080/steedapp/",
+    apiurl:"http://localhost:8080/steedapp/",
     usermenus:[],
-    apiurl:"http://143.110.176.106:8080/steedapp/",
+  //  apiurl:"http://143.110.176.106:8080/steedapp/",
 }
 
 

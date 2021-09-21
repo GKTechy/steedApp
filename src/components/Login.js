@@ -61,7 +61,7 @@ login = event => {
                 fetch(this.props.apiurl+"user/userLogin", requestOptions)
                     .then(async response => {
                         const data = await response.json();
-                       // console.log("--data--"+JSON.stringify(data))
+                        console.log("--data--"+JSON.stringify(data))
                         // check for error response
                         if (!response.ok) {
                             // get error message from body or default to response status
@@ -72,7 +72,7 @@ login = event => {
                         if(data.valid){
                         ///  console.log("user menus->"+JSON.stringify(data.usersList[0].menuList))
                             localStorage.setItem("steedUserMenus", JSON.stringify(data.usersList[0].menuList));
-                           // this.props.dispatch(ActionCreators.addProfile(data.usersList));
+                            this.props.dispatch(ActionCreators.addProfile(data.usersList));
                            // this.props.dispatch(ActionCreators.addUserMenus(data.menuList));
                             localStorage.setItem("steedApptoken", "SAt")
                             this.setState({

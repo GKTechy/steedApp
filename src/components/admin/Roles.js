@@ -61,11 +61,11 @@ export class Roles extends Component {
             isLoaded:false,
             loginUser:this.props.profile
         }
-       
+        
     }
     componentDidMount() {
         this.getTableValues();
-//        console.log('props profile-->:'+this.props.apiurl)
+        console.log('props profile-->:'+JSON.stringify(this.props))
         $("#as-react-datatable-container").find('select').addClass("form-control-sm");
         $("#as-react-datatable-container").find('input').addClass("form-control-sm");
      }  
@@ -208,7 +208,7 @@ export class Roles extends Component {
                                         <input className="form-check-input" type="checkbox" checked={this.state.active}  onChange={this.handleCheckClick}/><label className="form-check-label">Active</label>
                                 </div>
                             </div>
-                            <div className="col-2">
+                            <div className="col-3">
                                 <button type="button" className="btn btn-primary" onClick={this.saveClick}>Save</button>&nbsp;&nbsp;&nbsp;
                                  <button type="button" className="btn btn-success" onClick={this.refreshClick}><i className="fas fa-sync"></i>&nbsp;Refresh</button>
                             </div>
